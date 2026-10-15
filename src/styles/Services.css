@@ -1,0 +1,100 @@
+.services-sec {
+  background: #ffffff;
+}
+
+.services-sec__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: clamp(24px, 3.5vw, 36px);
+}
+
+.service-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease-out), border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--emerald-light);
+  box-shadow: 0 16px 36px rgba(11, 41, 23, 0.08);
+}
+
+.service-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.service-card__icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.service-card__tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--emerald);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.service-card__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.service-card__desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.service-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.service-card__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.service-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--forest);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.service-card__link:hover {
+  color: var(--emerald);
+  transform: translateX(2px);
+}

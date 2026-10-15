@@ -1,0 +1,108 @@
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+
+.cur-dot,
+.cur-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9500;
+}
+
+.cur-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--moss);
+}
+
+.cur-ring {
+  width: 0;
+  height: 0;
+}
+
+.cur-ring::before {
+  content: '';
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  left: -19px;
+  top: -19px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(79, 138, 75, 0.6);
+  transition: all 0.45s var(--ease);
+}
+
+.cur-ring.hover::before {
+  width: 64px;
+  height: 64px;
+  left: -32px;
+  top: -32px;
+  background: rgba(184, 232, 106, 0.22);
+  border-color: transparent;
+}
+
+.cur-ring.text::before {
+  width: 3px;
+  height: 28px;
+  left: -1.5px;
+  top: -14px;
+  border-radius: 2px;
+  background: var(--moss);
+  border: 0;
+}
+
+.cur-ring.label::before {
+  width: 96px;
+  height: 96px;
+  left: -48px;
+  top: -48px;
+  background: var(--sprout);
+  border-color: transparent;
+}
+
+.cur-ring.down::before {
+  scale: 0.8;
+}
+
+.cur-leaf {
+  position: absolute;
+  left: 10px;
+  top: -26px;
+  width: 16px;
+  height: 16px;
+  fill: var(--leaf);
+  opacity: 0;
+  transform: scale(0) rotate(-40deg);
+  transition: all 0.45s var(--ease-spring);
+}
+
+.cur-ring.hover .cur-leaf {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+}
+
+.cur-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%) scale(0.4);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.4s var(--ease);
+}
+
+.cur-ring.label .cur-label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}

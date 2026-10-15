@@ -1,0 +1,220 @@
+.process-sec {
+  background: var(--bg);
+}
+
+.process-sec__stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.process-sec__bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.process-sec__step-tab {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.25s var(--ease-out);
+}
+
+.process-sec__step-tab:hover {
+  border-color: var(--emerald-light);
+  background: var(--mint);
+}
+
+.process-sec__step-tab.is-active {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: #fff;
+  box-shadow: 0 8px 24px -4px rgba(11, 41, 23, 0.22);
+}
+
+.process-sec__step-num {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--emerald-light);
+}
+
+.process-sec__step-tab.is-active .process-sec__step-num {
+  color: var(--leaf);
+}
+
+.process-sec__step-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.process-sec__stage {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(32px, 5vw, 64px);
+  background: #ffffff;
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  padding: clamp(32px, 4.5vw, 56px);
+  box-shadow: 0 16px 40px rgba(11, 41, 23, 0.06);
+  align-items: center;
+}
+
+.process-sec__info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.process-sec__icon-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.process-sec__icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--mint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process-sec__info h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.process-sec__lead {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--emerald);
+  line-height: 1.5;
+}
+
+.process-sec__desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.process-sec__deliverables {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.process-sec__deliverables strong {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--forest);
+}
+
+.process-sec__deliverables ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.process-sec__deliverables li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.process-sec__cta {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.process-sec__media {
+  position: relative;
+  aspect-ratio: 4 / 3.4;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(11, 41, 23, 0.16);
+  border: 1px solid var(--line);
+}
+
+.process-sec__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.process-sec__media:hover .process-sec__img {
+  transform: scale(1.05);
+}
+
+.process-sec__vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(3, 18, 9, 0.9) 100%);
+}
+
+.process-sec__media-overlay {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.process-sec__media-overlay span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--leaf);
+  text-transform: uppercase;
+}
+
+.process-sec__media-overlay h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+@media (max-width: 1024px) {
+  .process-sec__bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .process-sec__stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .process-sec__bar {
+    grid-template-columns: 1fr;
+  }
+}

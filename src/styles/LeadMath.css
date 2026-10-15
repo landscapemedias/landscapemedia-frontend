@@ -1,0 +1,197 @@
+.lead-math {
+  background: var(--bg);
+}
+
+.lead-math__box {
+  background: #ffffff;
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(11, 41, 23, 0.06);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+.lead-math__controls {
+  padding: clamp(28px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-right: 1px solid var(--line);
+}
+
+.lead-math__slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lead-math__slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lead-math__slider-header label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.lead-math__val-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--emerald);
+  background: var(--mint);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(21, 128, 61, 0.2);
+}
+
+.lead-math__slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.lead-math__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--forest);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.lead-math__slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: var(--emerald);
+}
+
+.lead-math__scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.lead-math__results {
+  padding: clamp(28px, 4vw, 44px);
+  background: var(--forest);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.lead-math__res-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lead-math__jobs-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--leaf);
+}
+
+.lead-math__hero-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lead-math__metric-lbl {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lead-math__metric-val {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.lead-math__metric-val small {
+  font-size: 18px;
+  color: var(--leaf);
+  font-weight: 500;
+}
+
+.lead-math__metric-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.lead-math__metric-sub strong {
+  color: #fff;
+}
+
+.lead-math__breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.lead-math__stat-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lead-math__stat-card span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.lead-math__stat-card strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.lead-math__cta {
+  width: 100%;
+  background: var(--leaf);
+  color: var(--forest-deep);
+}
+
+.lead-math__cta:hover {
+  background: #ffffff;
+  color: var(--forest-deep);
+}
+
+@media (max-width: 900px) {
+  .lead-math__box {
+    grid-template-columns: 1fr;
+  }
+  .lead-math__controls {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+}
