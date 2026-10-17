@@ -8,6 +8,7 @@ export function useReveal(enabled = true) {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             e.target.classList.add('in')
+            e.target.setAttribute('data-revealed', 'true')
             io.unobserve(e.target)
           }
         })
@@ -15,8 +16,8 @@ export function useReveal(enabled = true) {
       { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
     )
     const scan = (root) => {
-      if (root.matches?.('[data-reveal]:not(.in)')) io.observe(root)
-      root.querySelectorAll?.('[data-reveal]:not(.in)').forEach((el) => io.observe(el))
+      if (root.matches?.('[data-reveal]:not([data-revealed="true"]):not(.in)')) io.observe(root)
+      root.querySelectorAll?.('[data-reveal]:not([data-revealed="true"]):not(.in)').forEach((el) => io.observe(el))
     }
     scan(document)
     const mo = new MutationObserver((rs) => rs.forEach((r) => r.addedNodes.forEach((n) => n.nodeType === 1 && scan(n))))

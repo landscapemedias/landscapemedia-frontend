@@ -13,17 +13,17 @@ export default function Nursery() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Our services</span>
+            <span className="eyebrow" data-reveal="">What we do</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Complete care for" />
+              <Words text="Everything a" />
               <br />
-              <Words text="the places you" delay={0.12} className="ital" />
+              <Words text="landscape brand" delay={0.12} className="ital" />
               <br />
-              <Words text="depend on." delay={0.24} className="ital" />
+              <Words text="needs to grow." delay={0.24} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            From routine landscape maintenance to specialized tree care, our experienced teams keep outdoor spaces healthy, safe and looking their best. Tap any tag to see what is included.
+            Branding, websites that showcase your finest work, appointment calendars, booking apps, flyers, reels, social media and email marketing. Tap any tag to see what is included.
           </p>
         </div>
 
@@ -33,13 +33,12 @@ export default function Nursery() {
           </svg>
         </div>
 
-        <div className="ns-grid">
+        <div className="ns-grid" data-reveal="">
           {SERVICES.map((s, i) => (
             <div
               key={s.n}
               className={`ns-tag ${flip === i ? 'flipped' : ''}`}
               style={{ '--i': i, '--tone': TONES[i % 4] }}
-              data-reveal=""
             >
               <span className="ns-string" />
               <div className="ns-card" role="button" tabIndex={0} onClick={() => setFlip(flip === i ? null : i)} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setFlip(flip === i ? null : i))} aria-pressed={flip === i} data-cursor={flip === i ? 'Close' : 'Flip'}>
@@ -54,12 +53,12 @@ export default function Nursery() {
                   <span className="ns-care">
                     <span>
                       <Sprout size={14} />
-                      <em>Season</em>
+                      <em>Format</em>
                       <b>{s.season}</b>
                     </span>
                     <span>
                       <Droplets size={14} />
-                      <em>Frequency</em>
+                      <em>Turnaround</em>
                       <b>{s.freq}</b>
                     </span>
                     <span>
@@ -101,9 +100,9 @@ export default function Nursery() {
 
         <div className="ns-foot" data-reveal="">
           <p>
-            Not sure where to start? <b>A free site visit</b> with a certified specialist will tell you exactly what your property needs.
+            Not sure where to start? <b>A free brand & media audit</b> shows exactly what is costing you jobs.
           </p>
-          <Btn onClick={() => scrollToId('book')}>Book a site visit</Btn>
+          <Btn onClick={() => scrollToId('book')}>Get a free audit</Btn>
         </div>
       </div>
     </section>

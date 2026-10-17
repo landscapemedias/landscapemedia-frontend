@@ -21,24 +21,24 @@ export default function WhyUs() {
     <section className="section why">
       <div className="wrap wy-grid">
         <div className="wy-left">
-          <span className="eyebrow" data-reveal="">Why choose us</span>
+          <span className="eyebrow" data-reveal="">Why Landscape Media</span>
           <h2 className="h-display h-lg" style={{ margin: '18px 0 22px' }}>
-            <Words text="Care you can see." />
+            <Words text="Never done before." />
             <br />
-            <Words text="Service you can count on." delay={0.15} className="ital" />
+            <Words text="Built for your industry." delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="">
-            Outdoor property care should be straightforward, reliable and backed by proven craftsmanship. That is why property managers and homeowners trust our crews year after year.
+            Most agencies treat a landscape company like any other client. We only work in this industry, so we know your seasons, your services and your customers.
           </p>
           <div className="wy-photo" data-reveal="scale">
-            <img src={IMG.crew} alt="Crew member caring for a residential lawn" />
+            <img src={IMG.crew} alt="Landscape crew filmed on a job site" />
             <div className="wy-badge">
               <svg viewBox="0 0 24 24" width="22" height="22">
                 <path d="M4 20C4 10 10 4 20 4c0 10-6 16-16 16z" fill="var(--sprout)" />
               </svg>
               <span>
-                <b>ISA certified & OSHA compliant</b>
-                <small>Full liability coverage</small>
+                <b>On-site video crew</b>
+                <small>We film your real jobs</small>
               </span>
             </div>
           </div>
@@ -59,10 +59,10 @@ export default function WhyUs() {
             })}
           </div>
           <div className="wy-counts" ref={ref}>
-            <Count n={46} s="+" label="Years of local service" run={seen} />
-            <Count n={45} s=" ac" label="Largest campus managed" run={seen} />
-            <Count n={350} s="" label="Lots in one community" run={seen} />
-            <Count n={24} s="/7" label="Emergency response" run={seen} />
+            <Count n={8} s="" label="Media channels, one team" run={seen} />
+            <Count n={7} s="" label="Landscape niches served" run={seen} />
+            <Count n={3} s="x" label="Average lead growth" run={seen} />
+            <Count n={24} s="/7" label="Online booking" run={seen} />
           </div>
         </div>
       </div>

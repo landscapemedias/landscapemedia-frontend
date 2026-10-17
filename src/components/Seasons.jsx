@@ -94,9 +94,9 @@ export default function Seasons() {
         <Particles kind={s.key} />
         <div className="wrap st-grid">
           <div className="st-head">
-            <span className="eyebrow">Year-round care</span>
+            <span className="eyebrow">Year-round marketing</span>
             <h2 className="h-display h-md">
-              Care that follows <em>every</em> season.
+              Campaigns for <em>every</em> season.
             </h2>
             <div className="st-tabs" role="tablist">
               {SEASONS.map((x, i) => (
@@ -132,7 +132,7 @@ export default function Seasons() {
                 </li>
               ))}
             </ul>
-            <Btn onClick={() => scrollToId('book')}>Plan my {s.name.toLowerCase()} care</Btn>
+            <Btn onClick={() => scrollToId('book')}>Plan my {s.name.toLowerCase()} campaign</Btn>
           </div>
         </div>
       </div>

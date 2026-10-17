@@ -1,8 +1,8 @@
-# ABC Landscape
+# Landscape Media
 
-Website for ABC Landscape, tree care and landscape management.
+Website for Landscape Media, a media and branding studio for landscape companies.
 
-Built with React and Vite. Company details, services, industries, projects and FAQ live in `src/data/site.js`.
+Built with React and Vite. Brand details, services, niches, projects and FAQ live in `src/data/site.js`.
 
 ## Run locally
 

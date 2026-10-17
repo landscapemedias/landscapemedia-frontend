@@ -8,19 +8,19 @@ export default function Industries() {
   const [i, setI] = useState(0)
   const D = INDUSTRIES[i]
   return (
-    <section className="section industries dark" id="industries">
+    <section className="section industries dark" id="niches">
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Industries we serve</span>
+            <span className="eyebrow" data-reveal="">Niches we serve</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Specialized care for" />
+              <Words text="Media for every" />
               <br />
-              <Words text="every property type." delay={0.15} className="ital" />
+              <Words text="service you sell." delay={0.15} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Whether it is a family home, a corporate campus or a luxury resort, we bring the right expertise, equipment and attention to every landscape.
+            Snow removal, tree removal & cutting, weekly and monthly maintenance, micro organic farming, green houses, glass verandas and specialty services like design and permits. Each one sells differently, so each gets its own playbook.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export default function Industries() {
                 </li>
               ))}
             </ul>
-            <Btn variant="light" onClick={() => scrollToId('book')}>Contact the {D.short.toLowerCase()} team</Btn>
+            <Btn variant="light" onClick={() => scrollToId('book')}>Grow my {D.short.toLowerCase()} business</Btn>
           </div>
         </div>
       </div>

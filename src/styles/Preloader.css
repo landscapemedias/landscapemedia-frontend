@@ -4,7 +4,8 @@
   z-index: 10000;
   display: grid;
   place-items: center;
-  background: var(--ink);
+  overflow: hidden;
+  background: radial-gradient(70% 60% at 50% 45%, #1d4a33 0%, var(--ink) 70%);
   color: var(--cream);
   clip-path: inset(0 0 0 0);
   transition: clip-path 1s var(--ease);
@@ -15,96 +16,50 @@
 }
 
 .preloader.leave .pl-inner {
-  transform: translateY(-60px);
+  transform: translateY(-60px) scale(0.96);
   opacity: 0;
 }
 
+.pl-rings {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.pl-rings span {
+  grid-area: 1 / 1;
+  width: 40vmin;
+  height: 40vmin;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 232, 106, 0.18);
+  animation: plRing 3.2s var(--ease) infinite;
+}
+
+.pl-rings span:nth-child(2) { animation-delay: 1.05s; }
+.pl-rings span:nth-child(3) { animation-delay: 2.1s; }
+
+@keyframes plRing {
+  from { transform: scale(0.4); opacity: 1; }
+  to { transform: scale(2.4); opacity: 0; }
+}
+
 .pl-inner {
-  width: min(320px, 80vw);
+  position: relative;
+  width: min(460px, 82vw);
   display: grid;
   justify-items: center;
-  gap: 18px;
+  gap: 26px;
   transition: transform 0.9s var(--ease), opacity 0.6s;
 }
 
-.pl-tree {
-  width: 180px;
-  height: 180px;
-  overflow: visible;
-}
-
-.pl-ground {
-  fill: none;
-  stroke: var(--bark);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 160;
-  stroke-dashoffset: 160;
-  animation: draw 0.6s var(--ease) forwards;
-}
-
-.pl-trunk {
-  fill: none;
-  stroke: var(--cream);
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-dasharray: 120;
-  stroke-dashoffset: 120;
-  animation: draw 0.9s var(--ease) 0.25s forwards;
-}
-
-.pl-br {
-  fill: none;
-  stroke: var(--cream);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-dasharray: 60;
-  stroke-dashoffset: 60;
-  animation: draw 0.6s var(--ease) forwards;
-}
-
-.pl-br.b1 { animation-delay: 0.6s; }
-.pl-br.b2 { animation-delay: 0.7s; }
-.pl-br.b3 { animation-delay: 0.8s; }
-.pl-br.b4 { animation-delay: 0.85s; }
-
-.pl-leaf {
-  fill: var(--sprout);
-  transform: scale(0);
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  animation: pop 0.7s var(--ease-spring) forwards;
-}
-
-.pl-leaf:nth-of-type(odd),
-g:nth-child(3n) .pl-leaf {
-  fill: var(--leaf);
-}
-
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes pop {
-  to { transform: scale(1); }
-}
-
 .pl-brand {
-  font-family: var(--display);
-  font-size: 34px;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  display: flex;
-  gap: 8px;
-}
-
-.pl-brand em {
-  font-weight: 300;
-  color: var(--sprout);
+  width: 100%;
 }
 
 .pl-bar {
-  width: 100%;
+  width: 70%;
   height: 2px;
   background: var(--line-light);
   overflow: hidden;
@@ -114,13 +69,15 @@ g:nth-child(3n) .pl-leaf {
 .pl-bar span {
   display: block;
   height: 100%;
-  background: var(--sprout);
+  background: linear-gradient(90deg, var(--leaf), var(--sprout));
   transform-origin: left;
 }
 
 .pl-meta {
-  width: 100%;
+  width: 70%;
   display: flex;
+  gap: 12px;
+  white-space: nowrap;
   justify-content: space-between;
   font-family: var(--mono);
   font-size: 11px;

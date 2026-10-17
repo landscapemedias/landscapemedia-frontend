@@ -14,6 +14,9 @@ import './styles/nursery.css'
 import './styles/estimate.css'
 import './styles/booking.css'
 import './styles/sections.css'
+import './styles/brandlogo.css'
+import './styles/mockups.css'
+import './styles/nichestories.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

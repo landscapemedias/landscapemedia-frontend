@@ -242,14 +242,14 @@ export default function AppShowcase() {
       </div>
       <div className="wrap as-grid">
         <div className="as-copy">
-          <span className="eyebrow" data-reveal="">{BRAND.name} {BRAND.word} client app</span>
+          <span className="eyebrow" data-reveal="">Booking apps & appointment calendars</span>
           <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-            <Words text="Your property," />
+            <Words text="Your brand," />
             <br />
-            <Words text="in your pocket." delay={0.15} className="ital" />
+            <Words text="on their home screen." delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Every client gets the app. Track crews, read visit reports, approve quotes and call a storm crew, without a single phone call.
+            We build branded booking apps for landscape companies. Your clients book weekly or monthly maintenance, track crews, read visit reports and pay, and you stop chasing phone calls.
           </p>
           <div className="as-feats" onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
             {FEATURES.map((f, i) => (

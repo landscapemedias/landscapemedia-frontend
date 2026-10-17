@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Star, Truck, ClipboardCheck, Zap, Play } from 'lucide-react'
+import { CalendarCheck, Printer, Clapperboard, Mail, Play } from 'lucide-react'
 import { IMG, BRAND, HERO_TOASTS } from '../data/site'
 import { Btn, Words } from './ui'
 import { scrollToId, useMouse } from '../hooks'
 
-const ICONS = [Truck, ClipboardCheck, Zap, Star]
+const ICONS = [CalendarCheck, Printer, Clapperboard, Mail]
 
 function seeded(n) {
   let s = n
@@ -94,14 +94,14 @@ export default function Hero() {
       <div className="hero-sun" style={{ transform: `translate3d(${m.x * -30}px, ${y * 0.3 + m.y * -20}px, 0)` }} />
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <span className="eyebrow" data-reveal="">Tree care & landscape management</span>
+          <span className="eyebrow" data-reveal="">Media & branding for landscape companies</span>
           <h1 className="h-display h-xl hero-title">
-            <Words text="Healthy trees." delay={0.1} />
+            <Words text="We grow" delay={0.1} />
             <br />
-            <Words text="Beautiful" delay={0.25} />
+            <Words text="landscape" delay={0.25} />
             <br />
             <span className="split-words" data-reveal="" style={{ '--d': '0.4s' }}>
-              <span className="w"><span style={{ '--i': 0 }}><em>properties.</em></span></span>
+              <span className="w"><span style={{ '--i': 0 }}><em>brands.</em></span></span>
             </span>
             <span className="hero-sprout" aria-hidden="true">
               <svg viewBox="0 0 60 60">
@@ -112,32 +112,32 @@ export default function Hero() {
             </span>
           </h1>
           <p className="lead hero-lead" data-reveal="" style={{ '--d': '0.7s' }}>
-            Professional tree and landscape care for homes, businesses and communities. Certified arborists, insured crews and dependable service, all year round.
+            Flyers, reels, social media, email marketing, showcase websites and booking apps for landscape, tree, snow removal and outdoor living companies. One studio for all of it. Never done like this before.
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
-            <Btn onClick={() => scrollToId('book')}>Book a free site visit</Btn>
-            <button className="hero-play" onClick={() => scrollToId('services')} data-cursor="Explore">
+            <Btn onClick={() => scrollToId('book')}>Book a strategy call</Btn>
+            <button className="hero-play" onClick={() => scrollToId('mockups')} data-cursor="Watch">
               <span className="hp-ring">
                 <Play size={16} fill="currentColor" />
               </span>
-              Explore services
+              See the mockups
             </button>
           </div>
           <ul className="hero-trust" data-reveal="" style={{ '--d': '1s' }}>
-            <li>Experienced professionals</li>
-            <li>Reliable service</li>
-            <li>Fully insured</li>
-            <li>Local care</li>
+            <li>Landscape only</li>
+            <li>Filmed on your sites</li>
+            <li>Booked jobs, not likes</li>
+            <li>No long contracts</li>
           </ul>
         </div>
 
         <div className="hero-visual" data-reveal="scale" style={{ '--d': '0.3s' }}>
           <div className="hero-arch" style={{ transform: `translate3d(${m.x * -14}px, ${m.y * -10}px, 0)` }}>
-            <img src={IMG.hero} alt="Modern home with a professionally maintained landscape" style={{ transform: `scale(1.15) translate3d(${m.x * 12}px, ${y * 0.06}px, 0)` }} />
+            <img src={IMG.hero} alt="Landscaped modern home photographed for a client showcase" style={{ transform: `scale(1.15) translate3d(${m.x * 12}px, ${y * 0.06}px, 0)` }} />
             <div className="arch-shine" />
             <div className="arch-tag">
-              <span>Crew on site</span>
-              <b>Huntington estate</b>
+              <span>Now filming</span>
+              <b>Estate garden reel</b>
             </div>
           </div>
           <div className="hero-badge" aria-hidden="true">
@@ -146,7 +146,7 @@ export default function Hero() {
                 <path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" />
               </defs>
               <text>
-                <textPath href="#circ">CERTIFIED ARBORISTS · FULLY INSURED · 24/7 ·</textPath>
+                <textPath href="#circ">BRANDING · REELS · SOCIAL · EMAIL · APPS ·</textPath>
               </text>
             </svg>
             <span className="hb-core">
@@ -166,9 +166,9 @@ export default function Hero() {
             <span className="ht-val">{T.value}</span>
           </div>
           <div className="hero-stat" style={{ transform: `translate3d(${m.x * 34}px, ${m.y * 22}px, 0)` }}>
-            <small>Years of local service</small>
+            <small>Average lead growth</small>
             <b>
-              {BRAND.years}<span>+ yrs</span>
+              3<span>x leads</span>
             </b>
             <svg viewBox="0 0 120 36" className="hs-spark">
               <path d="M0 30 L15 26 L30 28 L45 20 L60 22 L75 14 L90 16 L105 6 L120 4" />

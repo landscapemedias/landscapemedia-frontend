@@ -57,12 +57,12 @@ export default function Footer() {
           <div className="ft-cta" data-reveal="scale">
             <img src={IMG.lush} alt="" aria-hidden="true" />
             <div className="ft-cta-in">
-              <span className="eyebrow">Expert tree & landscape assistance</span>
+              <span className="eyebrow">Media & branding for landscape companies</span>
               <h2 className="h-display">
-                Ready to take <em>better care</em> of your property?
+                Ready to make your <em>finest work</em> famous?
               </h2>
               <div className="ft-cta-act">
-                <Btn variant="light" onClick={() => scrollToId('book')}>Book a free site visit</Btn>
+                <Btn variant="light" onClick={() => scrollToId('book')}>Book a strategy call</Btn>
                 <a className="ft-call" href={BRAND.phoneHref}>
                   <span><Phone size={18} /></span>
                   <span>
@@ -72,9 +72,9 @@ export default function Footer() {
                 </a>
               </div>
               <ul className="ft-trust">
-                <li><Check size={14} /> Prompt in-person site visits</li>
-                <li><Check size={14} /> Fully certified & insured</li>
-                <li><Check size={14} /> Dedicated local district teams</li>
+                <li><Check size={14} /> Free brand & media audit</li>
+                <li><Check size={14} /> Landscape industry only</li>
+                <li><Check size={14} /> No long contracts</li>
               </ul>
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function Footer() {
           <div className="ft-grid">
             <div className="ft-brand">
               <Logo light />
-              <p>Professional landscape management, certified arborist tree care and grounds maintenance for residential estates and commercial properties across Long Island and the greater New York region.</p>
+              <p>The media and branding studio for landscape companies. Flyers, reels, social media, email marketing, showcase websites, appointment calendars and booking apps.</p>
               <form
                 className={`ft-news ${sent ? 'sent' : ''}`}
                 onSubmit={(e) => {
@@ -90,7 +90,7 @@ export default function Footer() {
                   if (/\S+@\S+\.\S+/.test(email)) setSent(true)
                 }}
               >
-                <label htmlFor="ft-email">Seasonal tips & tree care advisories</label>
+                <label htmlFor="ft-email">Monthly marketing ideas for landscape companies</label>
                 <div>
                   <input id="ft-email" type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={sent} />
                   <button type="submit" disabled={sent}>{sent ? <Check size={18} /> : 'Subscribe'}</button>
@@ -134,12 +134,12 @@ export default function Footer() {
           <div className="ft-cert">
             <ShieldCheck size={22} />
             <p>
-              <b>ISA certified & OSHA compliant.</b> All operations performed under ISA standards (ANSI A300) and OSHA 1910.269 with full liability coverage. {BRAND.years}+ years · Licensed & insured.
+              <b>Landscape industry specialists.</b> Branding, print, video, social, email, web and apps for snow removal, tree care, maintenance, micro organic farms, green houses, glass verandas and design firms.
             </p>
           </div>
 
           <div className="ft-bottom">
-            <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.word} Services, Inc. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.word}™, Inc. All rights reserved.</span>
             <span className="ft-legal">
               <a href="#top" onClick={go('top')}>Privacy</a>
               <a href="#top" onClick={go('top')}>Terms</a>

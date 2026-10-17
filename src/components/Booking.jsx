@@ -4,8 +4,8 @@ import { BRAND, SERVICES } from '../data/site'
 import { Btn, Words } from './ui'
 
 const TYPES = [
-  { k: 'site', label: 'Site visit', sub: 'Specialist at your property', icon: MapPin },
-  { k: 'video', label: 'Video consult', sub: 'Show us on camera', icon: Video },
+  { k: 'site', label: 'In person', sub: 'We come to your yard', icon: MapPin },
+  { k: 'video', label: 'Video call', sub: 'Screen share your brand', icon: Video },
   { k: 'phone', label: 'Phone call', sub: 'We call you back', icon: Phone },
 ]
 const SLOTS = ['9:00 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM', '4:00 PM']
@@ -19,10 +19,10 @@ function ics(date, time, type, name) {
   d.setHours(h, m, 0, 0)
   const e = new Date(d.getTime() + 30 * 60000)
   const f = (x) => x.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
-  const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'BEGIN:VEVENT', `DTSTART:${f(d)}`, `DTEND:${f(e)}`, `SUMMARY:${BRAND.name} ${BRAND.word} site visit`, `DESCRIPTION:${type} with ${name}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n')
+  const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'BEGIN:VEVENT', `DTSTART:${f(d)}`, `DTEND:${f(e)}`, `SUMMARY:${BRAND.name} ${BRAND.word} strategy call`, `DESCRIPTION:${type} with ${name}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n')
   const a = document.createElement('a')
   a.href = URL.createObjectURL(new Blob([body], { type: 'text/calendar' }))
-  a.download = 'site-visit.ics'
+  a.download = 'strategy-call.ics'
   a.click()
 }
 
@@ -59,15 +59,15 @@ export default function Booking() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Book a free site visit</span>
+            <span className="eyebrow" data-reveal="">Book a strategy call</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Schedule your" />
+              <Words text="Pick a time." />
               <br />
-              <Words text="free site visit." delay={0.15} className="ital" />
+              <Words text="Let us grow your brand." delay={0.15} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Pick a day and time. A local specialist will visit, assess your trees and grounds, and send you a clear written care plan and quote.
+            This is the same appointment calendar we set up for your clients. Pick a day and time, and we will review your brand, website and social, then send a clear growth plan.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export default function Booking() {
                 <div className="bk-fields">
                   <input placeholder="Full name *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
                   <input placeholder="Email *" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                  <input placeholder="Property address" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
+                  <input placeholder="Company name" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
                   <input placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                 </div>
                 <div className="bk-picks">

@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { PROJECTS } from '../data/site'
 import { Words } from './ui'
 import { scrollToId } from '../hooks'
+import BeforeAfter from './BeforeAfter'
 
 export default function Projects() {
   return (
@@ -9,17 +10,19 @@ export default function Projects() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Case studies & projects</span>
+            <span className="eyebrow" data-reveal="">Showcase your finest work</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="See the difference" />
+              <Words text="Real landscape brands." />
               <br />
-              <Words text="professional care makes." delay={0.15} className="ital" />
+              <Words text="Real booked jobs." delay={0.15} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Real outcomes for real properties. How our certified teams maintain safety, preserve valuable trees and improve outdoor grounds.
+            Your projects deserve a gallery as good as the work. This is how we showcase it, from full rebrands to snow campaigns, tree service reels and booking apps.
           </p>
         </div>
+
+        <BeforeAfter />
 
         <div className="pj-grid">
           {PROJECTS.map((p, i) => (
@@ -32,7 +35,7 @@ export default function Projects() {
                 <h3>{p.t}</h3>
                 <p>{p.d}</p>
                 <span className="pj-link">
-                  View project details <ArrowUpRight size={16} />
+                  View the case study <ArrowUpRight size={16} />
                 </span>
               </div>
             </article>

@@ -301,6 +301,11 @@
   padding: clamp(60px, 7vw, 100px) 0 40px;
 }
 
+.ft-brand .logo .blogo {
+  width: clamp(200px, 20vw, 280px);
+  margin-bottom: 16px;
+}
+
 .ft-brand p {
   color: var(--muted-light);
   max-width: 400px;

@@ -115,6 +115,18 @@ button {
   color: var(--sprout);
 }
 
+@media (max-width: 520px) {
+  .eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+  .eyebrow::before {
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
+}
+
 .eyebrow::before {
   content: '';
   width: 18px;
@@ -306,7 +318,9 @@ button {
   transform: scale(0.94);
 }
 
-[data-reveal].in {
+[data-reveal].in,
+[data-revealed='true'],
+[data-reveal][data-revealed='true'] {
   opacity: 1;
   transform: none;
 }

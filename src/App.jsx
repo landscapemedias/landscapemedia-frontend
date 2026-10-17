@@ -6,7 +6,7 @@ import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import Manifesto from './components/Manifesto'
 import Seasons from './components/Seasons'
-import Industries from './components/Industries'
+import NicheStories from './components/NicheStories'
 import WhyUs from './components/WhyUs'
 import Projects from './components/Projects'
 import AppShowcase from './components/AppShowcase'
@@ -16,6 +16,8 @@ import Nursery from './components/Nursery'
 import Process from './components/Process'
 import Booking from './components/Booking'
 import Faq from './components/Faq'
+import BrandReveal from './components/BrandReveal'
+import Mockups from './components/Mockups'
 import Footer from './components/Footer'
 import { useReveal } from './hooks'
 
@@ -38,6 +40,11 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
+        <BrandReveal />
+        <Manifesto />
+        <Nursery />
+        <Mockups />
+        <NicheStories />
 
       </main>
 

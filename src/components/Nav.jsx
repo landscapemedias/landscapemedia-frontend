@@ -56,7 +56,7 @@ export default function Nav() {
           <div className="nav-top-in">
             <span className="nav-live">
               <i />
-              24/7 storm & emergency tree response
+              Now booking spring & snow season campaigns
             </span>
             <span className="nav-top-links">
               <a href={BRAND.phoneHref}><Phone size={13} /> {BRAND.phone}</a>
@@ -67,7 +67,7 @@ export default function Nav() {
         </div>
         <div className="nav-bar">
           <a href="#top" className="nav-logo" onClick={go('top')} aria-label={`${BRAND.name} ${BRAND.word} home`}>
-            <Logo />
+            <Logo delay={3.7} />
           </a>
           <nav className="nav-links" aria-label="Main">
             {NAV.slice(0, 5).map((l) => (
@@ -78,7 +78,7 @@ export default function Nav() {
           </nav>
           <div className="nav-cta">
             <Btn variant="sm" href="#book" onClick={go('book')}>
-              Free site visit
+              Book a strategy call
             </Btn>
             <a className="nav-call" href={BRAND.phoneHref} aria-label="Call us">
               <Phone size={18} />

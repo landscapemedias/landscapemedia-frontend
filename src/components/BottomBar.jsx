@@ -6,7 +6,7 @@ const TABS = [
   { id: 'top', label: 'Home', icon: Home },
   { id: 'services', label: 'Services', icon: Leaf },
   { id: 'book', label: 'Book', icon: CalendarPlus, main: true },
-  { id: 'projects', label: 'Projects', icon: Images },
+  { id: 'mockups', label: 'Mockups', icon: Images },
   { id: 'menu', label: 'Menu', icon: Menu },
 ]
 
@@ -17,7 +17,7 @@ export default function BottomBar() {
   useEffect(() => {
     const on = () => {
       let cur = 'top'
-      ;['services', 'projects', 'book'].forEach((id) => {
+      ;['services', 'mockups', 'book'].forEach((id) => {
         const el = document.getElementById(id)
         if (el && el.getBoundingClientRect().top < innerHeight * 0.5) cur = id
       })

@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { BRAND } from '../data/site'
+import BrandLogo from './BrandLogo'
 
 export function Words({ text, className = '', delay = 0, as: Tag = 'span' }) {
   const parts = text.split(' ')
@@ -56,16 +57,10 @@ export function LeafMark({ size = 34 }) {
   )
 }
 
-export function Logo({ light = false }) {
+export function Logo({ light = false, className = '', delay = 0 }) {
   return (
-    <span className={`logo ${light ? 'light' : ''}`}>
-      <LeafMark />
-      <span className="logo-t">
-        <b>
-          {BRAND.name}<em>{BRAND.word}</em>
-        </b>
-        <i>{BRAND.line}</i>
-      </span>
+    <span className={`logo ${light ? 'light' : ''} ${className}`}>
+      <BrandLogo light={light} style={{ '--bl-d': `${delay}s` }} />
     </span>
   )
 }

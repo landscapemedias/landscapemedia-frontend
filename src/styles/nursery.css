@@ -32,6 +32,11 @@
   padding-top: 46px;
   perspective: 1200px;
   transition-delay: calc(var(--i) * 0.06s);
+  transition: z-index 0.3s;
+}
+
+.ns-tag.flipped {
+  z-index: 10;
 }
 
 .ns-string {
@@ -64,8 +69,9 @@
   height: 360px;
   text-align: left;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transform-origin: 50% 0;
-  transition: transform 0.9s var(--ease);
+  transition: transform 0.85s var(--ease);
   animation: tagSway 7s ease-in-out infinite;
   animation-delay: calc(var(--i) * -0.9s);
 }
@@ -81,6 +87,7 @@
 
 .ns-tag.flipped .ns-card {
   transform: rotateY(180deg);
+  animation: none;
 }
 
 .ns-face {
@@ -89,20 +96,20 @@
   display: flex;
   flex-direction: column;
   padding: 44px 22px 22px;
-  border-radius: 22px 22px 22px 22px;
+  border-radius: 22px;
   background: var(--tone);
   border: 1px solid rgba(12, 31, 23, 0.1);
   box-shadow: 0 30px 40px -30px rgba(12, 31, 23, 0.45);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  overflow: hidden;
-  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, opacity 0.3s;
 }
 
 .ns-face::after {
   content: '';
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   pointer-events: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.08'/%3E%3C/svg%3E");
 }
@@ -111,10 +118,25 @@
   box-shadow: 0 40px 50px -30px rgba(12, 31, 23, 0.55);
 }
 
+.ns-face.front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
 .ns-face.back {
   transform: rotateY(180deg);
   background: var(--ink);
   color: var(--cream);
+  z-index: 1;
+}
+
+.ns-tag.flipped .ns-face.front {
+  pointer-events: none;
+}
+
+.ns-tag.flipped .ns-face.back {
+  pointer-events: auto;
+  z-index: 5;
 }
 
 .ns-hole {

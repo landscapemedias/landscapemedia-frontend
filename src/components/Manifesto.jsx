@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useScrollProgress, useInView, useCountUp } from '../hooks'
 import { IMG } from '../data/site'
 
-const TEXT = 'Great landscapes do not happen by accident. They take knowledge, attention to detail and people who care about doing the job properly. For more than four decades our teams have worked with property owners to understand what their landscape needs, and to care for it dependably, all year round.'
+const TEXT = 'Landscape companies do beautiful work every single day. Then it disappears behind a blurry photo, an old flyer and a website nobody updates. We change that. We film your crews, design your brand and put your finest work on every screen, door and inbox in town.'
 
 function Stat({ n, suffix, label, run, dec = 0 }) {
   const v = useCountUp(n, run, 1800, dec)
@@ -28,7 +28,7 @@ export default function Manifesto() {
   return (
     <section className="section dark manifesto" ref={ref}>
       <div className="wrap">
-        <span className="eyebrow">Built on experience</span>
+        <span className="eyebrow">Why we exist</span>
         <p className="mf-text">
           {words.map((w, i) => (
             <span key={i} className={i < lit ? 'lit' : ''}>
@@ -43,10 +43,10 @@ export default function Manifesto() {
             <img src={IMG.sprout} alt="Young green sprout" className="mfp c" style={{ transform: `translateY(${(0.5 - p) * 90}px) rotate(-2deg)` }} />
           </div>
           <div className="mf-stats" ref={statsRef}>
-            <Stat n={46} suffix="+ yrs" label="Of dedicated local service" run={seen} />
-            <Stat n={24} suffix="/7" label="Storm and emergency tree response" run={seen} />
-            <Stat n={100} suffix="%" label="Licensed, insured and OSHA compliant" run={seen} />
-            <Stat n={350} suffix="lots" label="Managed in a single planned community" run={seen} />
+            <Stat n={8} suffix=" channels" label="Brand, print, video, social, email, web, calendar & app" run={seen} />
+            <Stat n={24} suffix="/7" label="Online booking on your appointment calendar" run={seen} />
+            <Stat n={100} suffix="%" label="Focused on the landscape industry" run={seen} />
+            <Stat n={7} suffix=" niches" label="From snow removal to glass verandas" run={seen} />
           </div>
         </div>
       </div>
