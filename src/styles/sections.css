@@ -62,8 +62,8 @@
 }
 
 .pr-step.on .pr-dot {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--moss);
+  border-color: var(--moss);
   fill: var(--sprout);
   transform: scale(1.1) rotate(-20deg);
 }
@@ -353,7 +353,7 @@
   padding: 0 20px;
   border-radius: 999px;
   background: var(--sprout);
-  color: var(--ink);
+  color: var(--moss);
   font-weight: 700;
   font-size: 14px;
   transition: transform 0.4s var(--ease-spring);
@@ -429,7 +429,7 @@
 .ft-social a:hover {
   background: var(--sprout);
   border-color: var(--sprout);
-  color: var(--ink);
+  color: var(--moss);
   transform: translateY(-4px) rotate(-8deg);
 }
 
@@ -489,7 +489,7 @@
   height: 50px;
   border-radius: 50%;
   background: var(--sprout);
-  color: var(--ink);
+  color: var(--moss);
   transition: transform 0.5s var(--ease-spring);
 }
 

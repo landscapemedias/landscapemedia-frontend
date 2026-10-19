@@ -116,7 +116,8 @@ export default function Footer() {
             <div className="ft-col ft-contact">
               <h4>Contact</h4>
               <a href={`mailto:${BRAND.email}`}><Mail size={16} /> {BRAND.email}</a>
-              <a href={BRAND.phoneHref}><Phone size={16} /> {BRAND.phone}</a>
+              <a href={BRAND.tollFreeHref}><Phone size={16} /> Toll-free: {BRAND.tollFree}</a>
+              <a href={BRAND.directPhoneHref}><Phone size={16} /> Direct: {BRAND.directPhone}</a>
               <span><MapPin size={16} /> {BRAND.address}</span>
               <span><Clock size={16} /> {BRAND.hours}</span>
               <div className="ft-social">

@@ -15,7 +15,7 @@ const NOTES = [
   { icon: Truck, t: 'Crew arriving in 12 min', c: 'a' },
   { icon: Check, t: 'Visit report ready', c: 'b' },
   { icon: CreditCard, t: 'Invoice paid · $240', c: 'c' },
-  { icon: Zap, t: 'Storm alert for Huntington', c: 'd' },
+  { icon: Zap, t: 'Storm alert for Melville', c: 'd' },
 ]
 
 function StatusBar() {

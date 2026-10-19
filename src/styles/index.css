@@ -1,18 +1,18 @@
 :root {
-  --forest: #0b2917;
-  --forest-deep: #04160a;
-  --forest-dark: #020d06;
-  --emerald: #15803d;
-  --emerald-light: #22c55e;
-  --leaf: #4ade80;
-  --mint: #e8f5ec;
+  --forest: #234b34;
+  --forest-deep: #1b3d2b;
+  --forest-dark: #142e20;
+  --emerald: #2e5e3e;
+  --emerald-light: #4f8a4b;
+  --leaf: #6daa47;
+  --mint: #eef5ec;
   --earth: #c2884a;
-  --bg: #f5f8f5;
+  --bg: #faf8f1;
   --paper: #ffffff;
-  --line: rgba(11, 41, 23, 0.12);
-  --line-strong: rgba(11, 41, 23, 0.22);
-  --ink: #081a0f;
-  --muted: #4e6656;
+  --line: rgba(46, 94, 62, 0.16);
+  --line-strong: rgba(46, 94, 62, 0.24);
+  --ink: #1b3d2b;
+  --muted: #436b52;
 
   --font-display: 'Instrument Sans', system-ui, sans-serif;
   --font-body: 'Instrument Sans', system-ui, sans-serif;

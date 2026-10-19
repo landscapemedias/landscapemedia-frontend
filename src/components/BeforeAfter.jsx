@@ -27,12 +27,12 @@ export default function BeforeAfter() {
         style={{ '--p': `${p}%` }}
         data-cursor="Drag"
       >
-        <img src={IMG.path} alt="Garden path as an unedited phone photo" className="ba-img before" draggable="false" />
+        <img src={IMG.cover} alt="Estate terrace as an unedited phone photo" className="ba-img before" draggable="false" />
         <div className="ba-after">
-          <img src={IMG.path} alt="Same garden path after professional shoot and edit" className="ba-img after" draggable="false" />
+          <img src={IMG.cover} alt="Same estate terrace after professional shoot and edit" className="ba-img after" draggable="false" />
           <div className="ba-brand">
-            <b>Greenline Grounds</b>
-            <small>Garden path & bed renovation · Huntington, NY</small>
+            <b>Estate Garden Terrace</b>
+            <small>Terrace & perennial bed showcase · Melville, NY</small>
           </div>
         </div>
         <span className="ba-tag l"><Smartphone size={14} /> Phone photo</span>

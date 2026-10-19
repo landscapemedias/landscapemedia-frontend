@@ -1,9 +1,9 @@
 :root {
-  --ink: #0c1f17;
-  --forest: #12352a;
+  --ink: #1b3d2b;
+  --forest: #234b34;
   --moss: #2e5e3e;
   --fern: #4f8a4b;
-  --leaf: #76b852;
+  --leaf: #6daa47;
   --sprout: #b8e86a;
   --lime: #e2f7b5;
   --cream: #f3efe3;
@@ -12,10 +12,10 @@
   --bark: #6b4a2f;
   --clay: #c9784a;
   --sun: #f4c35a;
-  --line: rgba(12, 31, 23, 0.12);
-  --line-light: rgba(243, 239, 227, 0.14);
-  --muted: rgba(12, 31, 23, 0.62);
-  --muted-light: rgba(243, 239, 227, 0.66);
+  --line: rgba(46, 94, 62, 0.16);
+  --line-light: rgba(243, 239, 227, 0.16);
+  --muted: #436b52;
+  --muted-light: rgba(243, 239, 227, 0.76);
   --display: 'Fraunces', Georgia, serif;
   --body: 'Manrope', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -136,22 +136,51 @@ button {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 20C4 10 10 4 20 4c0 10-6 16-16 16z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
+h1, h2, h3, h4, h5, h6,
 .h-display {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 500;
   font-variation-settings: 'opsz' 144, 'SOFT' 100;
   letter-spacing: -0.035em;
   line-height: 0.95;
   margin: 0;
-}
-
-.h-display em {
-  font-style: italic;
-  font-weight: 300;
   color: var(--moss);
 }
 
-.dark .h-display em {
+h1 em, h2 em, h3 em, h4 em, h5 em, h6 em,
+.h-display em,
+.ital {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--fern);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark .h-display {
+  color: var(--cream);
+}
+
+.dark h1 em, .dark h2 em, .dark h3 em, .dark h4 em,
+.dark .h-display em,
+.dark .ital {
+  color: var(--sprout);
+}
+
+.split-words {
+  color: var(--moss);
+}
+
+.split-words em,
+.split-words.ital {
+  color: var(--fern);
+}
+
+.dark .split-words {
+  color: var(--cream);
+}
+
+.dark .split-words em,
+.dark .split-words.ital {
   color: var(--sprout);
 }
 
@@ -199,7 +228,7 @@ button {
 }
 
 .btn {
-  --bg: var(--ink);
+  --bg: var(--moss);
   --fg: var(--cream);
   position: relative;
   display: inline-flex;
@@ -223,7 +252,7 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--sprout);
+  background: var(--fern);
   border-radius: inherit;
   transform: translateY(102%);
   transition: transform 0.55s var(--ease);
@@ -235,9 +264,9 @@ button {
 }
 
 .btn:hover {
-  color: var(--ink);
+  color: var(--cream);
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -14px rgba(12, 31, 23, 0.45);
+  box-shadow: 0 14px 30px -14px rgba(46, 94, 62, 0.45);
 }
 
 .btn .ico {
@@ -247,23 +276,23 @@ button {
   height: 30px;
   border-radius: 50%;
   background: var(--sprout);
-  color: var(--ink);
+  color: var(--moss);
   transition: transform 0.5s var(--ease), background 0.4s;
 }
 
 .btn:hover .ico {
-  background: var(--ink);
-  color: var(--sprout);
+  background: var(--cream);
+  color: var(--moss);
   transform: rotate(-45deg);
 }
 
 .btn.light {
   --bg: var(--sprout);
-  --fg: var(--ink);
+  --fg: var(--moss);
 }
 
 .btn.light .ico {
-  background: var(--ink);
+  background: var(--moss);
   color: var(--sprout);
 }
 
@@ -273,8 +302,8 @@ button {
 
 .btn.ghost {
   --bg: transparent;
-  --fg: var(--ink);
-  border: 1.5px solid var(--line);
+  --fg: var(--moss);
+  border: 1.5px solid var(--moss);
 }
 
 .dark .btn.ghost {
@@ -283,7 +312,8 @@ button {
 }
 
 .btn.ghost:hover {
-  color: var(--ink);
+  background: var(--moss);
+  color: var(--cream);
 }
 
 .chip {

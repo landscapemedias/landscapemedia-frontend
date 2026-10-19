@@ -24,4 +24,5 @@ export const IMG = {
   workTurf: SITE.trimmer,
   workCortenZen: SITE.modern,
   reelCover: SITE.hills,
+  cover: SITE.cover,
 }

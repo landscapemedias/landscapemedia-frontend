@@ -23,17 +23,22 @@ import glassImg from '../assets/images/site/glass.jpg'
 import glassHouseImg from '../assets/images/site/glass-house.jpg'
 import plansImg from '../assets/images/site/plans.jpg'
 import teamImg from '../assets/images/site/team.jpg'
+import coverImg from '../assets/images/site/cover+photo+v2.webp'
 
 export const BRAND = {
   name: 'Landscape',
   word: 'Media',
   line: 'Media & Branding for Landscape Companies',
   tagline: 'We grow landscape brands.',
-  email: 'nick@aptreescorp.com',
-  phone: '+1 (631) 943-2157',
-  phoneHref: 'tel:+16319432157',
-  address: '133 New York Ave, Huntington, NY 11743',
-  city: 'Huntington, New York',
+  email: 'grow@landscapemedia.com',
+  phone: '800 224 8005',
+  phoneHref: 'tel:8002248005',
+  tollFree: '800 224 8005',
+  tollFreeHref: 'tel:8002248005',
+  directPhone: '516 252 8000',
+  directPhoneHref: 'tel:5162528000',
+  address: '105 Maxess Road, Melville, NY 11747',
+  city: 'Melville, New York',
   hours: 'Mon to Fri, 8:00 AM to 6:00 PM EST',
   years: 46,
   colors: [
@@ -70,6 +75,7 @@ export const IMG = {
   glassHouse: glassHouseImg,
   plans: plansImg,
   team: teamImg,
+  cover: coverImg,
 }
 export const NAV = [
   { id: 'services', label: 'Services' },
@@ -95,7 +101,7 @@ export const MARQUEE = [
 
 export const HERO_TOASTS = [
   { title: 'New booking: snow plowing', sub: 'Booked from your Instagram reel', value: '+1' },
-  { title: 'Flyer drop delivered', sub: '2,500 homes · Huntington', value: 'Sent' },
+  { title: 'Flyer drop delivered', sub: '2,500 homes · Melville', value: 'Sent' },
   { title: 'Reel hit 48k views', sub: 'Tree removal timelapse', value: '48k' },
   { title: 'Spring email campaign', sub: 'Weekly maintenance offer', value: '41% open' },
 ]
@@ -220,7 +226,7 @@ export const WHY = [
 ]
 
 export const PROJECTS = [
-  { k: 'Full rebrand + website', t: 'Greenline Grounds: from pickup truck to 12-crew brand', d: 'New logo, truck wraps, showcase website and a weekly maintenance plan page that doubled recurring clients in one season.', img: IMG.modern, stat: '2x plans' },
+  { k: 'Full rebrand + website', t: 'Greenline Grounds: from pickup truck to 12-crew brand', d: 'New logo, truck wraps, showcase website and a weekly maintenance plan page that doubled recurring clients in one season.', img: IMG.cover, stat: '2x plans' },
   { k: 'Snow removal campaign', t: 'Northfield Snow Co. sold out its routes by November', d: 'Door hangers, a contract landing page and plow reels.', img: IMG.snow, stat: '100% routes' },
   { k: 'Reels & social', t: 'High Oak Tree Care: 1.2M views of crane removals', d: 'Weekly on-site filming turned dangerous jobs into its best ads.', img: IMG.canopy, stat: '1.2M views' },
   { k: 'Booking app + calendar', t: 'Clearview Verandas: design visits booked online, 24/7', d: 'Showroom calendar, configurator and a branded client app.', img: IMG.glass, stat: '+64% visits' },

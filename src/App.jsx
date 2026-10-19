@@ -45,6 +45,10 @@ export default function App() {
         <Nursery />
         <Mockups />
         <NicheStories />
+        <Projects />
+        <Seasons />
+        <AppShowcase />
+        <WhyUs />
 
       </main>
 

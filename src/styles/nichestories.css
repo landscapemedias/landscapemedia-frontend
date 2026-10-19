@@ -232,7 +232,7 @@
 .mw-day { fill: #eef5e4; }
 .mw-day.on { fill: #2e5e3e; animation: mwDay 2s ease-in-out infinite; }
 @keyframes mwDay { 50% { fill: #76b852; } }
-.mw-cal text { font: 800 12px var(--body); fill: #0c1f17; }
+.mw-cal text { font: 800 12px var(--body); fill: #2e5e3e; }
 
 .sp-stem { transform-origin: 50% 100%; animation: spGrow 5s var(--ease) infinite; animation-delay: var(--d); transform: scaleY(0); }
 .sp-leaf { transform-origin: 50% 100%; animation: spLeaf 5s var(--ease-spring) infinite; animation-delay: calc(var(--d) + 0.3s); transform: scale(0); }

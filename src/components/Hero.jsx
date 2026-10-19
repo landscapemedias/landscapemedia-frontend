@@ -133,7 +133,7 @@ export default function Hero() {
 
         <div className="hero-visual" data-reveal="scale" style={{ '--d': '0.3s' }}>
           <div className="hero-arch" style={{ transform: `translate3d(${m.x * -14}px, ${m.y * -10}px, 0)` }}>
-            <img src={IMG.hero} alt="Landscaped modern home photographed for a client showcase" style={{ transform: `scale(1.15) translate3d(${m.x * 12}px, ${y * 0.06}px, 0)` }} />
+            <img src={IMG.cover} alt="Landscaped estate garden photographed for a client showcase" style={{ transform: `scale(1.15) translate3d(${m.x * 12}px, ${y * 0.06}px, 0)` }} />
             <div className="arch-shine" />
             <div className="arch-tag">
               <span>Now filming</span>
