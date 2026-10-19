@@ -19,6 +19,7 @@ import Faq from './components/Faq'
 import BrandReveal from './components/BrandReveal'
 import Mockups from './components/Mockups'
 import Footer from './components/Footer'
+
 import { useReveal } from './hooks'
 
 export default function App() {
@@ -42,16 +43,23 @@ export default function App() {
         <Marquee />
         <BrandReveal />
         <Manifesto />
+
         <Nursery />
         <Mockups />
         <NicheStories />
         <Projects />
+
         <Seasons />
+
         <AppShowcase />
         <WhyUs />
-
+        <Estimate />
+        <Process />
+        <Booking />
+        <Faq />
       </main>
-
+      <Footer />
+      <BottomBar />
     </>
   )
 }

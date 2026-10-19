@@ -1,0 +1,349 @@
+.sun {
+  overflow: hidden;
+  isolation: isolate;
+  background: #0f2418;
+}
+
+.sun::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(55% 45% at var(--sx) 40%, color-mix(in srgb, var(--glow) 32%, transparent), transparent 70%);
+  transition: background 1.2s var(--ease);
+}
+
+.sun-stars {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: var(--night);
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 28% 8%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 44% 22%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
+    radial-gradient(2px 2px at 78% 26%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 88% 6%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 6% 40%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 94% 44%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 52% 4%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 36% 34%, #fff 50%, transparent 51%);
+  animation: sun-twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes sun-twinkle {
+  to { filter: brightness(1.8); }
+}
+
+.sun-stage {
+  position: relative;
+}
+
+.sun-sky {
+  position: relative;
+  height: clamp(90px, 12vw, 170px);
+  margin: 0 6%;
+}
+
+.sun-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sun-arc path {
+  fill: none;
+  stroke: rgba(243, 239, 227, 0.28);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 7;
+}
+
+.sun-orb {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fffbe8, var(--glow) 70%);
+  box-shadow: 0 0 30px 8px color-mix(in srgb, var(--glow) 70%, transparent), 0 0 90px 30px color-mix(in srgb, var(--glow) 30%, transparent);
+  transition: background 0.8s, box-shadow 0.8s;
+  pointer-events: none;
+}
+
+.sun-orb::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--glow) 60%, transparent);
+  animation: sun-spin 12s linear infinite;
+}
+
+.sun-orb.moon {
+  background: radial-gradient(circle at 35% 35%, #f6f6f0, #c9d3e6 70%);
+  box-shadow: 0 0 26px 6px rgba(160, 190, 255, 0.45);
+}
+
+.sun-orb.moon::after {
+  inset: 0;
+  border: 0;
+  background: radial-gradient(circle at 70% 30%, transparent 46%, #0f2418 47%);
+  animation: none;
+  transform: translate(9px, -6px) scale(0.98);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+@keyframes sun-spin {
+  to { transform: rotate(360deg); }
+}
+
+.sun-frame {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 16 / 8;
+  border-radius: 28px;
+  overflow: hidden;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  box-shadow: 0 50px 100px -50px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(243, 239, 227, 0.08);
+}
+
+.sun-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.sun-grade {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: soft-light;
+  transition: background 1s;
+  pointer-events: none;
+}
+
+.sun-rays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 70% at var(--sx) 0%, color-mix(in srgb, var(--glow) 35%, transparent), transparent 70%);
+  mix-blend-mode: screen;
+  opacity: calc(1 - var(--night));
+}
+
+.sun-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(10, 24, 16, 0.75), transparent 55%), linear-gradient(0deg, rgba(10, 24, 16, 0.6), transparent 40%);
+}
+
+.sun-card {
+  position: absolute;
+  z-index: 2;
+  left: clamp(18px, 3vw, 40px);
+  top: clamp(18px, 3vw, 40px);
+  max-width: 340px;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: rgba(15, 36, 24, 0.55);
+  border: 1px solid rgba(243, 239, 227, 0.14);
+  backdrop-filter: blur(14px);
+  color: var(--cream);
+  animation: sun-card 0.8s var(--ease) both;
+}
+
+@keyframes sun-card {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.sun-card-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--glow);
+}
+
+.sun-card p {
+  margin: 10px 0 14px;
+  font-family: var(--display);
+  font-size: clamp(19px, 1.7vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.sun-card-use {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--sprout);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.sun-clock {
+  position: absolute;
+  z-index: 2;
+  right: clamp(18px, 3vw, 40px);
+  bottom: clamp(16px, 2.6vw, 34px);
+  text-align: right;
+  color: var(--cream);
+}
+
+.sun-clock b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(54px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 6px 40px rgba(0, 0, 0, 0.45);
+}
+
+.sun-clock small {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.sun-rail {
+  position: relative;
+  margin-top: 28px;
+  padding-bottom: 64px;
+}
+
+.sun-rail input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f6b98a, #fff1b8 40%, #f4a24a 80%, #7aa2ff);
+  outline: none;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.sun-rail input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 6px solid var(--ink);
+  box-shadow: 0 0 0 2px var(--glow), 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.sun-rail input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 6px solid var(--ink);
+  box-shadow: 0 0 0 2px var(--glow);
+}
+
+.sun-rail input[type='range']:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px var(--sprout);
+}
+
+.sun-ticks {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  top: 18px;
+}
+
+.sun-ticks button {
+  position: absolute;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  color: var(--muted-light);
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.6;
+  transition: opacity 0.3s, color 0.3s, transform 0.4s var(--ease);
+}
+
+.sun-ticks button small {
+  font-family: var(--mono);
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.sun-ticks button:hover,
+.sun-ticks button.on {
+  opacity: 1;
+  color: var(--glow);
+}
+
+.sun-ticks button.on {
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.sun-play {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line-light);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  transition: background 0.3s, color 0.3s;
+}
+
+.sun-play:hover {
+  background: var(--sprout);
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .sun-frame {
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+  }
+  .sun-card {
+    left: 14px;
+    right: 14px;
+    top: 14px;
+    max-width: none;
+    padding: 16px;
+  }
+  .sun-orb {
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+  }
+  .sun-ticks button span,
+  .sun-ticks button small {
+    display: none;
+  }
+  .sun-rail {
+    padding-bottom: 56px;
+  }
+}

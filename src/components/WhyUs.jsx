@@ -31,7 +31,7 @@ export default function WhyUs() {
             Most agencies treat a landscape company like any other client. We only work in this industry, so we know your seasons, your services and your customers.
           </p>
           <div className="wy-photo" data-reveal="scale">
-            <img src={IMG.crew} alt="Landscape crew filmed on a job site" />
+            <img src={IMG.path} alt="Manicured garden path lined with trimmed hedges and camellias" />
             <div className="wy-badge">
               <svg viewBox="0 0 24 24" width="22" height="22">
                 <path d="M4 20C4 10 10 4 20 4c0 10-6 16-16 16z" fill="var(--sprout)" />
