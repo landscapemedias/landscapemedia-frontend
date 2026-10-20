@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CalendarCheck, Printer, Clapperboard, Mail, Play } from 'lucide-react'
+import { CalendarCheck, Printer, Clapperboard, Mail, Play, Headphones, PhoneCall } from 'lucide-react'
 import { IMG, BRAND, HERO_TOASTS } from '../data/site'
 import { Btn, Words } from './ui'
 import { scrollToId, useMouse } from '../hooks'
 
-const ICONS = [CalendarCheck, Printer, Clapperboard, Mail]
+const ICONS = [CalendarCheck, Headphones, PhoneCall, Printer, Clapperboard, Mail]
 
 function seeded(n) {
   let s = n
@@ -87,7 +87,7 @@ export default function Hero() {
 
   const layer = (k, ky = 0) => ({ transform: `translate3d(${m.x * k}px, ${y * ky}px, 0)` })
   const T = HERO_TOASTS[toast]
-  const Icon = ICONS[toast]
+  const Icon = ICONS[toast % ICONS.length] || CalendarCheck
 
   return (
     <section className="hero" id="top">
@@ -112,7 +112,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="lead hero-lead" data-reveal="" style={{ '--d': '0.7s' }}>
-            Flyers, reels, social media, email marketing, showcase websites and booking apps for landscape, tree, snow removal and outdoor living companies. One studio for all of it. Never done like this before.
+            Flyers, reels, social media, email marketing, showcase websites, booking apps, vanity numbers, 24/7 live answering, and Melville office mailbox services for landscape companies. One studio for all of it.
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
             <Btn onClick={() => scrollToId('book')}>Book a strategy call</Btn>
@@ -125,9 +125,9 @@ export default function Hero() {
           </div>
           <ul className="hero-trust" data-reveal="" style={{ '--d': '1s' }}>
             <li>Landscape only</li>
-            <li>Filmed on your sites</li>
-            <li>Booked jobs, not likes</li>
-            <li>No long contracts</li>
+            <li>Vanity numbers</li>
+            <li>24/7 Live answering</li>
+            <li>Office & mailbox</li>
           </ul>
         </div>
 

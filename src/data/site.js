@@ -30,6 +30,8 @@ export const BRAND = {
   word: 'Media',
   line: 'Media & Branding for Landscape Companies',
   tagline: 'We grow landscape brands.',
+  slogan: 'Ring all the lucky sevens to reach us',
+  vanitySlogan: 'Ring all the lucky sevens to reach us',
   email: 'grow@landscapemedia.com',
   phone: '800 224 8005',
   phoneHref: 'tel:8002248005',
@@ -87,6 +89,10 @@ export const NAV = [
 ]
 
 export const MARQUEE = [
+  'Ring all the lucky sevens',
+  'Vanity telephone numbers',
+  '24/7 professional answering',
+  'Office & mailbox services',
   'Branding & logos',
   'Flyers & door hangers',
   'Reels & short video',
@@ -101,9 +107,11 @@ export const MARQUEE = [
 
 export const HERO_TOASTS = [
   { title: 'New booking: snow plowing', sub: 'Booked from your Instagram reel', value: '+1' },
+  { title: 'Live operator answered', sub: 'Commercial estimate booked on calendar', value: 'Live' },
+  { title: 'Vanity line call received', sub: 'Ring all the lucky sevens · Yard sign', value: '777' },
   { title: 'Flyer drop delivered', sub: '2,500 homes · Melville', value: 'Sent' },
   { title: 'Reel hit 48k views', sub: 'Tree removal timelapse', value: '48k' },
-  { title: 'Spring email campaign', sub: 'Weekly maintenance offer', value: '41% open' },
+  { title: 'Mailbox scanned', sub: 'Town permit packet received at Melville', value: 'HQ' },
 ]
 
 export const SERVICES = [
@@ -115,6 +123,10 @@ export const SERVICES = [
   { n: '06', name: 'Reels & Video', tag: 'Stop the scroll', latin: 'Short video', season: 'Reels & TikTok', freq: 'Weekly', team: 'Video crew', items: ['On-site filming with your crews', 'Timelapse & drone shots', 'Before and after transformations', 'Edited, captioned and scheduled'] },
   { n: '07', name: 'Social Media', tag: 'Always on', latin: 'Social growth', season: 'IG, FB, Google', freq: '3 to 5 posts / wk', team: 'Social team', items: ['Content calendar every month', 'Posts, stories and carousels', 'Google Business profile updates', 'Review replies and community'] },
   { n: '08', name: 'Email Marketing', tag: 'Fill the schedule', latin: 'Email campaigns', season: 'Campaigns', freq: 'Monthly', team: 'Growth team', items: ['Seasonal service campaigns', 'Maintenance plan renewals', 'Snow contract pre-sales', 'Open, click and booking reports'] },
+  { n: '09', name: 'Vanity Telephone Numbers', tag: 'Ring all the lucky sevens', latin: 'Memorable digits', season: 'Truck wraps & print', freq: '24 hours', team: 'Telecom crew', items: ['Memorable numbers (e.g. 800-777-7777)', 'Numbers that stick on truck wraps and signs', 'Direct call routing to mobile or our desk', 'Detailed call tracking & attribution'] },
+  { n: '10', name: 'Professional Live Answering', tag: 'Never miss an estimate', latin: '24/7 live dispatch', season: '24/7 / 365', freq: 'Instant pickup', team: 'Live desk', items: ['Trained US operators who know landscaping', 'Site visits & estimates booked directly on your calendar', 'Emergency storm dispatch & tree risk triage', 'Instant SMS summary sent after every call'] },
+  { n: '11', name: 'Office & Mailbox Services', tag: 'Prime Melville corporate address', latin: 'Physical presence', season: 'Year-round', freq: 'Same day scan', team: 'HQ operations', items: ['Prestigious address: 105 Maxess Rd, Melville NY', 'Commercial mailbox & package intake', 'Same-day digital mail scanning & forwarding', 'Bidding & permit representation on Long Island'] },
+  { n: '12', name: 'Lead Tracking & Attribution', tag: 'Know what works', latin: 'ROI dashboard', season: 'Real-time', freq: 'Live reporting', team: 'Analytics team', items: ['Dynamic number insertion per marketing channel', 'Listen to recordings of homeowner inquiries', 'Cost per booked estimate reporting', 'Sync with ServiceTitan, Jobber & Yardbook'] },
 ]
 
 export const NICHES = [
@@ -242,14 +254,20 @@ export const PROCESS = [
 
 export const FAQ = [
   { q: 'Who do you work with?', a: 'Landscape companies only: lawn and maintenance crews, tree services, snow removal, micro organic farms, greenhouse builders, glass veranda installers and landscape design firms.' },
+  { q: 'How do vanity telephone numbers help our landscape business?', a: 'When homeowners drive past your truck or yard sign, they only have 3 seconds to memorize your phone number. Vanity telephone numbers ("Ring all the lucky sevens to reach us") make your trucks and yard signs 4x more memorable, generating vastly higher direct call volume.' },
+  { q: 'How does the professional answering service work for landscape crews?', a: 'Landscape owners are out in the field on loud mowers, skid steers or chippers and cannot answer every call. Our professional 24/7 live US answering desk answers in your company brand, qualifies homeowners, books estimates directly onto your calendar, and dispatches storm emergencies.' },
+  { q: 'What is included in the office and mailbox service?', a: 'Your company gains a prestigious corporate address at 105 Maxess Road, Melville, NY 11747. We provide physical mailbox services, package intake, same-day mail scanning to your inbox, and an established Long Island presence for commercial bids and municipal contracts.' },
   { q: 'Can you film on our job sites?', a: 'Yes. Our video crew films your projects, crews and equipment for reels, before and after content and your website showcase.' },
   { q: 'Do you build booking apps and calendars?', a: 'Yes. We set up online appointment calendars for site visits and build branded booking apps for iPhone and Android with your logo and colors.' },
-  { q: 'How fast can we launch?', a: 'Branding and flyers usually take 1 to 3 weeks, websites 3 to 5 weeks and booking apps 6 to 8 weeks. Social and reels can start the first week.' },
+  { q: 'How fast can we launch?', a: 'Vanity numbers and live answering can be active in 24 to 48 hours. Branding and flyers take 1 to 3 weeks, websites 3 to 5 weeks and booking apps 6 to 8 weeks. Social and reels can start the first week.' },
   { q: 'Do you handle print and flyer delivery?', a: 'We design, print and plan neighborhood drops for flyers, door hangers, postcards, yard signs and truck magnets.' },
   { q: 'Are there long contracts?', a: 'No. Monthly plans you can change or cancel. We keep you because the bookings keep coming.' },
 ]
 
 export const ESTIMATE_SERVICES = [
+  { k: 'vanity', label: 'Vanity phone numbers', rate: 200 },
+  { k: 'answering', label: '24/7 Live answering desk', rate: 450 },
+  { k: 'office', label: 'Office & mailbox (Melville)', rate: 180 },
   { k: 'social', label: 'Social media', rate: 450 },
   { k: 'reels', label: 'Reels & video', rate: 650 },
   { k: 'flyers', label: 'Flyers & print', rate: 300 },

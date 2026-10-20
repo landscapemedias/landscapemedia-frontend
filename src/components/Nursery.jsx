@@ -23,7 +23,7 @@ export default function Nursery() {
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Branding, websites that showcase your finest work, appointment calendars, booking apps, flyers, reels, social media and email marketing. Tap any tag to see what is included.
+            Branding, showcase websites, vanity phone numbers, 24/7 live answering, Melville mailbox & office, booking apps, flyers, reels and social campaigns. Tap any tag to see what is included.
           </p>
         </div>
 

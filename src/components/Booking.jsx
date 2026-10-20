@@ -159,7 +159,7 @@ export default function Booking() {
                   <input placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                 </div>
                 <div className="bk-picks">
-                  {SERVICES.slice(0, 6).map((s) => (
+                  {SERVICES.map((s) => (
                     <button
                       type="button"
                       key={s.n}

@@ -66,7 +66,7 @@ export default function Footer() {
                 <a className="ft-call" href={BRAND.phoneHref}>
                   <span><Phone size={18} /></span>
                   <span>
-                    <small>Call toll-free</small>
+                    <small>{BRAND.slogan}</small>
                     <b>{BRAND.phone}</b>
                   </span>
                 </a>
@@ -82,7 +82,7 @@ export default function Footer() {
           <div className="ft-grid">
             <div className="ft-brand">
               <Logo light />
-              <p>The media and branding studio for landscape companies. Flyers, reels, social media, email marketing, showcase websites, appointment calendars and booking apps.</p>
+              <p>The media, communications and branding studio for landscape companies. Vanity telephone numbers, 24/7 live answering, Melville office & mailbox services, flyers, reels, email, websites and booking apps.</p>
               <form
                 className={`ft-news ${sent ? 'sent' : ''}`}
                 onSubmit={(e) => {
@@ -101,7 +101,7 @@ export default function Footer() {
 
             <div className="ft-col">
               <h4>Services</h4>
-              {SERVICES.slice(0, 6).map((s) => (
+              {SERVICES.map((s) => (
                 <a key={s.n} href="#services" onClick={go('services')}>{s.name}</a>
               ))}
             </div>
@@ -129,13 +129,16 @@ export default function Footer() {
           </div>
 
           <div className="ft-word" aria-hidden="true">
-            <span>{BRAND.word}</span>
+            <div className="ft-word-track">
+              <span className="ft-word-part">{BRAND.name}</span>
+              <span className="ft-word-part">{BRAND.word}</span>
+            </div>
           </div>
 
           <div className="ft-cert">
             <ShieldCheck size={22} />
             <p>
-              <b>Landscape industry specialists.</b> Branding, print, video, social, email, web and apps for snow removal, tree care, maintenance, micro organic farms, green houses, glass verandas and design firms.
+              <b>Landscape industry specialists.</b> Branding, vanity phone lines, 24/7 live answering, Melville NY office & mailbox, print, video, social, email, web and apps for landscape companies.
             </p>
           </div>
 

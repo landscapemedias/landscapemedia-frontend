@@ -17,6 +17,11 @@ import './styles/sections.css'
 import './styles/brandlogo.css'
 import './styles/mockups.css'
 import './styles/nichestories.css'
+import './styles/growth.css'
+import './styles/truckwrap.css'
+import './styles/viewfinder.css'
+import './styles/flyerdrop.css'
+import './styles/goldenhour.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

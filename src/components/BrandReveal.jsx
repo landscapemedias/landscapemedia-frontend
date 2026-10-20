@@ -1,4 +1,4 @@
-import { Image, Clapperboard, Share2, Mail, Globe, CalendarDays, Smartphone } from 'lucide-react'
+import { Image, Clapperboard, Globe, CalendarDays, PhoneCall, Headphones, Building2 } from 'lucide-react'
 import { BRAND } from '../data/site'
 import { useInView, useMouse } from '../hooks'
 import { Words } from './ui'
@@ -6,12 +6,12 @@ import BrandLogo from './BrandLogo'
 
 const CHIPS = [
   { icon: Image, t: 'Flyers' },
-  { icon: Clapperboard, t: 'Reels', lt: true },
-  { icon: Share2, t: 'Social media' },
-  { icon: Mail, t: 'Email marketing', lt: true },
+  { icon: PhoneCall, t: 'Vanity numbers', lt: true },
+  { icon: Headphones, t: 'Live answering' },
+  { icon: Building2, t: 'Melville mailbox', lt: true },
   { icon: Globe, t: 'Showcase website' },
-  { icon: CalendarDays, t: 'Appointment calendar', lt: true },
-  { icon: Smartphone, t: 'Booking apps' },
+  { icon: CalendarDays, t: 'Calendar & apps', lt: true },
+  { icon: Clapperboard, t: 'Reels & video' },
 ]
 
 export default function BrandReveal() {
@@ -29,7 +29,7 @@ export default function BrandReveal() {
             <Words text="landscape companies." delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            {BRAND.name} {BRAND.word} is a branding and media studio for landscape companies. Flyers, reels, social media, email, websites and booking apps, all from one team.
+            {BRAND.name} {BRAND.word} is a media, communications and branding studio for landscape companies. Vanity telephone numbers, 24/7 live answering, Melville office mailbox, flyers, reels, websites and booking apps.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function BrandReveal() {
         <div className="br-foot">
           <p className="br-first" data-reveal="">
             The first media studio built <em>only</em> for landscape companies.
-            <small>Snow removal, tree cutting, weekly maintenance, micro organic farms, green houses, glass verandas and design firms. If it grows outside, we make it look good online.</small>
+            <small>Snow removal, tree cutting, weekly maintenance, micro organic farms, green houses, glass verandas and design firms. If it grows outside, we answer your calls, host your Melville office & mailbox, and make you look world-class.</small>
           </p>
           <div className="br-swatches" data-reveal="" style={{ '--d': '0.1s' }}>
             {BRAND.colors.map((c) => (

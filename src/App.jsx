@@ -19,7 +19,11 @@ import Faq from './components/Faq'
 import BrandReveal from './components/BrandReveal'
 import Mockups from './components/Mockups'
 import Footer from './components/Footer'
-
+import GrowthRoots from './components/GrowthRoots'
+import Viewfinder from './components/Viewfinder'
+import GoldenHour from './components/GoldenHour'
+import TruckWrap from './components/TruckWrap'
+import FlyerDrop from './components/FlyerDrop'
 import { useReveal } from './hooks'
 
 export default function App() {
@@ -43,14 +47,16 @@ export default function App() {
         <Marquee />
         <BrandReveal />
         <Manifesto />
-
+        <GrowthRoots />
+        <TruckWrap />
         <Nursery />
         <Mockups />
         <NicheStories />
         <Projects />
-
+        <Viewfinder />
+        <FlyerDrop />
         <Seasons />
-
+        <GoldenHour />
         <AppShowcase />
         <WhyUs />
         <Estimate />

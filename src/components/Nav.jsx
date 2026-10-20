@@ -56,7 +56,7 @@ export default function Nav() {
           <div className="nav-top-in">
             <span className="nav-live">
               <i />
-              Now booking spring & snow season campaigns
+              Ring all the lucky sevens · Vanity numbers, 24/7 live answering & Melville mailbox
             </span>
             <span className="nav-top-links">
               <a href={BRAND.phoneHref}><Phone size={13} /> {BRAND.phone}</a>
