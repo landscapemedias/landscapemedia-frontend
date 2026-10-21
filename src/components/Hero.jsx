@@ -112,7 +112,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="lead hero-lead" data-reveal="" style={{ '--d': '0.7s' }}>
-            Flyers, reels, social media, email marketing, showcase websites, booking apps, vanity numbers, 24/7 live answering, and Melville office mailbox services for landscape companies. One studio for all of it.
+            Spring cleaning, Fall collection, snow removal and winterizing campaigns. Flyers, reels, social media, showcase websites, booking apps, vanity numbers and 24/7 live answering for landscape companies.
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
             <Btn onClick={() => scrollToId('book')}>Book a strategy call</Btn>

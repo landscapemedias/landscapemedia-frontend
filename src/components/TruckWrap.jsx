@@ -5,18 +5,18 @@ import { Words } from './ui'
 
 const WRAPS = [
   {
-    k: 'maintenance', label: 'Lawn care', icon: Scissors, img: IMG.trimmer,
-    name: ['Greenline', 'Grounds'], tag: 'WEEKLY LAWN CARE · FROM $45', phone: '(516) 555-0142',
+    k: 'maintenance', label: 'Spring cleaning', icon: Scissors, img: IMG.trimmer,
+    name: ['Greenline', 'Grounds'], tag: 'SPRING CLEANING & LAWN CARE', phone: '(516) 555-0142',
     c1: '#234b34', c2: '#b8e86a', ink: '#f3efe3', sky: ['#bfe6f2', '#f4f8e6'], hill: ['#8fc46a', '#5f9a48'], fx: 'pollen',
   },
   {
     k: 'snow', label: 'Snow removal', icon: Snowflake, img: IMG.snow,
-    name: ['Northfield', 'Snow Co.'], tag: 'WE PLOW BEFORE YOU WAKE', phone: '(516) 555-0199',
+    name: ['Northfield', 'Snow Co.'], tag: 'SNOW REMOVAL & WINTERIZING', phone: '(516) 555-0199',
     c1: '#16314f', c2: '#9fd3ff', ink: '#ffffff', sky: ['#9fb3c6', '#e9eef3'], hill: ['#e9f0f5', '#cfdbe4'], fx: 'snow',
   },
   {
-    k: 'tree', label: 'Tree care', icon: TreePine, img: IMG.canopy,
-    name: ['High Oak', 'Tree Care'], tag: 'BIG TREES · SAFE HANDS · 24/7', phone: '(516) 555-0177',
+    k: 'tree', label: 'Fall collection', icon: TreePine, img: IMG.canopy,
+    name: ['High Oak', 'Tree Care'], tag: 'FALL COLLECTION & TREE CARE', phone: '(516) 555-0177',
     c1: '#4a2f1b', c2: '#f4c35a', ink: '#fff6e4', sky: ['#f6c99a', '#fbecd6'], hill: ['#d9822b', '#a5521f'], fx: 'leaves',
   },
   {

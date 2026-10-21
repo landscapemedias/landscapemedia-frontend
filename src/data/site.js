@@ -89,6 +89,10 @@ export const NAV = [
 ]
 
 export const MARQUEE = [
+  'Spring cleaning campaigns',
+  'Fall collection & leaf drops',
+  'Snow removal & 24/7 plowing',
+  'Winterizing & irrigation blowouts',
   'Ring all the lucky sevens',
   'Vanity telephone numbers',
   '24/7 professional answering',
@@ -101,17 +105,15 @@ export const MARQUEE = [
   'Showcase websites',
   'Appointment calendars',
   'Booking apps',
-  'Snow removal campaigns',
-  'Greenhouse & veranda launches',
 ]
 
 export const HERO_TOASTS = [
-  { title: 'New booking: snow plowing', sub: 'Booked from your Instagram reel', value: '+1' },
+  { title: 'Spring cleaning booked', sub: 'Neighborhood door hanger campaign', value: '+1' },
+  { title: 'Fall collection route full', sub: 'Leaf vacuuming & curbside pickup', value: '100%' },
+  { title: 'Snow removal dispatched', sub: 'Commercial overnight plow route', value: '24/7' },
+  { title: 'Winterizing completed', sub: 'Irrigation blowouts & plant wrapping', value: 'Done' },
   { title: 'Live operator answered', sub: 'Commercial estimate booked on calendar', value: 'Live' },
   { title: 'Vanity line call received', sub: 'Ring all the lucky sevens · Yard sign', value: '777' },
-  { title: 'Flyer drop delivered', sub: '2,500 homes · Melville', value: 'Sent' },
-  { title: 'Reel hit 48k views', sub: 'Tree removal timelapse', value: '48k' },
-  { title: 'Mailbox scanned', sub: 'Town permit packet received at Melville', value: 'HQ' },
 ]
 
 export const SERVICES = [
@@ -119,10 +121,10 @@ export const SERVICES = [
   { n: '02', name: 'Showcase Websites', tag: 'Your finest work', latin: 'Portfolio sites', season: 'Website', freq: '3 to 5 weeks', team: 'Web team', items: ['Before & after project galleries', 'One page per service you sell', 'Fast, mobile-first and SEO ready', 'Quote and booking forms built in'] },
   { n: '03', name: 'Appointment Calendar', tag: 'Book while you sleep', latin: 'Online scheduling', season: 'Calendar', freq: '1 week setup', team: 'Systems team', items: ['Site visits booked 24/7 online', 'Crew and route aware time slots', 'SMS and email reminders', 'Syncs with Google and Outlook'] },
   { n: '04', name: 'Booking Apps', tag: 'Your brand on their phone', latin: 'Client apps', season: 'iPhone & Android', freq: '6 to 8 weeks', team: 'App team', items: ['Book maintenance in two taps', 'Live crew arrival tracking', 'Photo visit reports & invoices', 'Push alerts for storms and snow'] },
-  { n: '05', name: 'Flyers & Print', tag: 'Doors and mailboxes', latin: 'Print media', season: 'Flyers & hangers', freq: '5 days', team: 'Print studio', items: ['Door hangers & postcards', 'Seasonal offer flyers', 'Yard signs & truck magnets', 'Neighborhood drop planning'] },
+  { n: '05', name: 'Flyers & Print', tag: 'Doors and mailboxes', latin: 'Print media', season: 'Flyers & hangers', freq: '5 days', team: 'Print studio', items: ['Spring cleaning & fall collection drops', 'Snow removal & winterizing offer flyers', 'Yard signs, truck magnets & door hangers', 'Neighborhood route & EDDM planning'] },
   { n: '06', name: 'Reels & Video', tag: 'Stop the scroll', latin: 'Short video', season: 'Reels & TikTok', freq: 'Weekly', team: 'Video crew', items: ['On-site filming with your crews', 'Timelapse & drone shots', 'Before and after transformations', 'Edited, captioned and scheduled'] },
   { n: '07', name: 'Social Media', tag: 'Always on', latin: 'Social growth', season: 'IG, FB, Google', freq: '3 to 5 posts / wk', team: 'Social team', items: ['Content calendar every month', 'Posts, stories and carousels', 'Google Business profile updates', 'Review replies and community'] },
-  { n: '08', name: 'Email Marketing', tag: 'Fill the schedule', latin: 'Email campaigns', season: 'Campaigns', freq: 'Monthly', team: 'Growth team', items: ['Seasonal service campaigns', 'Maintenance plan renewals', 'Snow contract pre-sales', 'Open, click and booking reports'] },
+  { n: '08', name: 'Email Marketing', tag: 'Fill the schedule', latin: 'Email campaigns', season: 'Campaigns', freq: 'Monthly', team: 'Growth team', items: ['Spring cleaning & mulch pre-sale series', 'Fall collection & leaf vacuuming reminders', 'Snow contract renewals & winterizing blowouts', 'Open, click and estimate booking reports'] },
   { n: '09', name: 'Vanity Telephone Numbers', tag: 'Ring all the lucky sevens', latin: 'Memorable digits', season: 'Truck wraps & print', freq: '24 hours', team: 'Telecom crew', items: ['Memorable numbers (e.g. 800-777-7777)', 'Numbers that stick on truck wraps and signs', 'Direct call routing to mobile or our desk', 'Detailed call tracking & attribution'] },
   { n: '10', name: 'Professional Live Answering', tag: 'Never miss an estimate', latin: '24/7 live dispatch', season: '24/7 / 365', freq: 'Instant pickup', team: 'Live desk', items: ['Trained US operators who know landscaping', 'Site visits & estimates booked directly on your calendar', 'Emergency storm dispatch & tree risk triage', 'Instant SMS summary sent after every call'] },
   { n: '11', name: 'Office & Mailbox Services', tag: 'Prime Melville corporate address', latin: 'Physical presence', season: 'Year-round', freq: 'Same day scan', team: 'HQ operations', items: ['Prestigious address: 105 Maxess Rd, Melville NY', 'Commercial mailbox & package intake', 'Same-day digital mail scanning & forwarding', 'Bidding & permit representation on Long Island'] },
@@ -185,47 +187,47 @@ export const INDUSTRIES = NICHES
 
 export const SEASONS = [
   {
-    key: 'spring', name: 'Spring', months: 'Mar to May', title: 'Launch the season loud.',
-    lead: 'Spring is when homeowners decide who will care for their yard. We get your brand in front of them first.',
+    key: 'spring', name: 'Spring', months: 'Mar to May', title: 'Spring cleaning & kickoff.',
+    lead: 'Spring cleaning is when homeowners choose who cares for their property. We make sure your crews get booked first.',
     plays: [
-      { k: 'Cleanup flyers', v: 'Door hangers and postcards for spring cleanups and mulch.' },
-      { k: 'Maintenance plans', v: 'Email and social campaigns for weekly and monthly plans.' },
-      { k: 'Planting reels', v: 'Fresh color, bed edging and lawn transformation videos.' },
+      { k: 'Spring cleaning flyers', v: 'Door hangers and postcards for spring cleanups, dethatching, and mulch.' },
+      { k: 'Maintenance plans', v: 'Email and social campaigns for weekly and monthly mowing packages.' },
+      { k: 'Planting & bed reels', v: 'Fresh mulch, crisp bed edging and lawn transformation videos that convert.' },
     ],
-    metric: { n: 3, unit: 'x', label: 'more inbound leads when spring campaigns start in February' },
+    metric: { n: 3, unit: 'x', label: 'more inbound leads when spring cleaning campaigns start in February' },
     sky: ['#cfe9d6', '#f3efe3'], leaf: ['#9ad66a', '#c9f08a', '#f6b8c9'],
   },
   {
     key: 'summer', name: 'Summer', months: 'Jun to Aug', title: 'Show off the work.',
-    lead: 'Properties look their best. That is the moment to film, photograph and fill your showcase with your finest work.',
+    lead: 'Properties look their absolute best. Film, photograph and fill your showcase with your finest estate work.',
     plays: [
-      { k: 'Project shoots', v: 'Drone and ground photography of your best properties.' },
-      { k: 'Greenhouse & veranda', v: 'Lifestyle shoots for outdoor living and glass projects.' },
-      { k: 'Review engine', v: 'Automated review requests after every finished job.' },
+      { k: 'Project shoots', v: 'Drone and ground photography of your best landscape and hardscape jobs.' },
+      { k: 'Greenhouse & veranda', v: 'Lifestyle shoots for outdoor living, glass verandas and garden projects.' },
+      { k: 'Review engine', v: 'Automated 5-star review requests sent after every completed service.' },
     ],
     metric: { n: 48, unit: 'k', label: 'average views on a summer transformation reel' },
     sky: ['#bfe3f5', '#fff7d6'], leaf: ['#2f7d3c', '#4f8a4b', '#76b852'],
   },
   {
-    key: 'fall', name: 'Fall', months: 'Sep to Nov', title: 'Sell winter early.',
-    lead: 'Fall is for leaf cleanups, tree work and pre-selling snow contracts before your competitors even print a flyer.',
+    key: 'fall', name: 'Fall', months: 'Sep to Nov', title: 'Fall collection & winterizing.',
+    lead: 'Fall collection campaigns for leaf cleanups and curbside vacuuming, plus winterizing blowouts and early snow contract sales.',
     plays: [
-      { k: 'Leaf cleanup offers', v: 'Neighborhood flyer drops and local social ads.' },
-      { k: 'Tree risk campaign', v: 'Hazard assessment emails before storm season.' },
-      { k: 'Snow pre-sale', v: 'Seasonal snow removal contracts sold by November.' },
+      { k: 'Fall collection drops', v: 'Neighborhood flyer drops and local social ads for leaf collection and curbside vacuuming.' },
+      { k: 'Winterizing packages', v: 'Sprinkler and irrigation line blowouts, delicate shrub burlap wrapping and pool prep.' },
+      { k: 'Snow contract pre-sale', v: 'Seasonal snow removal contracts sold and routes locked by November 15.' },
     ],
-    metric: { n: 70, unit: '%', label: 'of snow routes sold before the first storm' },
+    metric: { n: 85, unit: '%', label: 'of fall collection routes and winterizing slots booked in advance' },
     sky: ['#f6d7b0', '#f3efe3'], leaf: ['#d9822b', '#c4532b', '#f4c35a'],
   },
   {
-    key: 'winter', name: 'Winter', months: 'Dec to Feb', title: 'Plow, alert, plan.',
-    lead: 'Storm alerts, snow removal updates and next year planning keep your phone ringing in the quiet season.',
+    key: 'winter', name: 'Winter', months: 'Dec to Feb', title: 'Snow removal & storm defense.',
+    lead: 'Commercial plow routes, residential driveways, 24/7 storm alert SMS and emergency freeze response.',
     plays: [
-      { k: 'Storm alert SMS', v: 'Automatic messages to every snow client before a storm.' },
-      { k: 'Plow route reels', v: 'Night timelapse content that builds trust and buzz.' },
-      { k: 'Brand refresh', v: 'The best time to rebrand trucks, uniforms and the website.' },
+      { k: 'Snow removal & plowing', v: '24/7 commercial parking lot plowing, salting contracts and residential driveway clearing.' },
+      { k: 'Storm alert SMS', v: 'Automatic text notifications sent to route clients before, during and after every blizzard.' },
+      { k: 'Winterizing defense', v: 'Emergency freeze alerts, snow staking, dormant pruning and arborist storm triage.' },
     ],
-    metric: { n: 24, unit: '/7', label: 'storm alerts sent automatically to your clients' },
+    metric: { n: 24, unit: '/7', label: 'live dispatch and storm alerts sent automatically to your clients' },
     sky: ['#dfe7ee', '#f7f9fb'], leaf: ['#ffffff', '#e8f0f5', '#cfdde6'],
   },
 ]
@@ -254,6 +256,7 @@ export const PROCESS = [
 
 export const FAQ = [
   { q: 'Who do you work with?', a: 'Landscape companies only: lawn and maintenance crews, tree services, snow removal, micro organic farms, greenhouse builders, glass veranda installers and landscape design firms.' },
+  { q: 'How do you market Spring cleaning, Fall collection, snow removal and winterizing?', a: 'We run timed seasonal playbooks: Spring cleaning door hangers and mulch reels launched in February; Fall collection leaf vacuum drops in September; winterizing blowouts and plant burlap wrapping packages in October; and commercial and residential snow removal contracts locked in by November.' },
   { q: 'How do vanity telephone numbers help our landscape business?', a: 'When homeowners drive past your truck or yard sign, they only have 3 seconds to memorize your phone number. Vanity telephone numbers ("Ring all the lucky sevens to reach us") make your trucks and yard signs 4x more memorable, generating vastly higher direct call volume.' },
   { q: 'How does the professional answering service work for landscape crews?', a: 'Landscape owners are out in the field on loud mowers, skid steers or chippers and cannot answer every call. Our professional 24/7 live US answering desk answers in your company brand, qualifies homeowners, books estimates directly onto your calendar, and dispatches storm emergencies.' },
   { q: 'What is included in the office and mailbox service?', a: 'Your company gains a prestigious corporate address at 105 Maxess Road, Melville, NY 11747. We provide physical mailbox services, package intake, same-day mail scanning to your inbox, and an established Long Island presence for commercial bids and municipal contracts.' },
