@@ -10,7 +10,7 @@ export default function Projects() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Showcase your finest work</span>
+            <span className="eyebrow" data-reveal="">Digital Showcase & Case Studies</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="Real landscape brands." />
               <br />
@@ -18,7 +18,7 @@ export default function Projects() {
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Your projects deserve a gallery as good as the work. This is how we showcase it, from full rebrands to snow campaigns, tree service reels and booking apps.
+            Your plants and outdoor craftsmanship deserve a gallery as stunning as the living work. This is how we present landscape transformations, planting palettes, seasonal campaigns, and booking systems.
           </p>
         </div>
 

@@ -57,7 +57,7 @@ export default function Footer() {
           <div className="ft-cta" data-reveal="scale">
             <img src={IMG.lush} alt="" aria-hidden="true" />
             <div className="ft-cta-in">
-              <span className="eyebrow">Media & branding for landscape companies</span>
+              <span className="eyebrow">Digital services for landscape companies</span>
               <h2 className="h-display">
                 Ready to make your <em>finest work</em> famous?
               </h2>
@@ -82,7 +82,7 @@ export default function Footer() {
           <div className="ft-grid">
             <div className="ft-brand">
               <Logo light />
-              <p>The media, communications and branding studio for landscape companies. Vanity telephone numbers, 24/7 live answering, Melville office & mailbox services, flyers, reels, email, websites and booking apps.</p>
+              <p>The full-suite digital services agency built exclusively for landscape companies. Websites that showcase your finest plants, viral video reels, client booking apps, vanity telephone numbers, and 24/7 live answering.</p>
               <form
                 className={`ft-news ${sent ? 'sent' : ''}`}
                 onSubmit={(e) => {
@@ -138,7 +138,7 @@ export default function Footer() {
           <div className="ft-cert">
             <ShieldCheck size={22} />
             <p>
-              <b>Landscape industry specialists.</b> Branding, vanity phone lines, 24/7 live answering, Melville NY office & mailbox, print, video, social, email, web and apps for landscape companies.
+              <b>Landscape digital specialists.</b> Digital services, plant and garden showcases, websites, client booking apps, 24/7 live answering, vanity phone lines, and Melville NY office & mailbox.
             </p>
           </div>
 

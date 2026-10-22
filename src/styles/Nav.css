@@ -184,7 +184,7 @@
   align-items: center;
   gap: 8px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -291,7 +291,7 @@
 
 .menu li small {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--sprout);
 }
 
@@ -300,7 +300,7 @@
   flex-direction: column;
   gap: 6px;
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted-light);
 }
 
@@ -339,7 +339,7 @@
   border-radius: 14px;
   background: var(--forest);
   color: var(--cream);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .nav-top .nav-live {
@@ -405,7 +405,7 @@
   .nav-cta .btn.sm {
     height: 46px;
     padding: 0 6px 0 16px;
-    font-size: 13px;
+    font-size: 15px;
   }
   .nav-call {
     width: 46px;

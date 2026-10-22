@@ -34,7 +34,7 @@ export default function Estimate() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Build your media plan</span>
+            <span className="eyebrow" data-reveal="">Digital Media Calculator</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="Know your budget" />
               <br />
@@ -42,7 +42,7 @@ export default function Estimate() {
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Pick your company focus, crew count and channels for a ballpark monthly media plan. Exact pricing comes after a free strategy call.
+            Select your company focus, crew size, and desired digital services for a ballpark monthly investment. Custom plans finalized on your free strategy call.
           </p>
         </div>
 

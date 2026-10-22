@@ -28,7 +28,7 @@ export default function WhyUs() {
             <Words text="Built for your industry." delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="">
-            Most agencies treat a landscape company like any other client. We only work in this industry, so we know your seasons, your services and your customers.
+            We provide complete digital services exclusively to the landscape industry. Unlike general agencies who treat every business the same, we know your plants, your seasonal rush, your equipment, and how homeowners buy high-end landscaping.
           </p>
           <div className="wy-photo" data-reveal="scale">
             <img src={IMG.path} alt="Manicured garden path lined with trimmed hedges and camellias" />

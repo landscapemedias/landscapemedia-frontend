@@ -252,7 +252,7 @@
 .vfx-slate small {
   display: block;
   opacity: 0.75;
-  font-size: 11px;
+  font-size: 13.5px;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   animation: vfx-up 0.8s var(--ease) 0.55s both;
@@ -392,7 +392,7 @@
   bottom: 6px;
   right: 8px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   color: #f3efe3;
   text-align: left;

@@ -55,11 +55,11 @@ export default function Booking() {
   }
 
   return (
-    <section className="section booking" id="book">
+    <section className="section booking dark" id="book">
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Book a strategy call</span>
+            <span className="eyebrow" data-reveal="">Digital Strategy Call</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="Pick a time." />
               <br />
@@ -67,7 +67,7 @@ export default function Booking() {
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            This is the same appointment calendar we set up for your clients. Pick a day and time, and we will review your brand, website and social, then send a clear growth plan.
+            Experience the exact 24/7 digital booking technology we build for your landscape clients. Select a time to review your current digital presence, plant showcases, and seasonal lead generation.
           </p>
         </div>
 

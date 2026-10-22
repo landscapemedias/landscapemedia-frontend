@@ -23,7 +23,7 @@
   transition: background 0.3s, color 0.3s, transform 0.3s var(--ease-spring);
 }
 
-.nx-jump a small { font-family: var(--mono); font-size: 10px; color: var(--fern); }
+.nx-jump a small { font-family: var(--mono); font-size: 13px; color: var(--fern); }
 .nx-jump a:hover { background: var(--ink); color: var(--cream); transform: translateY(-3px); }
 .nx-jump a:hover small { color: var(--sprout); }
 
@@ -66,7 +66,7 @@
   background: var(--ink);
   color: var(--sprout);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 7px 12px;
@@ -87,11 +87,11 @@
 }
 
 .nx-stat b { font-family: var(--display); font-size: 28px; line-height: 1; color: var(--moss); }
-.nx-stat small { font-size: 12px; color: var(--muted); line-height: 1.35; margin-top: 4px; }
+.nx-stat small { font-size: 14.5px; color: var(--muted); line-height: 1.35; margin-top: 4px; }
 
 @keyframes nxFloat { 50% { transform: translateY(-6px); } }
 
-.nx-num { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; color: var(--fern); }
+.nx-num { font-family: var(--mono); font-size: 14.5px; letter-spacing: 0.14em; color: var(--fern); }
 
 .nx-body h3 {
   margin: 10px 0 14px;

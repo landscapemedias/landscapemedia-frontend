@@ -70,7 +70,7 @@
 
 .pr-n {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fern);
@@ -264,7 +264,7 @@
 
 .ft-call small {
   display: block;
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--muted-light);
 }
 
@@ -316,7 +316,7 @@
   display: block;
   margin-bottom: 10px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--sprout);
@@ -367,7 +367,7 @@
   display: block;
   margin-top: 10px;
   color: var(--sprout);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .ft-col {
@@ -513,7 +513,7 @@
   padding-top: 26px;
   margin-top: 10px;
   border-top: 1px solid var(--line-light);
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted-light);
 }
 

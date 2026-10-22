@@ -28,8 +28,8 @@ import coverImg from '../assets/images/site/cover+photo+v2.webp'
 export const BRAND = {
   name: 'Landscape',
   word: 'Media',
-  line: 'Media & Branding for Landscape Companies',
-  tagline: 'We grow landscape brands.',
+  line: 'Digital Services for Landscape Companies',
+  tagline: 'Digital services built exclusively for landscape companies.',
   slogan: 'Ring all the lucky sevens to reach us',
   vanitySlogan: 'Ring all the lucky sevens to reach us',
   email: 'grow@landscapemedia.com',
@@ -81,6 +81,7 @@ export const IMG = {
 }
 export const NAV = [
   { id: 'services', label: 'Services' },
+  { id: 'digital', label: 'Plant care' },
   { id: 'mockups', label: 'Mockups' },
   { id: 'niches', label: 'Niches' },
   { id: 'projects', label: 'Showcase' },
@@ -89,6 +90,8 @@ export const NAV = [
 ]
 
 export const MARQUEE = [
+  'Digital services for landscape companies',
+  'Plant & garden digital showcases',
   'Spring cleaning campaigns',
   'Fall collection & leaf drops',
   'Snow removal & 24/7 plowing',
@@ -255,6 +258,7 @@ export const PROCESS = [
 ]
 
 export const FAQ = [
+  { q: 'What does Landscape Media do?', a: 'We provide end-to-end digital services exclusively for landscape companies. We film your finest plants, lawns and estate gardens, design high-converting showcase websites, build client booking apps, manage social media and reels, and provide vanity phone numbers with 24/7 live answering.' },
   { q: 'Who do you work with?', a: 'Landscape companies only: lawn and maintenance crews, tree services, snow removal, micro organic farms, greenhouse builders, glass veranda installers and landscape design firms.' },
   { q: 'How do you market Spring cleaning, Fall collection, snow removal and winterizing?', a: 'We run timed seasonal playbooks: Spring cleaning door hangers and mulch reels launched in February; Fall collection leaf vacuum drops in September; winterizing blowouts and plant burlap wrapping packages in October; and commercial and residential snow removal contracts locked in by November.' },
   { q: 'How do vanity telephone numbers help our landscape business?', a: 'When homeowners drive past your truck or yard sign, they only have 3 seconds to memorize your phone number. Vanity telephone numbers ("Ring all the lucky sevens to reach us") make your trucks and yard signs 4x more memorable, generating vastly higher direct call volume.' },
@@ -276,4 +280,52 @@ export const ESTIMATE_SERVICES = [
   { k: 'flyers', label: 'Flyers & print', rate: 300 },
   { k: 'email', label: 'Email marketing', rate: 250 },
   { k: 'web', label: 'Website & booking calendar', rate: 350 },
+]
+
+export const PLANTS = [
+  {
+    k: 'wisteria', name: 'Chinese Wisteria', latin: 'Wisteria sinensis', img: IMG.flowers, tone: '#e4def5',
+    light: 'Full sun', water: 'Weekly', zone: 'Zones 5 to 9', bloom: 'Late spring',
+    sms: 'Hi Sarah, your wisteria arch blooms in about 2 weeks. Light trim this Saturday? Tap to book.',
+    next: 'Post-bloom pruning', when: 'Jun 14', reel: 'Wisteria tunnel in full bloom',
+  },
+  {
+    k: 'camellia', name: 'Camellia & Boxwood', latin: 'Camellia japonica', img: IMG.path, tone: '#f6dfe1',
+    light: 'Part shade', water: '2x a week', zone: 'Zones 7 to 9', bloom: 'Winter to spring',
+    sms: 'Frost tonight. We added burlap covers to your camellias at no charge. Photos in your app.',
+    next: 'Hedge shaping', when: 'Apr 02', reel: 'Crisp hedge lines, before and after',
+  },
+  {
+    k: 'shade', name: 'Begonia Shade Garden', latin: 'Begonia x tuberhybrida', img: IMG.lush, tone: '#fbe1d2',
+    light: 'Shade', water: 'Every 3 days', zone: 'Annual color', bloom: 'Summer to frost',
+    sms: 'Heat wave this week. Your shade beds get an extra drip cycle, automatically.',
+    next: 'Seasonal color swap', when: 'Sep 20', reel: 'Moss & begonia woodland walk',
+  },
+  {
+    k: 'kitchen', name: 'Herb & Kitchen Beds', latin: 'Allium schoenoprasum', img: IMG.garden, tone: '#e2f1d4',
+    light: 'Full sun', water: 'Daily in summer', zone: 'Raised beds', bloom: 'Harvest May to Oct',
+    sms: 'Your chives and lettuce are ready to harvest. Tip: cut 2 inches above the soil.',
+    next: 'Bed refresh & compost', when: 'May 06', reel: 'From raised bed to dinner plate',
+  },
+  {
+    k: 'starters', name: 'Spring Starter Plants', latin: 'Seasonal annuals', img: IMG.seedlings, tone: '#e9f5d4',
+    light: 'Bright light', water: 'Keep moist', zone: 'Plant after frost', bloom: 'Mar to May',
+    sms: 'Your 48 spring starters are grown and ready. Planting day: Thursday, 9 to 11 AM.',
+    next: 'Planting day', when: 'Mar 28', reel: 'Greenhouse to garden in 30 days',
+  },
+  {
+    k: 'tree', name: 'Red Maple Shade Tree', latin: 'Acer rubrum', img: IMG.canopy, tone: '#f4dccb',
+    light: 'Sun to part shade', water: 'Deep, weekly', zone: 'Zones 3 to 9', bloom: 'Red fall color',
+    sms: 'Storm alert: an arborist will check your maple tomorrow. Nothing to do on your side.',
+    next: 'Arborist check', when: 'Oct 11', reel: 'One year of your maple in 30 sec',
+  },
+]
+
+export const CUSTOMER_JOURNEY = [
+  { n: '01', t: 'Browse the plant catalog', s: 'Showcase website', d: 'Homeowners explore every plant, size and garden style online, with real photos from your own jobs and clear prices.' },
+  { n: '02', t: 'Preview their own yard', s: 'Photo design preview', d: 'They upload a photo of their yard and see the new beds, trees and hedges placed in before saying yes.' },
+  { n: '03', t: 'Book in two taps', s: 'Calendar & booking app', d: 'Site visits, planting days and quotes booked online 24/7, with SMS reminders and live crew arrival tracking.' },
+  { n: '04', t: 'Plant passport', s: 'QR plant tags', d: 'Every plant gets a QR tag. One scan opens its care page, planting photos, warranty and the crew who planted it.' },
+  { n: '05', t: 'Care reminders', s: 'SMS, email & push', d: 'Watering, pruning and feeding reminders by season, plus frost, heat and storm alerts sent automatically.' },
+  { n: '06', t: 'Reorder & renew', s: 'Client app & invoices', d: 'One-tap seasonal color swaps, maintenance plans, photo visit reports and invoices paid online.' },
 ]

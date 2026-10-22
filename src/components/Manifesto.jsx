@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useScrollProgress, useInView, useCountUp } from '../hooks'
 import { IMG } from '../data/site'
 
-const TEXT = 'Landscape companies do beautiful work every single day. Then it disappears behind a blurry photo, an old flyer and a website nobody updates. We change that. We film your crews, design your brand and put your finest work on every screen, door and inbox in town.'
+const TEXT = 'Landscape companies cultivate living art, plant breathtaking gardens and transform outdoor properties every single day. But without modern digital services, that craftsmanship stays invisible. We are the digital media studio built exclusively for landscape companies. We film your finest plants, build showcase websites and put your work on every screen in town.'
 
 function Stat({ n, suffix, label, run, dec = 0 }) {
   const v = useCountUp(n, run, 1800, dec)

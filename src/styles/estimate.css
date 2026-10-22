@@ -25,7 +25,7 @@
   justify-content: space-between;
   align-items: baseline;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted-light);
@@ -187,7 +187,7 @@
 
 .es-out > small {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--sprout);
@@ -242,7 +242,7 @@
 
 .es-fine {
   margin: 18px 0 0;
-  font-size: 12.5px;
+  font-size: 14.5px;
   color: var(--muted-light);
 }
 
@@ -333,7 +333,7 @@
   .hero-trust {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .es-freq {
@@ -385,7 +385,7 @@
   }
 
   .bb-tab small {
-    font-size: 10.5px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.01em;
   }

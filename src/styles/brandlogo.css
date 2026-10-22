@@ -242,7 +242,7 @@
 .br-label {
   position: absolute;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--moss);
@@ -350,7 +350,7 @@
   display: block;
   padding: 10px 12px 12px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.06em;
   line-height: 1.4;
   color: var(--muted);
@@ -386,7 +386,7 @@
 @media (max-width: 900px) {
   .br-foot { grid-template-columns: 1fr; }
   .br-label { display: none; }
-  .br-chip { font-size: 12px; padding: 7px 12px 7px 7px; }
+  .br-chip { font-size: 14.5px; padding: 7px 12px 7px 7px; }
   .br-chip i { width: 24px; height: 24px; }
   .br-chip.c1, .br-chip.c4, .br-chip.c6 { display: none; }
 }

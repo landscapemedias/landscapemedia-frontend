@@ -13,6 +13,7 @@ import AppShowcase from './components/AppShowcase'
 import Estimate from './components/Estimate'
 import BottomBar from './components/BottomBar'
 import Nursery from './components/Nursery'
+import PlantPassport from './components/PlantPassport'
 import Process from './components/Process'
 import Booking from './components/Booking'
 import Faq from './components/Faq'
@@ -50,6 +51,7 @@ export default function App() {
         <GrowthRoots />
         <TruckWrap />
         <Nursery />
+        <PlantPassport />
         <Mockups />
         <NicheStories />
         <Projects />

@@ -26,7 +26,7 @@
 
 .in-tabs button small {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   color: var(--sprout);
 }
 
@@ -95,7 +95,7 @@
 }
 
 .in-stat span {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted-light);
 }
 
@@ -106,7 +106,7 @@
 
 .in-num {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--sprout);
   letter-spacing: 0.12em;
 }
@@ -201,7 +201,7 @@
 }
 
 .wy-badge small {
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--muted-light);
 }
 
@@ -271,7 +271,7 @@
   background: var(--lime);
   color: var(--moss);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -300,7 +300,7 @@
   background: var(--lime);
   color: var(--moss);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -345,7 +345,7 @@
 .wy-count span {
   display: block;
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted-light);
 }
 
@@ -407,7 +407,7 @@
   background: var(--sprout);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 600;

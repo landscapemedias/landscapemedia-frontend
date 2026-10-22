@@ -107,7 +107,7 @@ export default function GoldenHour() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">We chase the light</span>
+            <span className="eyebrow" data-reveal="">Botanical & Architectural Photography</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="Same garden." />
               <br />
@@ -117,7 +117,7 @@ export default function GoldenHour() {
             </h2>
           </div>
           <p className="lead" data-reveal="">
-            Our shoot days are planned around the sun. Drag through the day and see why a sunrise lawn sells maintenance plans and a blue hour pool sells luxury.
+            Digital media depends on lighting. Drag through the day to see how we film your plants, manicured turf and architectural gardens to sell recurring maintenance and high-end outdoor living.
           </p>
         </div>
 

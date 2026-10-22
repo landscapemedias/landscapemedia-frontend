@@ -242,14 +242,14 @@ export default function AppShowcase() {
       </div>
       <div className="wrap as-grid">
         <div className="as-copy">
-          <span className="eyebrow" data-reveal="">Booking apps & appointment calendars</span>
+          <span className="eyebrow" data-reveal="">Client Apps & Digital Tech</span>
           <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
             <Words text="Your brand," />
             <br />
             <Words text="on their home screen." delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            We build branded booking apps for landscape companies. Your clients book weekly or monthly maintenance, track crews, read visit reports and pay, and you stop chasing phone calls.
+            Part of our digital services: we build custom branded iOS & Android booking apps for your landscape business. Clients schedule maintenance, request plant care, track crews, and pay invoices from their phones.
           </p>
           <div className="as-feats" onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
             {FEATURES.map((f, i) => (

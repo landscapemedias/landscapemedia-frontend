@@ -83,7 +83,7 @@
 
 .st-tabs button small {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   color: var(--muted);
 }
@@ -213,7 +213,7 @@
 .st-badge small {
   display: block;
   margin-top: 6px;
-  font-size: 12.5px;
+  font-size: 14.5px;
   line-height: 1.4;
   color: var(--muted-light);
 }
@@ -229,7 +229,7 @@
 
 .st-num {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--moss);
@@ -375,7 +375,7 @@
     font-size: 30px;
   }
   .st-badge small {
-    font-size: 11px;
+    font-size: 13.5px;
   }
   .st-body h3 {
     font-size: 30px;
@@ -391,7 +391,7 @@
     padding: 8px 0;
   }
   .st-body li span {
-    font-size: 13px;
+    font-size: 15px;
   }
   .st-body ul {
     margin-bottom: 16px;

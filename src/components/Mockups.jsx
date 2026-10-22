@@ -185,7 +185,7 @@ export default function Mockups() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Mockups · see your brand live</span>
+            <span className="eyebrow" data-reveal="">Digital Mockups · See your digital brand live</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="One brand." />
               <br />
@@ -193,7 +193,7 @@ export default function Mockups() {
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Pick a service your company sells. Watch the website, reel, flyer, social post, email and booking calendar change together. This is the media kit we build for you.
+            Pick a service your company sells. Watch the digital website, viral reel, print drop, social post, email campaign and online booking calendar transform together. This is the complete digital media kit we build for your landscape business.
           </p>
         </div>
 

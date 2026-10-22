@@ -253,15 +253,15 @@ export default function NicheStories() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Niches we serve</span>
+            <span className="eyebrow" data-reveal="">Specialized Digital Media</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Media for every" />
+              <Words text="Digital media for every" />
               <br />
               <Words text="service you sell." delay={0.15} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Snow removal sells differently than a glass veranda. So every service gets its own story, its own visuals and its own campaign. Here is the playbook for each one.
+            Lawn maintenance, organic plant farms, tree surgery, greenhouses, and snow removal each have unique buyers. We build dedicated digital playbooks with targeted visuals, reels, and landing pages for each service you sell.
           </p>
         </div>
 

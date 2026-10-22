@@ -29,7 +29,7 @@ export default function BrandReveal() {
             <Words text="landscape companies." delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            {BRAND.name} {BRAND.word} is a media, communications and branding studio for landscape companies. Vanity telephone numbers, 24/7 live answering, Melville office mailbox, flyers, reels, websites and booking apps.
+            {BRAND.name} {BRAND.word} provides full-scale digital services exclusively for landscape companies. From showcasing your finest plants, perennials and estate designs to building websites, client booking apps, viral reels, vanity numbers and 24/7 live answering.
           </p>
         </div>
 
@@ -63,8 +63,8 @@ export default function BrandReveal() {
 
         <div className="br-foot">
           <p className="br-first" data-reveal="">
-            The first media studio built <em>only</em> for landscape companies.
-            <small>Snow removal, tree cutting, weekly maintenance, micro organic farms, green houses, glass verandas and design firms. If it grows outside, we answer your calls, host your Melville office & mailbox, and make you look world-class.</small>
+            The digital services studio built <em>only</em> for landscape companies.
+            <small>From rare plants, lush perennial gardens and sod installations to snow removal and glass verandas. We bring your outdoor craftsmanship into the modern digital world with stunning media and seamless booking technology.</small>
           </p>
           <div className="br-swatches" data-reveal="" style={{ '--d': '0.1s' }}>
             {BRAND.colors.map((c) => (

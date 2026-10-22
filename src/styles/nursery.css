@@ -164,7 +164,7 @@
 
 .ns-face small {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fern);
@@ -209,7 +209,7 @@
   grid-template-columns: 18px 1fr auto;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .ns-care svg {
@@ -231,7 +231,7 @@
   gap: 6px;
   margin-top: 14px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--moss);

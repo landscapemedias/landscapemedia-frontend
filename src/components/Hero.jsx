@@ -94,7 +94,7 @@ export default function Hero() {
       <div className="hero-sun" style={{ transform: `translate3d(${m.x * -30}px, ${y * 0.3 + m.y * -20}px, 0)` }} />
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <span className="eyebrow" data-reveal="">Media & branding for landscape companies</span>
+          <span className="eyebrow" data-reveal="">Digital Services & Media for Landscape Companies</span>
           <h1 className="h-display h-xl hero-title">
             <Words text="We grow" delay={0.1} />
             <br />
@@ -112,7 +112,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="lead hero-lead" data-reveal="" style={{ '--d': '0.7s' }}>
-            Spring cleaning, Fall collection, snow removal and winterizing campaigns. Flyers, reels, social media, showcase websites, booking apps, vanity numbers and 24/7 live answering for landscape companies.
+            Complete digital services for landscape companies. We turn your finest plants, garden designs, and outdoor craftsmanship into booking-ready websites, cinematic video reels, client apps, and high-ticket customer acquisition.
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
             <Btn onClick={() => scrollToId('book')}>Book a strategy call</Btn>
@@ -124,10 +124,10 @@ export default function Hero() {
             </button>
           </div>
           <ul className="hero-trust" data-reveal="" style={{ '--d': '1s' }}>
-            <li>Landscape only</li>
-            <li>Vanity numbers</li>
+            <li>Digital services</li>
+            <li>Plant & garden media</li>
             <li>24/7 Live answering</li>
-            <li>Office & mailbox</li>
+            <li>Vanity numbers</li>
           </ul>
         </div>
 

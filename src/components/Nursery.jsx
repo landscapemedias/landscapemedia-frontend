@@ -13,7 +13,7 @@ export default function Nursery() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">What we do</span>
+            <span className="eyebrow" data-reveal="">Digital Services & Media</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="Everything a" />
               <br />
@@ -23,7 +23,7 @@ export default function Nursery() {
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Branding, showcase websites, vanity phone numbers, 24/7 live answering, Melville mailbox & office, booking apps, flyers, reels and social campaigns. Tap any tag to see what is included.
+            Complete digital services for landscape companies: showcase websites that make your plants and gardens look breathtaking, online appointment calendars, mobile booking apps, viral reels, and seasonal digital marketing. Tap any tag to see what is included.
           </p>
         </div>
 

@@ -14,8 +14,8 @@
   --sun: #f4c35a;
   --line: rgba(46, 94, 62, 0.16);
   --line-light: rgba(243, 239, 227, 0.16);
-  --muted: #436b52;
-  --muted-light: rgba(243, 239, 227, 0.76);
+  --muted: #24432f;
+  --muted-light: rgba(243, 239, 227, 0.94);
   --display: 'Fraunces', Georgia, serif;
   --body: 'Manrope', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -105,7 +105,7 @@ button {
   align-items: center;
   gap: 10px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--moss);
@@ -117,7 +117,7 @@ button {
 
 @media (max-width: 520px) {
   .eyebrow {
-    font-size: 10.5px;
+    font-size: 13px;
     letter-spacing: 0.1em;
   }
   .eyebrow::before {
@@ -324,7 +324,7 @@ h1 em, h2 em, h3 em, h4 em, h5 em, h6 em,
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   transition: all 0.35s var(--ease);
 }

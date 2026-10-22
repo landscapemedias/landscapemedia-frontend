@@ -12,9 +12,9 @@ export default function Process() {
     <section className="section process" id="process" ref={ref}>
       <div className="wrap">
         <div className="sec-head">
-          <span className="eyebrow" data-reveal="">How it works</span>
+          <span className="eyebrow" data-reveal="">Digital Rollout & Partnership</span>
           <h2 className="h-display h-lg">
-            <Words text="From first call" /> <Words text="to ongoing care." delay={0.12} className="ital" />
+            <Words text="From strategy call" /> <Words text="to digital growth." delay={0.12} className="ital" />
           </h2>
         </div>
         <div className="pr-list">

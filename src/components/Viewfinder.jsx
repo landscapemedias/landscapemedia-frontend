@@ -62,7 +62,7 @@ export default function Viewfinder() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Shot on location</span>
+            <span className="eyebrow" data-reveal="">Cinematography & Digital Media</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
               <Words text="No stock footage." />
               <br />
@@ -70,7 +70,7 @@ export default function Viewfinder() {
             </h2>
           </div>
           <p className="lead" data-reveal="">
-            Our crew shows up on your job sites with real cameras. Every frame is your trucks, your people and your finest work, then cut into reels, pages, flyers and emails.
+            Our video crew arrives on your properties with cinema cameras and drones. We capture real plantings, lush gardens, tree work and hardscape transformations into viral reels, website showcases and digital ad creative.
           </p>
         </div>
 

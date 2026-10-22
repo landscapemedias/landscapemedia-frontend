@@ -165,7 +165,7 @@
   background: rgba(15, 36, 24, 0.75);
   backdrop-filter: blur(8px);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   color: var(--muted-light);
 }
@@ -339,7 +339,7 @@
 }
 
 .fd-stat small {
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--muted-light);
 }
 
@@ -402,7 +402,7 @@
 }
 
 .fd-feed small {
-  font-size: 12px;
+  font-size: 14.5px;
   color: var(--muted-light);
 }
 
@@ -424,7 +424,7 @@
   border-radius: 999px;
   border: 1px solid var(--line-light);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 13.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cream);

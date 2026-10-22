@@ -4,24 +4,24 @@ import { IMG } from '../data/site'
 
 const STAGES = [
   {
-    k: 'Seed', n: '01', t: 'Brand identity', img: IMG.seedlings, alt: 'Seedling trays in a nursery',
-    d: 'Logo, colors, type and truck wraps. The DNA every flyer, reel and page grows from.',
+    k: 'Seed', n: '01', t: 'Digital Brand Identity', img: IMG.seedlings, alt: 'Seedling trays in a nursery',
+    d: 'Logo, botanical color palette, typography and truck wraps. The visual DNA every plant showcase, reel and digital campaign grows from.',
     chips: ['Logo & wordmark', 'Truck wraps', 'Brand guide'], when: 'Weeks 1 to 3',
   },
   {
-    k: 'Roots', n: '02', t: 'Website & booking calendar', img: IMG.hands, alt: 'Hands planting a young plant in soil',
-    d: 'Nobody sees roots, yet everything stands on them. Your site and 24/7 calendar catch every lead.',
-    chips: ['Showcase website', 'Online calendar', 'Quote forms'], when: 'Weeks 3 to 5',
+    k: 'Roots', n: '02', t: 'Digital Showcase & Booking', img: IMG.hands, alt: 'Hands planting a young plant in soil',
+    d: 'A high-converting website showcasing your finest plants, garden designs, and outdoor living. Paired with a 24/7 online calendar.',
+    chips: ['Plant & garden gallery', 'Online calendar', 'Quote forms'], when: 'Weeks 3 to 5',
   },
   {
-    k: 'Shoots', n: '03', t: 'Reels, social & flyers', img: IMG.sprout, alt: 'Young green sprout breaking through soil',
-    d: 'Visible growth, every single week. Content that pushes through the noise of your town.',
-    chips: ['Weekly reels', 'Door hangers', 'Social calendar'], when: 'Every week',
+    k: 'Shoots', n: '03', t: 'Plant Reels, Media & Social', img: IMG.sprout, alt: 'Young green sprout breaking through soil',
+    d: 'Cinematic on-site video reels of your crews planting, edging, and transforming properties. Content that pushes through the noise.',
+    chips: ['Weekly plant reels', 'Door hangers', 'Social calendar'], when: 'Every week',
   },
   {
-    k: 'Bloom', n: '04', t: 'Booked solid', img: IMG.flowers, alt: 'Garden in full bloom',
-    d: 'Calls, booked site visits and signed maintenance plans. The part your neighbours notice.',
-    chips: ['Booked visits', 'Signed plans', 'Monthly report'], when: 'Season after season',
+    k: 'Bloom', n: '04', t: 'Full Schedule & High-Ticket Jobs', img: IMG.flowers, alt: 'Garden in full bloom',
+    d: 'Direct calls, booked site visits and signed recurring maintenance plans. The results that grow your landscape business.',
+    chips: ['Booked visits', 'Signed plans', 'Monthly ROI report'], when: 'Season after season',
   },
 ]
 
@@ -117,9 +117,9 @@ export default function GrowthRoots() {
       <div className="root-sticky">
         <div className="wrap root-grid">
           <div className="root-left">
-            <span className="eyebrow">How brands grow</span>
+            <span className="eyebrow">Digital Growth Process</span>
             <h2 className="h-display h-md root-title">
-              Every landscape brand <em>starts as a seed.</em>
+              How we digitize & grow <em>landscape brands.</em>
             </h2>
             <div className="root-stage-wrap">
               <Plant p={p} />
