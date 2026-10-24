@@ -61,12 +61,12 @@ export default function Nav() {
           <div className="nav-top-in">
             <span className="nav-live">
               <i />
-              {t.nav.ticker}
+              <span className="nav-live-txt">{t.nav.ticker}</span>
             </span>
             <span className="nav-top-links">
-              <a href={BRAND.phoneHref}><Phone size={13} /> {BRAND.phone}</a>
-              <a href={`mailto:${BRAND.email}`}><Mail size={13} /> {BRAND.email}</a>
-              <span><Clock size={13} /> {t.nav.hours}</span>
+              <a href={BRAND.phoneHref} className="nav-top-phone"><Phone size={13} /> {BRAND.phone}</a>
+              <a href={`mailto:${BRAND.email}`} className="nav-top-email"><Mail size={13} /> {BRAND.email}</a>
+              <span className="nav-top-hours"><Clock size={13} /> {t.nav.hours}</span>
             </span>
           </div>
         </div>
