@@ -1,8 +1,7 @@
 import { useRef } from 'react'
 import { useScrollProgress, useInView, useCountUp } from '../hooks'
 import { IMG } from '../data/site'
-
-const TEXT = 'Landscape companies cultivate living art, plant breathtaking gardens and transform outdoor properties every single day. But without modern digital services, that craftsmanship stays invisible. We are the digital media studio built exclusively for landscape companies. We film your finest plants, build showcase websites and put your work on every screen in town.'
+import { useLanguage } from '../context/LanguageContext'
 
 function Stat({ n, suffix, label, run, dec = 0 }) {
   const v = useCountUp(n, run, 1800, dec)
@@ -21,14 +20,24 @@ export default function Manifesto() {
   const ref = useRef(null)
   const p = useScrollProgress(ref)
   const [statsRef, seen] = useInView({ threshold: 0.4 })
-  const words = TEXT.split(' ')
+  const { t } = useLanguage()
+  const data = t.manifesto
+
+  const words = (data.text || '').split(' ')
   const k = Math.min(1, Math.max(0, (p - 0.18) / 0.45))
   const lit = Math.floor(k * words.length)
+
+  const stats = data.stats || [
+    { n: 8, suffix: ' channels', label: 'Brand, print, video, social, email, web, calendar & app' },
+    { n: 24, suffix: '/7', label: 'Online booking on your appointment calendar' },
+    { n: 100, suffix: '%', label: 'Focused on the landscape industry' },
+    { n: 7, suffix: ' niches', label: 'From snow removal to glass verandas' },
+  ]
 
   return (
     <section className="section dark manifesto" ref={ref}>
       <div className="wrap">
-        <span className="eyebrow">Why we exist</span>
+        <span className="eyebrow">{data.eyebrow}</span>
         <p className="mf-text">
           {words.map((w, i) => (
             <span key={i} className={i < lit ? 'lit' : ''}>
@@ -43,10 +52,9 @@ export default function Manifesto() {
             <img src={IMG.sprout} alt="Young green sprout" className="mfp c" style={{ transform: `translateY(${(0.5 - p) * 90}px) rotate(-2deg)` }} />
           </div>
           <div className="mf-stats" ref={statsRef}>
-            <Stat n={8} suffix=" channels" label="Brand, print, video, social, email, web, calendar & app" run={seen} />
-            <Stat n={24} suffix="/7" label="Online booking on your appointment calendar" run={seen} />
-            <Stat n={100} suffix="%" label="Focused on the landscape industry" run={seen} />
-            <Stat n={7} suffix=" niches" label="From snow removal to glass verandas" run={seen} />
+            {stats.map((s, i) => (
+              <Stat key={i} n={s.n} suffix={s.suffix} label={s.label} run={seen} />
+            ))}
           </div>
         </div>
       </div>

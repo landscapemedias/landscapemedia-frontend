@@ -1,16 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { IMG } from '../data/site'
 import { Words } from './ui'
+import { useLanguage } from '../context/LanguageContext'
 
-const SHOTS = [
-  { img: IMG.crew, alt: 'Landscape crew working on a client property', t: 'Crew in action', c: 'Greenline Grounds', lens: '35mm', f: 'f/2.8', iso: 200, use: 'Website hero' },
-  { img: IMG.canopy, alt: 'Tall tree canopy seen from below', t: 'Crane removal, 60 sec reel', c: 'High Oak Tree Care', lens: '24mm', f: 'f/8', iso: 100, use: 'Instagram reel' },
-  { img: IMG.snow, alt: 'Snow covered property after a storm', t: 'Overnight plow route', c: 'Northfield Snow Co.', lens: '50mm', f: 'f/1.8', iso: 3200, use: 'Storm alert email' },
-  { img: IMG.greenhouse, alt: 'Greenhouse full of young plants', t: 'Build day 1 to 30', c: 'Glasshouse Growers', lens: '16mm', f: 'f/5.6', iso: 400, use: 'Build series' },
-  { img: IMG.micro, alt: 'Close up of fresh microgreens', t: 'Seed to harvest', c: 'Root & Sprout Farms', lens: '100mm macro', f: 'f/4', iso: 320, use: 'Harvest box page' },
-  { img: IMG.glass, alt: 'Glass veranda opening onto a garden', t: 'Veranda reveal at sunset', c: 'Clearview Verandas', lens: '24mm', f: 'f/11', iso: 100, use: 'Luxury brochure' },
-]
-
+const SHOT_IMGS = [IMG.crew, IMG.canopy, IMG.snow, IMG.greenhouse, IMG.micro, IMG.glass]
 const DWELL = 4800
 
 function useVisible(ref) {
@@ -43,34 +36,51 @@ export default function Viewfinder() {
   const [i, setI] = useState(0)
   const [snap, setSnap] = useState(0)
   const [hold, setHold] = useState(false)
-  const shot = SHOTS[i]
+  const { t } = useLanguage()
+  const data = t.viewfinder || {}
+
+  const shots = (data.shots || []).map((s, idx) => ({
+    ...s,
+    img: SHOT_IMGS[idx] || IMG.crew,
+    alt: s.t,
+  }))
+
+  const shot = shots[i] || shots[0] || {
+    t: '', c: '', lens: '35mm', f: 'f/2.8', iso: 200, use: '', img: IMG.crew, alt: '',
+  }
 
   const go = (n) => {
-    setI((n + SHOTS.length) % SHOTS.length)
+    if (!shots.length) return
+    setI((n + shots.length) % shots.length)
     setSnap((x) => x + 1)
   }
 
   useEffect(() => {
-    if (!visible || hold) return
+    if (!visible || hold || !shots.length) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const id = setTimeout(() => go(i + 1), DWELL)
     return () => clearTimeout(id)
-  }, [i, visible, hold])
+  }, [i, visible, hold, shots.length])
+
+  const shotSlate = (data.shotOf || 'Shot {cur} / {total} · {company}')
+    .replace('{cur}', String(i + 1).padStart(2, '0'))
+    .replace('{total}', String(shots.length).padStart(2, '0'))
+    .replace('{company}', shot.c)
 
   return (
     <section className="section dark vfx" id="on-location">
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Cinematography & Digital Media</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="No stock footage." />
+              <Words text={data.title1} />
               <br />
-              <Words text="Ever." className="ital" delay={0.2} />
+              <Words text={data.title2} className="ital" delay={0.2} />
             </h2>
           </div>
           <p className="lead" data-reveal="">
-            Our video crew arrives on your properties with cinema cameras and drones. We capture real plantings, lush gardens, tree work and hardscape transformations into viral reels, website showcases and digital ad creative.
+            {data.lead}
           </p>
         </div>
 
@@ -81,7 +91,7 @@ export default function Viewfinder() {
           onPointerEnter={() => setHold(true)}
           onPointerLeave={() => setHold(false)}
         >
-          {SHOTS.map((s, n) => (
+          {shots.map((s, n) => (
             <img key={n} src={s.img} alt={s.alt} className={`vfx-img ${n === i ? 'on' : ''}`} loading="lazy" />
           ))}
 
@@ -97,14 +107,14 @@ export default function Viewfinder() {
 
             <div className="vfx-top">
               <span className="vfx-rec">
-                <b /> REC
+                <b /> {data.rec || 'REC'}
               </span>
               <Timecode run={visible} />
               <span className="vfx-spec">4K · 24 fps · ISO {shot.iso}</span>
             </div>
 
             <div className="vfx-focus" key={`af-${snap}`}>
-              <span>AF</span>
+              <span>{data.af || 'AF'}</span>
             </div>
 
             <div className="vfx-meters">
@@ -119,9 +129,7 @@ export default function Viewfinder() {
 
             <div className="vfx-bottom">
               <div className="vfx-slate" key={`slate-${snap}`}>
-                <small>
-                  Shot {String(i + 1).padStart(2, '0')} / {String(SHOTS.length).padStart(2, '0')} · {shot.c}
-                </small>
+                <small>{shotSlate}</small>
                 <b>{shot.t}</b>
               </div>
               <div className="vfx-exp">
@@ -139,7 +147,7 @@ export default function Viewfinder() {
         </div>
 
         <div className="vfx-strip" role="tablist" aria-label="Shot list">
-          {SHOTS.map((s, n) => (
+          {shots.map((s, n) => (
             <button
               key={n}
               type="button"

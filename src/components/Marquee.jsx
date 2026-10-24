@@ -1,5 +1,6 @@
 import { MARQUEE } from '../data/site'
 import { Leaf } from './ui'
+import { useLanguage } from '../context/LanguageContext'
 
 function Row({ items, reverse }) {
   const list = [...items, ...items]
@@ -18,10 +19,12 @@ function Row({ items, reverse }) {
 }
 
 export default function Marquee() {
+  const { t } = useLanguage()
+  const items = t.marquee || MARQUEE
   return (
     <section className="marquee dark" aria-label="What we do">
-      <Row items={MARQUEE} />
-      <Row items={[...MARQUEE].reverse()} reverse />
+      <Row items={items} />
+      <Row items={[...items].reverse()} reverse />
     </section>
   )
 }

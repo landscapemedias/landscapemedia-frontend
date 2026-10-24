@@ -1,73 +1,91 @@
 import { useState } from 'react'
 import { Home, Building2, Check } from 'lucide-react'
-import { ESTIMATE_SERVICES } from '../data/site'
 import { Btn, Words } from './ui'
 import { scrollToId } from '../hooks'
+import { useLanguage } from '../context/LanguageContext'
 
-const FREQ = [
-  { k: 'weekly', label: 'Weekly content', f: 1 },
-  { k: 'bi', label: 'Every 2 weeks', f: 0.72 },
-  { k: 'monthly', label: 'Monthly', f: 0.5 },
-]
+const SERVICE_RATES = {
+  vanity: 200,
+  answering: 450,
+  office: 180,
+  social: 450,
+  reels: 650,
+  flyers: 300,
+  email: 250,
+  web: 350,
+}
+
+const FREQ_FACTORS = {
+  weekly: 1,
+  bi: 0.72,
+  monthly: 0.5,
+}
 
 const fmt = (n) => `$${Math.round(n / 10) * 10}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 export default function Estimate() {
   const [type, setType] = useState('res')
   const [size, setSize] = useState(4)
-  const [picks, setPicks] = useState(['mow', 'beds'])
+  const [picks, setPicks] = useState(['reels', 'web'])
   const [freq, setFreq] = useState('weekly')
+  const { t } = useLanguage()
+  const data = t.estimate || {}
+
+  const services = data.services || []
+  const frequencies = data.freq || []
 
   const toggle = (k) => setPicks(picks.includes(k) ? picks.filter((p) => p !== k) : [...picks, k])
-  const base = ESTIMATE_SERVICES.filter((s) => picks.includes(s.k)).reduce((a, s) => a + s.rate, 0)
+  const base = picks.reduce((a, k) => a + (SERVICE_RATES[k] || 250), 0)
   const sizeF = 0.8 + Math.sqrt(size) * 0.2
   const typeF = type === 'com' ? 1.35 : 1
-  const freqF = FREQ.find((f) => f.k === freq).f
+  const freqF = FREQ_FACTORS[freq] ?? 1
   const monthly = base * sizeF * typeF * freqF
   const low = monthly * 0.85
   const high = monthly * 1.15
   const pct = ((size - 1) / 39) * 100
   const growth = Math.min(1, monthly / 5000)
 
+  const crewUnit = size === 1 ? (data.crewsUnitSingular || 'crew') : (data.crewsUnitPlural || 'crews')
+
   return (
     <section className="section estimate dark" id="estimate">
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Digital Media Calculator</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Know your budget" />
+              <Words text={data.title1} />
               <br />
-              <Words text="before we talk." delay={0.15} className="ital" />
+              <Words text={data.title2} delay={0.15} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Select your company focus, crew size, and desired digital services for a ballpark monthly investment. Custom plans finalized on your free strategy call.
+            {data.lead}
           </p>
         </div>
 
         <div className="es-grid" data-reveal="">
           <div className="es-form">
-            <span className="es-label">Company focus</span>
+            <span className="es-label">{data.focusLabel}</span>
             <div className="es-type">
               <button className={type === 'res' ? 'on' : ''} onClick={() => setType('res')}>
-                <Home size={20} /> Residential
+                <Home size={20} /> {data.residential || 'Residential'}
               </button>
               <button className={type === 'com' ? 'on' : ''} onClick={() => setType('com')}>
-                <Building2 size={20} /> Commercial
+                <Building2 size={20} /> {data.commercial || 'Commercial'}
               </button>
             </div>
 
             <label className="es-size">
               <span className="es-label">
-                Crews on the road <b>{size} {size === 1 ? 'crew' : 'crews'}</b>
+                {data.crewsLabel || 'Crews on the road'} <b>{size} {crewUnit}</b>
               </span>
               <input type="range" min={1} max={40} step={1} value={size} onChange={(e) => setSize(+e.target.value)} style={{ '--p': `${pct}%` }} />
             </label>
 
-            <span className="es-label">Channels</span>
+            <span className="es-label">{data.channelsLabel || 'Channels'}</span>
             <div className="es-svcs">
-              {ESTIMATE_SERVICES.map((s) => (
+              {services.map((s) => (
                 <button key={s.k} className={picks.includes(s.k) ? 'on' : ''} onClick={() => toggle(s.k)}>
                   <i>
                     <Check size={12} strokeWidth={3.5} />
@@ -77,9 +95,9 @@ export default function Estimate() {
               ))}
             </div>
 
-            <span className="es-label">Content cadence</span>
+            <span className="es-label">{data.cadenceLabel || 'Content cadence'}</span>
             <div className="es-freq">
-              {FREQ.map((f) => (
+              {frequencies.map((f) => (
                 <button key={f.k} className={freq === f.k ? 'on' : ''} onClick={() => setFreq(f.k)}>
                   {f.label}
                 </button>
@@ -103,25 +121,25 @@ export default function Estimate() {
                 ))}
               </svg>
             </div>
-            <small>Estimated monthly range</small>
+            <small>{data.rangeLabel || 'Estimated monthly range'}</small>
             <div className="es-price">
               {picks.length ? (
                 <>
                   <b>{fmt(low)}</b>
-                  <span>to</span>
+                  <span>{data.rangeTo || 'to'}</span>
                   <b>{fmt(high)}</b>
                 </>
               ) : (
-                <b className="es-none">Pick a service</b>
+                <b className="es-none">{data.pickService || 'Pick a service'}</b>
               )}
             </div>
             <ul className="es-inc">
-              <li>Dedicated account manager</li>
-              <li>Monthly bookings report</li>
-              <li>Cancel any month</li>
+              <li>{data.benefit1 || 'Dedicated account manager'}</li>
+              <li>{data.benefit2 || 'Monthly bookings report'}</li>
+              <li>{data.benefit3 || 'Cancel any month'}</li>
             </ul>
-            <Btn variant="light" onClick={() => scrollToId('book')}>Get my exact plan</Btn>
-            <p className="es-fine">A ballpark for planning only. Final pricing is confirmed in writing after your free strategy call.</p>
+            <Btn variant="light" onClick={() => scrollToId('book')}>{data.exactPlanBtn || 'Get my exact plan'}</Btn>
+            <p className="es-fine">{data.finePrint}</p>
           </div>
         </div>
       </div>

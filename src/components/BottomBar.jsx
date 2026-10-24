@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Home, Leaf, CalendarPlus, Images, Menu } from 'lucide-react'
 import { scrollToId } from '../hooks'
-
-const TABS = [
-  { id: 'top', label: 'Home', icon: Home },
-  { id: 'services', label: 'Services', icon: Leaf },
-  { id: 'book', label: 'Book', icon: CalendarPlus, main: true },
-  { id: 'mockups', label: 'Mockups', icon: Images },
-  { id: 'menu', label: 'Menu', icon: Menu },
-]
+import { useLanguage } from '../context/LanguageContext'
 
 export default function BottomBar() {
   const [active, setActive] = useState('top')
   const [menu, setMenu] = useState(false)
+  const { t } = useLanguage()
+  const data = t.bottomBar || {}
+
+  const tabs = [
+    { id: 'top', label: data.home || 'Home', icon: Home },
+    { id: 'services', label: data.services || 'Services', icon: Leaf },
+    { id: 'book', label: data.book || 'Book', icon: CalendarPlus, main: true },
+    { id: 'mockups', label: data.mockups || 'Mockups', icon: Images },
+    { id: 'menu', label: data.menu || 'Menu', icon: Menu },
+  ]
 
   useEffect(() => {
     const on = () => {
@@ -46,14 +49,14 @@ export default function BottomBar() {
 
   return (
     <nav className="bbar" aria-label="App navigation">
-      {TABS.map((t) => {
-        const on = t.id === 'menu' ? menu : !menu && active === t.id
+      {tabs.map((tab) => {
+        const on = tab.id === 'menu' ? menu : !menu && active === tab.id
         return (
-          <button key={t.id} className={`bb-tab ${t.main ? 'main' : ''} ${on ? 'on' : ''}`} onClick={() => tap(t.id)} aria-label={t.label}>
+          <button key={tab.id} className={`bb-tab ${tab.main ? 'main' : ''} ${on ? 'on' : ''}`} onClick={() => tap(tab.id)} aria-label={tab.label}>
             <span className="bb-ico">
-              <t.icon size={t.main ? 22 : 20} strokeWidth={on ? 2.4 : 2} />
+              <tab.icon size={tab.main ? 22 : 20} strokeWidth={on ? 2.4 : 2} />
             </span>
-            <small>{t.label}</small>
+            <small>{tab.label}</small>
           </button>
         )
       })}

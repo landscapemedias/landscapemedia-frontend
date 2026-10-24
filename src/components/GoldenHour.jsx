@@ -2,42 +2,29 @@ import { useEffect, useRef, useState } from 'react'
 import { Sunrise, Sun, Sunset, Moon } from 'lucide-react'
 import { IMG } from '../data/site'
 import { Words } from './ui'
+import { useLanguage } from '../context/LanguageContext'
 
 const START = 330
 const END = 1290
 const toT = (min) => (min - START) / (END - START)
 
-const STOPS = [
-  {
-    min: 370, k: 'Sunrise', icon: Sunrise, img: IMG.hills, alt: 'Misty green hills at sunrise',
-    shoot: 'Dew on fresh stripes, mist over the lawn, crews rolling out.', use: 'Maintenance plan ads',
-    grade: 'rgba(255, 196, 140, 0.18)', glow: '#f6b98a',
-  },
-  {
-    min: 750, k: 'Midday', icon: Sun, img: IMG.poolModern, alt: 'Modern house with a pool under a clear blue sky',
-    shoot: 'Hard light for crisp hardscape, pools and clean architecture.', use: 'Showcase website',
-    grade: 'rgba(160, 210, 255, 0.06)', glow: '#fff1b8',
-  },
-  {
-    min: 1120, k: 'Golden hour', icon: Sunset, img: IMG.forest, alt: 'Warm evening light through a forest path',
-    shoot: 'Warm, long shadows. People, gardens and lifestyle moments.', use: 'Reels & social',
-    grade: 'rgba(255, 150, 60, 0.22)', glow: '#f4a24a',
-  },
-  {
-    min: 1250, k: 'Blue hour', icon: Moon, img: IMG.lake, alt: 'Villa with a glowing pool and landscape lighting at night',
-    shoot: 'Landscape lighting on, pools glowing, verandas lit from inside.', use: 'Luxury brochures',
-    grade: 'rgba(40, 70, 160, 0.22)', glow: '#7aa2ff',
-  },
-].map((s) => ({ ...s, t: toT(s.min) }))
+const STOP_BASES = [
+  { min: 370, icon: Sunrise, img: IMG.hills, grade: 'rgba(255, 196, 140, 0.18)', glow: '#f6b98a' },
+  { min: 750, icon: Sun, img: IMG.poolModern, grade: 'rgba(160, 210, 255, 0.06)', glow: '#fff1b8' },
+  { min: 1120, icon: Sunset, img: IMG.forest, grade: 'rgba(255, 150, 60, 0.22)', glow: '#f4a24a' },
+  { min: 1250, icon: Moon, img: IMG.lake, grade: 'rgba(40, 70, 160, 0.22)', glow: '#7aa2ff' },
+]
 
-function weights(t) {
-  if (t <= STOPS[0].t) return STOPS.map((_, i) => (i === 0 ? 1 : 0))
-  const last = STOPS.length - 1
-  if (t >= STOPS[last].t) return STOPS.map((_, i) => (i === last ? 1 : 0))
-  const j = STOPS.findIndex((s, i) => t >= s.t && t < STOPS[i + 1].t)
-  const k = (t - STOPS[j].t) / (STOPS[j + 1].t - STOPS[j].t)
+function weights(t, stops) {
+  if (!stops.length) return []
+  if (t <= stops[0].t) return stops.map((_, i) => (i === 0 ? 1 : 0))
+  const last = stops.length - 1
+  if (t >= stops[last].t) return stops.map((_, i) => (i === last ? 1 : 0))
+  const j = stops.findIndex((s, i) => t >= s.t && t < stops[i + 1].t)
+  if (j === -1) return stops.map((_, i) => (i === 0 ? 1 : 0))
+  const k = (t - stops[j].t) / (stops[j + 1].t - stops[j].t)
   const e = k * k * (3 - 2 * k)
-  return STOPS.map((_, i) => (i === j ? 1 - e : i === j + 1 ? e : 0))
+  return stops.map((_, i) => (i === j ? 1 - e : i === j + 1 ? e : 0))
 }
 
 const clock = (t) => {
@@ -47,10 +34,20 @@ const clock = (t) => {
 
 export default function GoldenHour() {
   const secRef = useRef(null)
-  const [t, setT] = useState(STOPS[2].t)
+  const drag = useRef(null)
+  const { t } = useLanguage()
+  const data = t.goldenHour || {}
+
+  const stops = (data.stops || []).map((s, idx) => ({
+    ...STOP_BASES[idx],
+    ...s,
+    t: toT(STOP_BASES[idx].min),
+    alt: s.k,
+  }))
+
+  const [tVal, setTVal] = useState(stops[2]?.t ?? 0.7)
   const [auto, setAuto] = useState(true)
   const [visible, setVisible] = useState(false)
-  const drag = useRef(null)
 
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.3 })
@@ -66,26 +63,29 @@ export default function GoldenHour() {
     const step = (now) => {
       const dt = Math.min(64, now - last)
       last = now
-      setT((x) => (x + dt / 16000) % 1)
+      setTVal((x) => (x + dt / 16000) % 1)
       raf = requestAnimationFrame(step)
     }
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
   }, [auto, visible])
 
-  const w = weights(t)
-  const active = w.indexOf(Math.max(...w))
-  const stop = STOPS[active]
-  const night = Math.max(0, (t - 0.86) / 0.14)
-  const dawn = Math.max(0, 1 - t / 0.08)
+  const w = weights(tVal, stops)
+  const active = w.length ? w.indexOf(Math.max(...w)) : 0
+  const stop = stops[active] || stops[0] || {
+    glow: '#f4a24a', grade: 'rgba(255, 150, 60, 0.22)', shoot: '', use: '', k: 'Golden hour',
+  }
 
-  const ang = Math.PI * (1 - t)
+  const night = Math.max(0, (tVal - 0.86) / 0.14)
+  const dawn = Math.max(0, 1 - tVal / 0.08)
+
+  const ang = Math.PI * (1 - tVal)
   const sx = 50 + Math.cos(ang) * 44
   const sy = 92 - Math.sin(ang) * 78
 
   const scrub = (clientX) => {
     const r = drag.current.getBoundingClientRect()
-    setT(Math.min(1, Math.max(0, (clientX - r.left) / r.width)))
+    setTVal(Math.min(1, Math.max(0, (clientX - r.left) / r.width)))
   }
   const onDown = (e) => {
     setAuto(false)
@@ -107,17 +107,17 @@ export default function GoldenHour() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Botanical & Architectural Photography</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Same garden." />
+              <Words text={data.title1} />
               <br />
-              <Words text="Different hour." className="ital" delay={0.15} />
+              <Words text={data.title2} className="ital" delay={0.15} />
               <br />
-              <Words text="Different sale." delay={0.3} />
+              <Words text={data.title3} delay={0.3} />
             </h2>
           </div>
           <p className="lead" data-reveal="">
-            Digital media depends on lighting. Drag through the day to see how we film your plants, manicured turf and architectural gardens to sell recurring maintenance and high-end outdoor living.
+            {data.lead}
           </p>
         </div>
 
@@ -137,14 +137,14 @@ export default function GoldenHour() {
             role="img"
             aria-label={stop.alt}
           >
-            {STOPS.map((s, i) => (
+            {stops.map((s, i) => (
               <img
-                key={s.k}
+                key={s.k || i}
                 src={s.img}
                 alt=""
                 className="sun-img"
                 loading="lazy"
-                style={{ opacity: w[i], transform: `scale(${1.08 - w[i] * 0.08}) translateX(${(t - s.t) * -12}%)` }}
+                style={{ opacity: w[i] ?? 0, transform: `scale(${1.08 - (w[i] ?? 0) * 0.08}) translateX(${(tVal - s.t) * -12}%)` }}
               />
             ))}
             <div className="sun-grade" style={{ background: stop.grade }} />
@@ -152,15 +152,15 @@ export default function GoldenHour() {
 
             <div className="sun-card" key={stop.k}>
               <span className="sun-card-k">
-                <stop.icon size={16} /> {stop.k}
+                {stop.icon && <stop.icon size={16} />} {stop.k}
               </span>
               <p>{stop.shoot}</p>
-              <span className="sun-card-use">Best for: {stop.use}</span>
+              <span className="sun-card-use">{data.bestFor || 'Best for:'} {stop.use}</span>
             </div>
 
             <div className="sun-clock">
-              <b>{clock(t)}</b>
-              <small>{auto ? 'Time-lapse · drag to scrub' : 'Scrubbing'}</small>
+              <b>{clock(tVal)}</b>
+              <small>{auto ? (data.timelapseDrag || 'Time-lapse · drag to scrub') : (data.scrubbing || 'Scrubbing')}</small>
             </div>
           </div>
 
@@ -169,27 +169,27 @@ export default function GoldenHour() {
               type="range"
               min="0"
               max="1000"
-              value={Math.round(t * 1000)}
+              value={Math.round(tVal * 1000)}
               onChange={(e) => {
                 setAuto(false)
-                setT(+e.target.value / 1000)
+                setTVal(+e.target.value / 1000)
               }}
               aria-label="Time of day"
-              aria-valuetext={`${clock(t)}, ${stop.k}`}
-              style={{ '--v': `${t * 100}%` }}
+              aria-valuetext={`${clock(tVal)}, ${stop.k}`}
+              style={{ '--v': `${tVal * 100}%` }}
             />
             <div className="sun-ticks">
-              {STOPS.map((s, i) => {
+              {stops.map((s, i) => {
                 const I = s.icon
                 return (
                   <button
-                    key={s.k}
+                    key={s.k || i}
                     type="button"
                     className={i === active ? 'on' : ''}
                     style={{ left: `${s.t * 100}%` }}
                     onClick={() => {
                       setAuto(false)
-                      setT(s.t)
+                      setTVal(s.t)
                     }}
                   >
                     <I size={14} />
@@ -200,7 +200,7 @@ export default function GoldenHour() {
               })}
             </div>
             <button type="button" className="sun-play" onClick={() => setAuto((a) => !a)}>
-              {auto ? 'Pause time-lapse' : 'Play time-lapse'}
+              {auto ? (data.pauseBtn || 'Pause time-lapse') : (data.playBtn || 'Play time-lapse')}
             </button>
           </div>
         </div>

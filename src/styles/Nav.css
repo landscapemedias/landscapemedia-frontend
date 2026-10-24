@@ -99,7 +99,7 @@
   border-radius: 24px;
   border: 1px solid transparent;
   transition: all 0.5s var(--ease);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .nav.scrolled .nav-bar {
@@ -113,14 +113,16 @@
 
 .nav-progress {
   position: absolute;
-  left: 0;
+  left: 20px;
+  right: 20px;
   bottom: 0;
   height: 2px;
-  width: 100%;
   background: linear-gradient(90deg, var(--fern), var(--sprout));
   transform-origin: left;
   opacity: 0;
   transition: opacity 0.4s;
+  border-radius: 999px;
+  pointer-events: none;
 }
 
 .nav.scrolled .nav-progress {
@@ -430,4 +432,211 @@
   .nav.scrolled .logo .blogo {
     width: 108px;
   }
+}
+
+.lang-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(243, 239, 227, 0.7);
+  border: 1px solid var(--line);
+  color: var(--forest);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.nav.scrolled .lang-trigger {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(46, 94, 62, 0.15);
+}
+
+.lang-trigger:hover,
+.lang-picker.open .lang-trigger {
+  background: #ffffff;
+  border-color: var(--forest);
+  color: var(--forest);
+  box-shadow: 0 4px 16px rgba(46, 94, 62, 0.12);
+}
+
+.lang-globe {
+  display: flex;
+  align-items: center;
+  color: var(--fern);
+}
+
+.lang-code {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+}
+
+.lang-caret {
+  display: flex;
+  align-items: center;
+  transition: transform 0.25s ease;
+  color: var(--muted);
+}
+
+.lang-picker.open .lang-caret {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 205px;
+  background: #ffffff;
+  border: 1px solid rgba(35, 75, 52, 0.22);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 24px 50px -10px rgba(12, 31, 23, 0.35), 0 6px 18px rgba(0, 0, 0, 0.08);
+  z-index: 2000;
+  animation: langFadeIn 0.2s var(--ease);
+}
+
+@keyframes langFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lang-head {
+  padding: 6px 10px 8px;
+  border-bottom: 1px solid rgba(35, 75, 52, 0.08);
+  margin-bottom: 4px;
+}
+
+.lang-head small {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #557561;
+}
+
+.lang-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #1b3d2b;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.lang-opt:hover {
+  background: rgba(184, 232, 106, 0.22);
+  border-color: rgba(46, 94, 62, 0.14);
+}
+
+.lang-opt.active {
+  background: #234b34;
+  color: #ffffff;
+  border-color: #234b34;
+}
+
+.lang-opt-flag {
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.lang-opt-txt {
+  flex: 1;
+}
+
+.lang-opt-txt b {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: inherit;
+}
+
+.lang-opt-txt small {
+  display: block;
+  font-size: 11px;
+  color: #637768;
+  margin-top: 2px;
+}
+
+.lang-opt.active .lang-opt-txt small {
+  color: #d8f5a2;
+}
+
+.lang-check {
+  display: flex;
+  align-items: center;
+  color: #b8e86a;
+  margin-left: auto;
+}
+
+.lang-picker.compact .lang-trigger {
+  height: 38px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.menu-lang-row {
+  display: flex;
+  justify-content: flex-start;
+  padding: 16px 36px 4px;
+}
+
+.menu-lang-row .lang-trigger {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--cream);
+}
+
+.menu-lang-row .lang-trigger:hover,
+.menu-lang-row .lang-picker.open .lang-trigger {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: var(--sprout);
+  color: #ffffff;
+}
+
+.menu-lang-row .lang-globe {
+  color: var(--sprout);
+}
+
+.menu-lang-row .lang-caret {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.menu-lang-row .lang-dropdown {
+  left: 0;
+  right: auto;
+  background: #ffffff;
+  color: #1b3d2b;
 }

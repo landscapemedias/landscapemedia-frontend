@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import BrandLogo from './BrandLogo'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Preloader({ onDone }) {
   const [n, setN] = useState(0)
   const [leaving, setLeaving] = useState(false)
+  const { lang } = useLanguage()
 
   useEffect(() => {
     let raf
@@ -37,7 +39,7 @@ export default function Preloader({ onDone }) {
           <span style={{ transform: `scaleX(${n / 100})` }} />
         </div>
         <div className="pl-meta">
-          <span>Growing landscape brands</span>
+          <span>{lang === 'es' ? 'Haciendo crecer marcas de paisajismo' : 'Growing landscape brands'}</span>
           <span>{String(n).padStart(3, '0')}</span>
         </div>
       </div>

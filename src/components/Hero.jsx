@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CalendarCheck, Printer, Clapperboard, Mail, Play, Headphones, PhoneCall } from 'lucide-react'
-import { IMG, BRAND, HERO_TOASTS } from '../data/site'
+import { IMG } from '../data/site'
 import { Btn, Words } from './ui'
 import { scrollToId, useMouse } from '../hooks'
+import { useLanguage } from '../context/LanguageContext'
 
 const ICONS = [CalendarCheck, Headphones, PhoneCall, Printer, Clapperboard, Mail]
 
@@ -64,9 +65,12 @@ function Grass() {
 }
 
 export default function Hero() {
+  const { t } = useLanguage()
   const m = useMouse()
   const [y, setY] = useState(0)
   const [toast, setToast] = useState(0)
+
+  const heroToasts = t.hero.toasts || []
 
   useEffect(() => {
     let raf = 0
@@ -81,12 +85,13 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    const id = setInterval(() => setToast((t) => (t + 1) % HERO_TOASTS.length), 3200)
+    if (!heroToasts.length) return
+    const id = setInterval(() => setToast((x) => (x + 1) % heroToasts.length), 3200)
     return () => clearInterval(id)
-  }, [])
+  }, [heroToasts.length])
 
   const layer = (k, ky = 0) => ({ transform: `translate3d(${m.x * k}px, ${y * ky}px, 0)` })
-  const T = HERO_TOASTS[toast]
+  const T = heroToasts[toast % heroToasts.length] || heroToasts[0] || {}
   const Icon = ICONS[toast % ICONS.length] || CalendarCheck
 
   return (
@@ -94,14 +99,14 @@ export default function Hero() {
       <div className="hero-sun" style={{ transform: `translate3d(${m.x * -30}px, ${y * 0.3 + m.y * -20}px, 0)` }} />
       <div className="wrap hero-grid">
         <div className="hero-copy">
-          <span className="eyebrow" data-reveal="">Digital Services & Media for Landscape Companies</span>
+          <span className="eyebrow" data-reveal="">{t.hero.eyebrow}</span>
           <h1 className="h-display h-xl hero-title">
-            <Words text="We grow" delay={0.1} />
+            <Words text={t.hero.title1} delay={0.1} />
             <br />
-            <Words text="landscape" delay={0.25} />
+            <Words text={t.hero.title2} delay={0.25} />
             <br />
             <span className="split-words" data-reveal="" style={{ '--d': '0.4s' }}>
-              <span className="w"><span style={{ '--i': 0 }}><em>brands.</em></span></span>
+              <span className="w"><span style={{ '--i': 0 }}><em>{t.hero.title3}</em></span></span>
             </span>
             <span className="hero-sprout" aria-hidden="true">
               <svg viewBox="0 0 60 60">
@@ -112,22 +117,21 @@ export default function Hero() {
             </span>
           </h1>
           <p className="lead hero-lead" data-reveal="" style={{ '--d': '0.7s' }}>
-            Complete digital services for landscape companies. We turn your finest plants, garden designs, and outdoor craftsmanship into booking-ready websites, cinematic video reels, client apps, and high-ticket customer acquisition.
+            {t.hero.lead}
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
-            <Btn onClick={() => scrollToId('book')}>Book a strategy call</Btn>
+            <Btn onClick={() => scrollToId('book')}>{t.hero.cta}</Btn>
             <button className="hero-play" onClick={() => scrollToId('mockups')} data-cursor="Watch">
               <span className="hp-ring">
                 <Play size={16} fill="currentColor" />
               </span>
-              See the mockups
+              {t.hero.seeMockups}
             </button>
           </div>
           <ul className="hero-trust" data-reveal="" style={{ '--d': '1s' }}>
-            <li>Digital services</li>
-            <li>Plant & garden media</li>
-            <li>24/7 Live answering</li>
-            <li>Vanity numbers</li>
+            {(t.hero.trust || []).map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </div>
 
@@ -136,8 +140,8 @@ export default function Hero() {
             <img src={IMG.cover} alt="Landscaped estate garden photographed for a client showcase" style={{ transform: `scale(1.15) translate3d(${m.x * 12}px, ${y * 0.06}px, 0)` }} />
             <div className="arch-shine" />
             <div className="arch-tag">
-              <span>Now filming</span>
-              <b>Estate garden reel</b>
+              <span>{t.hero.archTagSub}</span>
+              <b>{t.hero.archTagTitle}</b>
             </div>
           </div>
           <div className="hero-badge" aria-hidden="true">
@@ -155,7 +159,7 @@ export default function Hero() {
               </svg>
             </span>
           </div>
-          <div className="hero-toast" key={toast} style={{ transform: `translate3d(${m.x * 24}px, ${m.y * 16}px, 0)` }}>
+          <div className="hero-toast" key={`${toast}-${t.code}`} style={{ transform: `translate3d(${m.x * 24}px, ${m.y * 16}px, 0)` }}>
             <span className="ht-ico">
               <Icon size={18} />
             </span>
@@ -166,9 +170,9 @@ export default function Hero() {
             <span className="ht-val">{T.value}</span>
           </div>
           <div className="hero-stat" style={{ transform: `translate3d(${m.x * 34}px, ${m.y * 22}px, 0)` }}>
-            <small>Average lead growth</small>
+            <small>{t.hero.statLabel}</small>
             <b>
-              3<span>x leads</span>
+              {(t.hero.statValue || '').split(' ')[0]}<span> {(t.hero.statValue || '').split(' ').slice(1).join(' ')}</span>
             </b>
             <svg viewBox="0 0 120 36" className="hs-spark">
               <path d="M0 30 L15 26 L30 28 L45 20 L60 22 L75 14 L90 16 L105 6 L120 4" />

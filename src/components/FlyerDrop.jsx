@@ -2,13 +2,13 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { RotateCcw, Phone, QrCode, DoorOpen, CalendarCheck } from 'lucide-react'
 import { IMG } from '../data/site'
 import { Words } from './ui'
+import { useLanguage } from '../context/LanguageContext'
 
 const W = 800
 const ROADS = [110, 270, 430]
 const X0 = 70
 const X1 = 730
 const STREETS = ['Maple Ave', 'Oak Street', 'Birch Lane']
-const SERVICES = ['Spring cleaning', 'Fall collection', 'Snow removal', 'Winterizing', 'Weekly lawn care', 'Mulch & edging']
 const RUN = 11000
 const ROW = X1 - X0
 const TURN = ROADS[1] - ROADS[0]
@@ -37,9 +37,10 @@ function pointAt(d) {
 
 const ROUTE = `M${X0} ${ROADS[0]} H${X1} V${ROADS[1]} H${X0} V${ROADS[2]} H${X1}`
 
-function useHouses() {
+function useHouses(services) {
   return useMemo(() => {
     const out = []
+    const svcs = services && services.length ? services : ['Spring cleaning', 'Fall collection', 'Snow removal', 'Winterizing', 'Weekly lawn care', 'Mulch & edging']
     ROADS.forEach((y, r) => {
       for (let c = 0; c < 12; c++) {
         const x = 100 + c * 55
@@ -52,20 +53,22 @@ function useHouses() {
             d: distAt(r, x) / TOTAL,
             booked: (i * 7 + r * 3) % 11 === 0,
             addr: `${12 + c * 4 + (side > 0 ? 1 : 0)} ${STREETS[r]}`,
-            svc: SERVICES[(i * 5) % SERVICES.length],
+            svc: svcs[(i * 5) % svcs.length],
             hue: ['#e9d9c0', '#d8e4d0', '#e6d4cf', '#dcdfe8'][(i * 3) % 4],
           })
         })
       }
     })
     return out
-  }, [])
+  }, [services])
 }
 
 export default function FlyerDrop() {
-  const houses = useHouses()
+  const { t } = useLanguage()
+  const data = t.flyerDrop || {}
+  const houses = useHouses(data.flyerServices)
   const secRef = useRef(null)
-  const [t, setT] = useState(0)
+  const [tVal, setTVal] = useState(0)
   const [visible, setVisible] = useState(false)
   const [run, setRun] = useState(0)
 
@@ -78,15 +81,15 @@ export default function FlyerDrop() {
   useEffect(() => {
     if (!visible) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setT(1)
+      setTVal(1)
       return
     }
     let raf
     let restart
-    const t0 = performance.now() - (t >= 1 ? 0 : t) * RUN
+    const t0 = performance.now() - (tVal >= 1 ? 0 : tVal) * RUN
     const step = (now) => {
       const k = Math.min(1, (now - t0) / RUN)
-      setT(k)
+      setTVal(k)
       if (k < 1) raf = requestAnimationFrame(step)
       else restart = setTimeout(() => setRun((x) => x + 1), 4500)
     }
@@ -98,13 +101,13 @@ export default function FlyerDrop() {
   }, [visible, run])
 
   const replay = () => {
-    setT(0)
+    setTVal(0)
     setRun((x) => x + 1)
   }
 
-  const van = pointAt(t * TOTAL)
-  const dropped = houses.filter((h) => h.d <= t).length
-  const booked = houses.filter((h) => h.booked && h.d + 0.06 <= t)
+  const van = pointAt(tVal * TOTAL)
+  const dropped = houses.filter((h) => h.d <= tVal).length
+  const booked = houses.filter((h) => h.booked && h.d + 0.06 <= tVal)
   const doors = Math.round((dropped / houses.length) * TOTAL_DOORS)
   const scans = Math.round(doors * 0.072)
   const calls = Math.round(doors * 0.021)
@@ -115,17 +118,17 @@ export default function FlyerDrop() {
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Neighbourhood drops</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="2,500 doors." />
+              <Words text={data.title1 || '2,500 doors.'} />
               <br />
-              <Words text="One Saturday." className="ital" delay={0.15} />
+              <Words text={data.title2 || 'One Saturday.'} className="ital" delay={0.15} />
               <br />
-              <Words text="Every call tracked." delay={0.3} />
+              <Words text={data.title3 || 'Every call tracked.'} delay={0.3} />
             </h2>
           </div>
           <p className="lead" data-reveal="">
-            We design the door hanger, print it, plan the route and put a tracked QR and phone number on every one. Watch a route run and the bookings come back in.
+            {data.lead}
           </p>
         </div>
 
@@ -162,11 +165,11 @@ export default function FlyerDrop() {
               ))}
 
               <path d={ROUTE} className="fd-route-bg" />
-              <path d={ROUTE} className="fd-route" pathLength="1" style={{ strokeDashoffset: 1 - t }} />
+              <path d={ROUTE} className="fd-route" pathLength="1" style={{ strokeDashoffset: 1 - tVal }} />
 
               {houses.map((h, i) => {
-                const hit = h.d <= t
-                const isBooked = h.booked && h.d + 0.06 <= t
+                const hit = h.d <= tVal
+                const isBooked = h.booked && h.d + 0.06 <= tVal
                 const roofY = h.side < 0 ? h.y - 14 : h.y + 2
                 return (
                   <g key={i} className={`fd-house ${hit ? 'hit' : ''} ${isBooked ? 'booked' : ''}`} transform={`translate(${h.x} ${h.y})`}>
@@ -196,9 +199,9 @@ export default function FlyerDrop() {
             </svg>
 
             <div className="fd-legend">
-              <span><i className="l1" /> Route</span>
-              <span><i className="l2" /> Hanger delivered</span>
-              <span><i className="l3" /> Booked</span>
+              <span><i className="l1" /> {data.legendRoute || 'Route'}</span>
+              <span><i className="l2" /> {data.legendHanger || 'Hanger delivered'}</span>
+              <span><i className="l3" /> {data.legendBooked || 'Booked'}</span>
             </div>
           </div>
 
@@ -207,14 +210,14 @@ export default function FlyerDrop() {
               <div className="fd-hole" />
               <div className="fd-flyer-photo">
                 <img src={IMG.garden} alt="Raised garden bed with fresh spring planting" loading="lazy" />
-                <span>Spring is here</span>
+                <span>{data.springHere}</span>
               </div>
               <div className="fd-flyer-body">
-                <b>Your yard, ready in one visit.</b>
-                <p>Spring cleanup, edging & fresh mulch.</p>
+                <b>{data.couponTitle}</b>
+                <p>{data.couponSubtitle}</p>
                 <div className="fd-coupon">
                   <span>
-                    <small>Neighbour offer</small>
+                    <small>{data.neighborOffer}</small>
                     <strong>-20%</strong>
                   </span>
                   <QrCode size={38} />
@@ -224,10 +227,10 @@ export default function FlyerDrop() {
 
             <div className="fd-stats">
               {[
-                [DoorOpen, doors, 'Doors reached'],
-                [QrCode, scans, 'QR scans'],
-                [Phone, calls, 'Tracked calls'],
-                [CalendarCheck, visits, 'Visits booked'],
+                [DoorOpen, doors, data.doorsLabel || 'Doors reached'],
+                [QrCode, scans, data.scansLabel || 'QR scans'],
+                [Phone, calls, data.callsLabel || 'Tracked calls'],
+                [CalendarCheck, visits, data.visitsLabel || 'Visits booked'],
               ].map(([I, v, l]) => (
                 <div key={l} className="fd-stat">
                   <I size={16} />
@@ -235,7 +238,7 @@ export default function FlyerDrop() {
                   <small>{l}</small>
                 </div>
               ))}
-              <span className="fd-progress"><i style={{ transform: `scaleX(${t})` }} /></span>
+              <span className="fd-progress"><i style={{ transform: `scaleX(${tVal})` }} /></span>
             </div>
 
             <ul className="fd-feed" aria-live="polite">
@@ -244,15 +247,15 @@ export default function FlyerDrop() {
                   <span className="fd-dot" />
                   <span>
                     <b>{h.svc}</b>
-                    <small>{h.addr} · from door hanger</small>
+                    <small>{h.addr} · {data.fromDoorHanger || 'from door hanger'}</small>
                   </span>
                 </li>
               ))}
-              {booked.length === 0 && <li className="empty">Waiting for the first booking…</li>}
+              {booked.length === 0 && <li className="empty">{data.waitingBooking || 'Waiting for the first booking…'}</li>}
             </ul>
 
             <button type="button" className="fd-replay" onClick={replay}>
-              <RotateCcw size={14} /> Run the route again
+              <RotateCcw size={14} /> {data.replayBtn || 'Run the route again'}
             </button>
           </aside>
         </div>

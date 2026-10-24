@@ -1,29 +1,34 @@
 import { useState } from 'react'
 import { Sun, Droplets, Sprout, RotateCw, Check } from 'lucide-react'
-import { SERVICES } from '../data/site'
 import { Btn, Words } from './ui'
 import { scrollToId } from '../hooks'
+import { useLanguage } from '../context/LanguageContext'
 
 const TONES = ['#e2f7b5', '#f3efe3', '#d8ecd0', '#f6e7c4']
 
 export default function Nursery() {
   const [flip, setFlip] = useState(null)
+  const { t } = useLanguage()
+  const data = t.services
+  const cardLabels = data.card || {}
+  const list = data.list || []
+
   return (
     <section className="section nursery" id="services">
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Digital Services & Media</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Everything a" />
+              <Words text={data.title1} />
               <br />
-              <Words text="landscape brand" delay={0.12} className="ital" />
+              <Words text={data.title2} delay={0.12} className="ital" />
               <br />
-              <Words text="needs to grow." delay={0.24} className="ital" />
+              <Words text={data.title3} delay={0.24} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Complete digital services for landscape companies: showcase websites that make your plants and gardens look breathtaking, online appointment calendars, mobile booking apps, viral reels, and seasonal digital marketing. Tap any tag to see what is included.
+            {data.lead}
           </p>
         </div>
 
@@ -34,14 +39,22 @@ export default function Nursery() {
         </div>
 
         <div className="ns-grid" data-reveal="">
-          {SERVICES.map((s, i) => (
+          {list.map((s, i) => (
             <div
               key={s.n}
               className={`ns-tag ${flip === i ? 'flipped' : ''}`}
               style={{ '--i': i, '--tone': TONES[i % 4] }}
             >
               <span className="ns-string" />
-              <div className="ns-card" role="button" tabIndex={0} onClick={() => setFlip(flip === i ? null : i)} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setFlip(flip === i ? null : i))} aria-pressed={flip === i} data-cursor={flip === i ? 'Close' : 'Flip'}>
+              <div
+                className="ns-card"
+                role="button"
+                tabIndex={0}
+                onClick={() => setFlip(flip === i ? null : i)}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), setFlip(flip === i ? null : i))}
+                aria-pressed={flip === i}
+                data-cursor={flip === i ? 'Close' : 'Flip'}
+              >
                 <span className="ns-face front">
                   <span className="ns-hole" />
                   <span className="ns-top">
@@ -53,27 +66,27 @@ export default function Nursery() {
                   <span className="ns-care">
                     <span>
                       <Sprout size={14} />
-                      <em>Format</em>
+                      <em>{cardLabels.format || 'Format'}</em>
                       <b>{s.season}</b>
                     </span>
                     <span>
                       <Droplets size={14} />
-                      <em>Turnaround</em>
+                      <em>{cardLabels.turnaround || 'Turnaround'}</em>
                       <b>{s.freq}</b>
                     </span>
                     <span>
                       <Sun size={14} />
-                      <em>Team</em>
+                      <em>{cardLabels.team || 'Team'}</em>
                       <b>{s.team}</b>
                     </span>
                   </span>
                   <span className="ns-flip">
-                    <RotateCw size={13} /> What's included
+                    <RotateCw size={13} /> {cardLabels.whatsIncluded || "What's included"}
                   </span>
                 </span>
                 <span className="ns-face back">
                   <span className="ns-hole" />
-                  <small>No. {s.n} · Included</small>
+                  <small>No. {s.n} · {cardLabels.includedTag || 'Included'}</small>
                   <span className="ns-name sm">{s.name}</span>
                   <ul>
                     {s.items.map((it) => (
@@ -90,7 +103,7 @@ export default function Nursery() {
                       scrollToId('book')
                     }}
                   >
-                    Request this service →
+                    {cardLabels.requestService || 'Request this service →'}
                   </span>
                 </span>
               </div>
@@ -99,10 +112,8 @@ export default function Nursery() {
         </div>
 
         <div className="ns-foot" data-reveal="">
-          <p>
-            Not sure where to start? <b>A free brand & media audit</b> shows exactly what is costing you jobs.
-          </p>
-          <Btn onClick={() => scrollToId('book')}>Get a free audit</Btn>
+          <p>{data.footText}</p>
+          <Btn onClick={() => scrollToId('book')}>{data.auditBtn}</Btn>
         </div>
       </div>
     </section>

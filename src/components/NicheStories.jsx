@@ -1,8 +1,19 @@
 import { useMemo } from 'react'
 import { Check, Image, Clapperboard, Share2, Mail, ArrowUpRight } from 'lucide-react'
-import { NICHES } from '../data/site'
+import { IMG } from '../data/site'
 import { Words, Btn } from './ui'
 import { scrollToId } from '../hooks'
+import { useLanguage } from '../context/LanguageContext'
+
+const NICHE_ASSETS = [
+  { img: IMG.snow, hue: '#dfe9f1' },
+  { img: IMG.canopy, hue: '#e3eedb' },
+  { img: IMG.trimmer, hue: '#e9f5d4' },
+  { img: IMG.micro, hue: '#eef6dc' },
+  { img: IMG.greenhouse, hue: '#e6f2e1' },
+  { img: IMG.glass, hue: '#e8eef0' },
+  { img: IMG.plans, hue: '#f3ecdc' },
+]
 
 function seeded(n) {
   let s = n
@@ -98,17 +109,26 @@ function MowScene() {
       ))}
       <g className="mw-mower">
         <rect x="-30" y="-14" width="34" height="20" rx="5" fill="#0c1f17" />
-        <rect x="-26" y="-10" width="18" height="6" rx="2" fill="#b8e86a" />
-        <path d="M-28 -12 L-46 -40" stroke="#0c1f17" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="-22" cy="8" r="5" fill="#333" />
-        <circle cx="-2" cy="8" r="5" fill="#333" />
+        <circle cx="-24" cy="8" r="6" fill="#b8e86a" />
+        <circle cx="-4" cy="8" r="6" fill="#b8e86a" />
+        <path d="M-28 -4 H-10" stroke="#b8e86a" strokeWidth="2" />
       </g>
-      <g className="mw-cal" transform="translate(212 0)">
-        <rect x="14" y="14" width="164" height="62" rx="12" fill="#fff" />
-        {['M', 'T', 'W', 'T', 'F'].map((d, i) => (
-          <g key={i} transform={`translate(${30 + i * 30} 30)`}>
-            <rect width="24" height="32" rx="6" className={`mw-day ${i === 1 || i === 3 ? 'on' : ''}`} style={{ '--i': i }} />
-            <text x="12" y="21" textAnchor="middle">{d}</text>
+    </svg>
+  )
+}
+
+function SproutScene() {
+  return (
+    <svg viewBox="0 0 400 300" className="nsx micro">
+      <rect width="400" height="300" fill="#f1f7e4" />
+      <path d="M0 240 C100 236 300 236 400 240 L400 300 L0 300Z" fill="#4d3420" />
+      <g className="sp-tray">
+        <rect x="50" y="220" width="300" height="28" rx="6" fill="#2a1c10" />
+        {Array.from({ length: 18 }).map((_, i) => (
+          <g key={i} transform={`translate(${72 + i * 15} 220)`} className="sp-sprout" style={{ animationDelay: `${(i % 5) * 0.25}s` }}>
+            <line x1="0" y1="0" x2="0" y2="-28" stroke="#8fc46a" strokeWidth="2.5" />
+            <circle cx="-4" cy="-30" r="5" fill="#b8e86a" />
+            <circle cx="4" cy="-30" r="5" fill="#b8e86a" />
           </g>
         ))}
       </g>
@@ -116,93 +136,54 @@ function MowScene() {
   )
 }
 
-function SproutScene() {
-  const cells = useMemo(() => {
-    const out = []
-    for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) out.push({ x: 64 + c * 38, y: 170 + r * 34, d: (r * 8 + c) * 0.08 })
-    return out
-  }, [])
-  return (
-    <svg viewBox="0 0 400 300" className="nsx sprout">
-      <rect width="400" height="300" fill="#f3efe3" />
-      <g className="sp-sun">
-        <circle cx="330" cy="64" r="26" fill="#f4c35a" />
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
-          <rect key={a} x="328" y="22" width="4" height="12" rx="2" fill="#f4c35a" transform={`rotate(${a} 330 64)`} />
-        ))}
-      </g>
-      <rect x="44" y="150" width="312" height="120" rx="12" fill="#6b4a2f" />
-      <rect x="52" y="158" width="296" height="104" rx="8" fill="#3d2a1a" />
-      {cells.map((c, i) => (
-        <g key={i} transform={`translate(${c.x} ${c.y + 22})`} className="sp-plant" style={{ '--d': `${c.d}s` }}>
-          <path className="sp-stem" d="M0 0 V-22" stroke="#76b852" strokeWidth="2.5" strokeLinecap="round" />
-          <path className="sp-leaf l" d="M0 -20 C-4 -30 -14 -30 -16 -24 C-12 -18 -4 -18 0 -20Z" fill="#b8e86a" />
-          <path className="sp-leaf r" d="M0 -20 C4 -30 14 -30 16 -24 C12 -18 4 -18 0 -20Z" fill="#9ad66a" />
-        </g>
-      ))}
-      <g className="sp-tag">
-        <rect x="40" y="84" width="140" height="40" rx="20" fill="#0c1f17" />
-        <text x="110" y="109" textAnchor="middle">100% organic</text>
-      </g>
-    </svg>
-  )
-}
-
 function GreenhouseScene() {
   return (
-    <svg viewBox="0 0 400 300" className="nsx gh">
-      <rect width="400" height="300" fill="#e2f0ea" />
-      <path d="M0 250 C120 244 280 244 400 250 L400 300 L0 300Z" fill="#4f8a4b" />
-      <g className="gh-glass">
-        <path d="M90 250 V150 L200 80 L310 150 V250Z" fill="rgba(184,232,106,.22)" />
-        <path d="M90 150 L200 80 L310 150Z" fill="rgba(255,255,255,.45)" />
+    <svg viewBox="0 0 400 300" className="nsx green">
+      <defs>
+        <linearGradient id="ghSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#cfeee6" />
+          <stop offset="1" stopColor="#f3efe3" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="300" fill="url(#ghSky)" />
+      <path d="M0 240 H400 V300 H0Z" fill="#3f8a72" />
+      <g className="gh-frame">
+        <path d="M80 240 V130 L200 60 L320 130 V240Z" fill="rgba(255,255,255,.35)" stroke="#0c1f17" strokeWidth="3" />
+        <line x1="200" y1="60" x2="200" y2="240" stroke="#0c1f17" strokeWidth="2" />
+        <line x1="140" y1="95" x2="140" y2="240" stroke="#0c1f17" strokeWidth="1.5" />
+        <line x1="260" y1="95" x2="260" y2="240" stroke="#0c1f17" strokeWidth="1.5" />
+        <line x1="80" y1="130" x2="320" y2="130" stroke="#0c1f17" strokeWidth="2" />
+        <line x1="80" y1="185" x2="320" y2="185" stroke="#0c1f17" strokeWidth="1.5" />
       </g>
-      <g className="gh-frame" fill="none" stroke="#2e5e3e" strokeWidth="4" strokeLinejoin="round">
-        <path d="M90 250 V150 L200 80 L310 150 V250Z" />
-        <path d="M145 250 V115 M200 250 V80 M255 250 V115 M90 200 H310 M90 150 H310" />
+      <g className="gh-plants">
+        {[100, 140, 180, 220, 260].map((x) => (
+          <ellipse key={x} cx={x} cy="235" rx="14" ry="20" fill="#76b852" />
+        ))}
       </g>
-      {[110, 160, 230, 280].map((x, i) => (
-        <g key={x} className="gh-plant" style={{ '--i': i }} transform={`translate(${x} 250)`}>
-          <rect x="-12" y="-14" width="24" height="14" rx="2" fill="#c9784a" />
-          <circle cy="-30" r="16" fill={i % 2 ? '#76b852' : '#4f8a4b'} />
-          <circle cx="-9" cy="-22" r="10" fill="#9ad66a" />
-        </g>
-      ))}
-      <rect className="gh-shine" x="0" y="60" width="40" height="200" fill="rgba(255,255,255,.5)" />
     </svg>
   )
 }
 
 function VerandaScene() {
   return (
-    <svg viewBox="0 0 400 300" className="nsx ver">
+    <svg viewBox="0 0 400 300" className="nsx glass">
       <defs>
-        <linearGradient id="vSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#f6c48a" />
-          <stop offset="1" stopColor="#f3e3d0" />
+        <linearGradient id="vrSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f9dfb8" />
+          <stop offset="1" stopColor="#e4eeea" />
         </linearGradient>
-        <clipPath id="vClip">
-          <rect x="150" y="96" width="220" height="150" />
-        </clipPath>
       </defs>
-      <rect width="400" height="300" fill="url(#vSky)" />
-      <circle className="v-sun" cx="300" cy="150" r="30" fill="#f4a35a" />
-      <rect x="20" y="60" width="140" height="200" fill="#e6dfcb" />
-      <rect x="44" y="100" width="40" height="56" fill="#0c1f17" opacity=".75" />
-      <path d="M0 246 H400 V300 H0Z" fill="#4f8a4b" />
-      <path d="M150 96 L370 120" stroke="#0c1f17" strokeWidth="6" />
-      {[0, 1, 2, 3].map((i) => (
-        <rect key={i} className="v-pane" x={150 + i * 55} y="100" width="55" height="146" fill="rgba(200,230,240,.42)" stroke="#0c1f17" strokeWidth="3" style={{ '--i': i }} />
-      ))}
-      <g clipPath="url(#vClip)">
-        <rect className="v-shine" x="120" y="80" width="30" height="200" fill="rgba(255,255,255,.6)" transform="skewX(-20)" />
+      <rect width="400" height="300" fill="url(#vrSky)" />
+      <circle cx="80" cy="90" r="34" fill="#f4a24a" opacity=".7" />
+      <path d="M0 230 C120 226 280 226 400 230 L400 300 L0 300Z" fill="#355746" />
+      <g className="vr-house">
+        <rect x="180" y="80" width="220" height="150" fill="#2b3b33" />
+        <polygon points="180,80 320,30 400,60 400,80" fill="#1b2822" />
       </g>
-      <g className="v-chair">
-        <rect x="200" y="214" width="34" height="8" rx="3" fill="#6b4a2f" />
-        <rect x="204" y="222" width="4" height="22" fill="#6b4a2f" />
-        <rect x="226" y="222" width="4" height="22" fill="#6b4a2f" />
-        <circle cx="300" cy="230" r="16" fill="#76b852" />
-        <rect x="292" y="232" width="16" height="14" fill="#c9784a" />
+      <g className="vr-veranda">
+        <polygon points="80,140 220,110 220,230 80,230" fill="rgba(255,255,255,.45)" stroke="#0c1f17" strokeWidth="2.5" />
+        <line x1="150" y1="125" x2="150" y2="230" stroke="#0c1f17" strokeWidth="2" />
+        <line x1="80" y1="175" x2="220" y2="170" stroke="#0c1f17" strokeWidth="1.5" />
       </g>
     </svg>
   )
@@ -211,20 +192,19 @@ function VerandaScene() {
 function PlanScene() {
   return (
     <svg viewBox="0 0 400 300" className="nsx plan">
-      <defs>
-        <pattern id="pGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M20 0 H0 V20" fill="none" stroke="rgba(255,255,255,.12)" />
-        </pattern>
-      </defs>
-      <rect width="400" height="300" fill="#1f4f6b" />
-      <rect width="400" height="300" fill="url(#pGrid)" />
-      <g className="pl-draw" fill="none" stroke="#e8f3f8" strokeWidth="2.5">
-        <path d="M50 50 H250 V200 H50Z" />
-        <path d="M50 130 H150 V200" />
-        <path d="M150 50 V100 H250" />
-        <circle cx="100" cy="90" r="22" />
-        <path d="M270 70 C330 60 360 120 330 170 C300 220 260 220 270 250" strokeDasharray="6 6" />
-        <path d="M60 230 H240 M60 224 V236 M240 224 V236" />
+      <rect width="400" height="300" fill="#203a30" />
+      <g stroke="#2f5446" strokeWidth="1">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <line key={`x-${i}`} x1={i * 50} y1="0" x2={i * 50} y2="300" />
+        ))}
+        {Array.from({ length: 7 }).map((_, i) => (
+          <line key={`y-${i}`} x1="0" y1={i * 50} x2="400" y2={i * 50} />
+        ))}
+      </g>
+      <g className="pl-lines" fill="none" stroke="#b8e86a" strokeWidth="2.5">
+        <rect x="70" y="60" width="180" height="180" rx="8" />
+        <path d="M120 60 V240 M70 150 H250" strokeDasharray="4 4" />
+        <circle cx="160" cy="150" r="50" stroke="#e2f7b5" />
       </g>
       <g className="pl-trees">
         {[[200, 160], [220, 130], [180, 170]].map(([x, y], i) => (
@@ -233,41 +213,51 @@ function PlanScene() {
       </g>
       <g className="pl-stamp">
         <rect x="236" y="150" width="140" height="52" rx="8" fill="none" stroke="#b8e86a" strokeWidth="4" />
-        <text x="306" y="184" textAnchor="middle">APPROVED</text>
+        <text x="306" y="184" textAnchor="middle" fill="#b8e86a" fontSize="16" fontWeight="bold">APPROVED</text>
       </g>
     </svg>
   )
 }
 
 const SCENES = [SnowScene, TreeScene, MowScene, SproutScene, GreenhouseScene, VerandaScene, PlanScene]
-const CH = [
-  { icon: Image, k: 'Flyer', f: 'head' },
-  { icon: Clapperboard, k: 'Reel', f: 'reel' },
-  { icon: Share2, k: 'Post', f: 'post' },
-  { icon: Mail, k: 'Email', f: 'mail' },
-]
 
 export default function NicheStories() {
+  const { t, lang } = useLanguage()
+  const data = t.niches || {}
+  const list = data.list || []
+
+  const niches = list.map((n, idx) => ({
+    ...NICHE_ASSETS[idx],
+    ...n,
+  }))
+
+  const ch = [
+    { icon: Image, k: lang === 'es' ? 'Folleto' : 'Flyer', f: 'head' },
+    { icon: Clapperboard, k: 'Reel', f: 'reel' },
+    { icon: Share2, k: lang === 'es' ? 'Publicación' : 'Post', f: 'post' },
+    { icon: Mail, k: lang === 'es' ? 'Correo' : 'Email', f: 'mail' },
+  ]
+
   return (
     <section className="section nstories" id="niches">
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Specialized Digital Media</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Digital media for every" />
+              <Words text={data.title1} />
               <br />
-              <Words text="service you sell." delay={0.15} className="ital" />
+              <Words text={data.title2} delay={0.15} className="ital" />
             </h2>
           </div>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Lawn maintenance, organic plant farms, tree surgery, greenhouses, and snow removal each have unique buyers. We build dedicated digital playbooks with targeted visuals, reels, and landing pages for each service you sell.
+            {data.lead}
           </p>
         </div>
 
         <nav className="nx-jump" data-reveal="">
-          {NICHES.map((n, i) => (
-            <a key={n.k} href={`#niche-${i}`} onClick={(e) => { e.preventDefault(); scrollToId(`niche-${i}`) }}>
+          {niches.map((n, i) => (
+            <a key={n.k || i} href={`#niche-${i}`} onClick={(e) => { e.preventDefault(); scrollToId(`niche-${i}`) }}>
               <small>0{i + 1}</small>
               {n.short}
             </a>
@@ -275,24 +265,24 @@ export default function NicheStories() {
         </nav>
 
         <div className="nx-list">
-          {NICHES.map((n, i) => {
-            const Scene = SCENES[i]
+          {niches.map((n, i) => {
+            const Scene = SCENES[i] || SnowScene
             return (
-              <article key={n.k} id={`niche-${i}`} className={`nx-row ${i % 2 ? 'flip' : ''}`}>
+              <article key={n.k || i} id={`niche-${i}`} className={`nx-row ${i % 2 ? 'flip' : ''}`}>
                 <div className="nx-scene" data-reveal="scale" style={{ '--hue': n.hue }}>
                   <Scene />
                   <span className="nx-badge">{n.badge}</span>
                   <span className="nx-stat">
-                    <b>{n.stat[0]}</b>
-                    <small>{n.stat[1]}</small>
+                    <b>{n.stat?.[0]}</b>
+                    <small>{n.stat?.[1]}</small>
                   </span>
                 </div>
                 <div className="nx-body">
-                  <span className="nx-num" data-reveal="">0{i + 1} / 0{NICHES.length}</span>
+                  <span className="nx-num" data-reveal="">0{i + 1} / 0{niches.length}</span>
                   <h3 className="h-display" data-reveal="" style={{ '--d': '0.05s' }}>{n.k}</h3>
                   <p data-reveal="" style={{ '--d': '0.1s' }}>{n.lead}</p>
                   <ul className="nx-points" data-reveal="" style={{ '--d': '0.15s' }}>
-                    {n.points.map((p, k) => (
+                    {(n.points || []).map((p, k) => (
                       <li key={p} style={{ '--i': k }}>
                         <span><Check size={13} strokeWidth={3} /></span>
                         {p}
@@ -300,7 +290,7 @@ export default function NicheStories() {
                     ))}
                   </ul>
                   <div className="nx-media" data-reveal="" style={{ '--d': '0.2s' }}>
-                    {CH.map((c, k) => (
+                    {ch.map((c, k) => (
                       <div key={c.k} className="nx-m" style={{ '--i': k }}>
                         <c.icon size={15} />
                         <small>{c.k}</small>
@@ -309,7 +299,9 @@ export default function NicheStories() {
                     ))}
                   </div>
                   <div data-reveal="" style={{ '--d': '0.25s' }}>
-                    <Btn onClick={() => scrollToId('book')}>Grow my {n.short.toLowerCase()} business</Btn>
+                    <Btn onClick={() => scrollToId('book')}>
+                      {data.growBusinessBtn ? `${data.growBusinessBtn} ${(n.short || '').toLowerCase()}` : `Grow my ${(n.short || '').toLowerCase()} business`}
+                    </Btn>
                   </div>
                 </div>
               </article>
@@ -318,9 +310,9 @@ export default function NicheStories() {
         </div>
 
         <div className="nx-more" data-reveal="">
-          <p>Sell something else outdoors? Hardscape, irrigation, pools, fencing, lighting.</p>
+          <p>{data.moreText}</p>
           <button onClick={() => scrollToId('book')}>
-            We build a playbook for it <ArrowUpRight size={16} />
+            {data.buildPlaybookBtn} <ArrowUpRight size={16} />
           </button>
         </div>
       </div>

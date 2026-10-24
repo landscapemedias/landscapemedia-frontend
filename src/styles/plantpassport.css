@@ -12,7 +12,6 @@
   align-items: center;
 }
 
-/* plant picker */
 .pp-list {
   list-style: none;
   margin: 0;
@@ -89,7 +88,6 @@
   to { transform: scaleX(1); }
 }
 
-/* phone */
 .pp-phone-wrap {
   position: relative;
   justify-self: center;
@@ -279,7 +277,6 @@
   border: 1px solid var(--line);
 }
 
-/* floating SMS + reel */
 .pp-sms {
   position: absolute;
   z-index: 2;
@@ -354,7 +351,6 @@
   50% { opacity: 0.3; }
 }
 
-/* facts */
 .pp-facts {
   display: grid;
   gap: 18px;
@@ -406,7 +402,6 @@
   color: var(--muted);
 }
 
-/* journey */
 .pp-journey {
   margin-top: clamp(70px, 9vw, 130px);
 }

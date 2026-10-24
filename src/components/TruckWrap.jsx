@@ -2,28 +2,13 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { Snowflake, TreePine, Scissors, Sprout } from 'lucide-react'
 import { IMG } from '../data/site'
 import { Words } from './ui'
+import { useLanguage } from '../context/LanguageContext'
 
-const WRAPS = [
-  {
-    k: 'maintenance', label: 'Spring cleaning', icon: Scissors, img: IMG.trimmer,
-    name: ['Greenline', 'Grounds'], tag: 'SPRING CLEANING & LAWN CARE', phone: '(516) 555-0142',
-    c1: '#234b34', c2: '#b8e86a', ink: '#f3efe3', sky: ['#bfe6f2', '#f4f8e6'], hill: ['#8fc46a', '#5f9a48'], fx: 'pollen',
-  },
-  {
-    k: 'snow', label: 'Snow removal', icon: Snowflake, img: IMG.snow,
-    name: ['Northfield', 'Snow Co.'], tag: 'SNOW REMOVAL & WINTERIZING', phone: '(516) 555-0199',
-    c1: '#16314f', c2: '#9fd3ff', ink: '#ffffff', sky: ['#9fb3c6', '#e9eef3'], hill: ['#e9f0f5', '#cfdbe4'], fx: 'snow',
-  },
-  {
-    k: 'tree', label: 'Fall collection', icon: TreePine, img: IMG.canopy,
-    name: ['High Oak', 'Tree Care'], tag: 'FALL COLLECTION & TREE CARE', phone: '(516) 555-0177',
-    c1: '#4a2f1b', c2: '#f4c35a', ink: '#fff6e4', sky: ['#f6c99a', '#fbecd6'], hill: ['#d9822b', '#a5521f'], fx: 'leaves',
-  },
-  {
-    k: 'greenhouse', label: 'Greenhouses', icon: Sprout, img: IMG.greenhouse,
-    name: ['Glasshouse', 'Growers'], tag: 'GROW ALL YEAR UNDER GLASS', phone: '(516) 555-0123',
-    c1: '#0f4f4a', c2: '#e2f7b5', ink: '#f3efe3', sky: ['#cfeee6', '#f6fbef'], hill: ['#76b8a0', '#3f8a72'], fx: 'pollen',
-  },
+const WRAP_STYLES = [
+  { k: 'maintenance', icon: Scissors, img: IMG.trimmer, c1: '#234b34', c2: '#b8e86a', ink: '#f3efe3', sky: ['#bfe6f2', '#f4f8e6'], hill: ['#8fc46a', '#5f9a48'], fx: 'pollen' },
+  { k: 'snow', icon: Snowflake, img: IMG.snow, c1: '#16314f', c2: '#9fd3ff', ink: '#ffffff', sky: ['#9fb3c6', '#e9eef3'], hill: ['#e9f0f5', '#cfdbe4'], fx: 'snow' },
+  { k: 'tree', icon: TreePine, img: IMG.canopy, c1: '#4a2f1b', c2: '#f4c35a', ink: '#fff6e4', sky: ['#f6c99a', '#fbecd6'], hill: ['#d9822b', '#a5521f'], fx: 'leaves' },
+  { k: 'greenhouse', icon: Sprout, img: IMG.greenhouse, c1: '#0f4f4a', c2: '#e2f7b5', ink: '#f3efe3', sky: ['#cfeee6', '#f6fbef'], hill: ['#76b8a0', '#3f8a72'], fx: 'pollen' },
 ]
 
 const HILL_A = 'M0 200 V120 C120 60 220 140 340 90 C460 40 560 130 680 80 C800 30 900 110 1000 120 V200Z'
@@ -128,6 +113,13 @@ export default function TruckWrap() {
   const [hold, setHold] = useState(false)
   const [seen, setSeen] = useState(0)
   const raf = useRef(0)
+  const { t } = useLanguage()
+  const data = t.trucks
+
+  const wraps = (data.wraps || []).map((w, i) => ({
+    ...WRAP_STYLES[i],
+    ...w,
+  }))
 
   const pick = (n, user = false) => {
     if (user) setHold(true)
@@ -135,8 +127,8 @@ export default function TruckWrap() {
     setPrev(cur)
     setCur(n)
     const t0 = performance.now()
-    const step = (t) => {
-      const k = Math.min(1, (t - t0) / 1300)
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / 1300)
       setWipe(k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2)
       if (k < 1) raf.current = requestAnimationFrame(step)
     }
@@ -149,9 +141,9 @@ export default function TruckWrap() {
   useEffect(() => {
     if (!visible || hold) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = setTimeout(() => pick((cur + 1) % WRAPS.length), 5200)
+    const id = setTimeout(() => pick((cur + 1) % wraps.length), 5200)
     return () => clearTimeout(id)
-  }, [visible, hold, cur, wipe])
+  }, [visible, hold, cur, wipe, wraps.length])
 
   useEffect(() => {
     if (!visible) return
@@ -159,30 +151,34 @@ export default function TruckWrap() {
     return () => clearInterval(id)
   }, [visible])
 
-  const w = WRAPS[cur]
-  const p = WRAPS[prev]
+  const w = wraps[cur] || WRAP_STYLES[0]
+  const p = wraps[prev] || WRAP_STYLES[0]
   const edge = 30 + wipe * 440
   const painting = wipe > 0 && wipe < 1
+
+  const specs = data.specs || [
+    { k: '01 · Read in 2 seconds', p: "Name, one offer and a phone number. Nothing a driver behind you can't read at a red light." },
+    { k: '02 · Your real work on it', p: 'We print your own job photos on the panel, not stock. Neighbours recognise the street.' },
+    { k: '03 · Palette for', p: '' },
+  ]
 
   return (
     <section className="section tw" id="truck-wrap" ref={secRef}>
       <div className="wrap">
         <div className="sec-head split">
           <div>
-            <span className="eyebrow" data-reveal="">Truck wrap studio</span>
+            <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
             <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-              <Words text="Your truck is a" />
-              <br />
-              <Words text="billboard on wheels." className="ital" delay={0.15} />
+              <Words text={data.title} />
             </h2>
           </div>
           <p className="lead" data-reveal="">
-            Every route, every driveway, every red light. We design wraps that read in two seconds at 40 mph, so your trucks sell the next job while they drive to this one.
+            {data.lead}
           </p>
         </div>
 
         <div className="tw-tabs" role="tablist" aria-label="Choose a wrap" data-reveal="">
-          {WRAPS.map((x, i) => {
+          {wraps.map((x, i) => {
             const I = x.icon
             return (
               <button
@@ -275,22 +271,22 @@ export default function TruckWrap() {
           </div>
 
           <div className="tw-hud">
-            <small>Impressions on today&apos;s route</small>
+            <small>{data.impressions}</small>
             <b>{seen.toLocaleString()}</b>
           </div>
         </div>
 
         <div className="tw-specs">
           <div className="tw-spec" data-reveal="">
-            <span className="tw-spec-k">01 · Read in 2 seconds</span>
-            <p>Name, one offer and a phone number. Nothing a driver behind you can&apos;t read at a red light.</p>
+            <span className="tw-spec-k">{specs[0]?.k}</span>
+            <p>{specs[0]?.p}</p>
           </div>
           <div className="tw-spec" data-reveal="" style={{ '--d': '0.08s' }}>
-            <span className="tw-spec-k">02 · Your real work on it</span>
-            <p>We print your own job photos on the panel, not stock. Neighbours recognise the street.</p>
+            <span className="tw-spec-k">{specs[1]?.k}</span>
+            <p>{specs[1]?.p}</p>
           </div>
           <div className="tw-spec swatch" data-reveal="" style={{ '--d': '0.16s' }}>
-            <span className="tw-spec-k">03 · Palette for {w.name.join(' ')}</span>
+            <span className="tw-spec-k">{specs[2]?.k} {w.name.join(' ')}</span>
             <div className="tw-swatches" key={w.k}>
               {[w.c1, w.c2, w.ink].map((c, i) => (
                 <span key={c} style={{ background: c, '--i': i }}>

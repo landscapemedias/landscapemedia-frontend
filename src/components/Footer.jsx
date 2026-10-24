@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Mail, Phone, MapPin, Clock, ArrowUp, Instagram, Facebook, Youtube, Linkedin, Check, ShieldCheck } from 'lucide-react'
-import { BRAND, NAV, SERVICES, IMG } from '../data/site'
+import { BRAND, IMG } from '../data/site'
 import { Btn, Logo } from './ui'
 import { scrollToId } from '../hooks'
+import { useLanguage } from '../context/LanguageContext'
 
 const SOCIAL = [
   { i: Instagram, l: 'Instagram' },
@@ -44,6 +45,12 @@ function Skyline() {
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
+  const { t } = useLanguage()
+  const data = t.footer || {}
+  const navLinks = t.nav?.links || []
+  const servicesList = t.services?.list || []
+  const trustList = data.trust || ['Free brand & media audit', 'Landscape industry only', 'No long contracts']
+
   const go = (id) => (e) => {
     e.preventDefault()
     scrollToId(id)
@@ -57,24 +64,24 @@ export default function Footer() {
           <div className="ft-cta" data-reveal="scale">
             <img src={IMG.lush} alt="" aria-hidden="true" />
             <div className="ft-cta-in">
-              <span className="eyebrow">Digital services for landscape companies</span>
+              <span className="eyebrow">{data.eyebrow}</span>
               <h2 className="h-display">
-                Ready to make your <em>finest work</em> famous?
+                {data.ctaTitle1} <em>{data.ctaTitle2}</em>
               </h2>
               <div className="ft-cta-act">
-                <Btn variant="light" onClick={() => scrollToId('book')}>Book a strategy call</Btn>
+                <Btn variant="light" onClick={() => scrollToId('book')}>{data.bookCall}</Btn>
                 <a className="ft-call" href={BRAND.phoneHref}>
                   <span><Phone size={18} /></span>
                   <span>
-                    <small>{BRAND.slogan}</small>
+                    <small>{data.callSlogan || BRAND.slogan}</small>
                     <b>{BRAND.phone}</b>
                   </span>
                 </a>
               </div>
               <ul className="ft-trust">
-                <li><Check size={14} /> Free brand & media audit</li>
-                <li><Check size={14} /> Landscape industry only</li>
-                <li><Check size={14} /> No long contracts</li>
+                {trustList.map((item, idx) => (
+                  <li key={idx}><Check size={14} /> {item}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -82,7 +89,7 @@ export default function Footer() {
           <div className="ft-grid">
             <div className="ft-brand">
               <Logo light />
-              <p>The full-suite digital services agency built exclusively for landscape companies. Websites that showcase your finest plants, viral video reels, client booking apps, vanity telephone numbers, and 24/7 live answering.</p>
+              <p>{data.brandDesc}</p>
               <form
                 className={`ft-news ${sent ? 'sent' : ''}`}
                 onSubmit={(e) => {
@@ -90,34 +97,34 @@ export default function Footer() {
                   if (/\S+@\S+\.\S+/.test(email)) setSent(true)
                 }}
               >
-                <label htmlFor="ft-email">Monthly marketing ideas for landscape companies</label>
+                <label htmlFor="ft-email">{data.newsletterLabel}</label>
                 <div>
                   <input id="ft-email" type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={sent} />
-                  <button type="submit" disabled={sent}>{sent ? <Check size={18} /> : 'Subscribe'}</button>
+                  <button type="submit" disabled={sent}>{sent ? <Check size={18} /> : (data.subscribeBtn || 'Subscribe')}</button>
                 </div>
-                {sent && <small>Thanks. You are on the list.</small>}
+                {sent && <small>{data.subscribeSuccess}</small>}
               </form>
             </div>
 
             <div className="ft-col">
-              <h4>Services</h4>
-              {SERVICES.map((s) => (
+              <h4>{data.colServices || 'Services'}</h4>
+              {servicesList.map((s) => (
                 <a key={s.n} href="#services" onClick={go('services')}>{s.name}</a>
               ))}
             </div>
 
             <div className="ft-col">
-              <h4>Company</h4>
-              {NAV.map((n) => (
+              <h4>{data.colCompany || 'Company'}</h4>
+              {navLinks.map((n) => (
                 <a key={n.id} href={`#${n.id}`} onClick={go(n.id)}>{n.label}</a>
               ))}
             </div>
 
             <div className="ft-col ft-contact">
-              <h4>Contact</h4>
+              <h4>{data.colContact || 'Contact'}</h4>
               <a href={`mailto:${BRAND.email}`}><Mail size={16} /> {BRAND.email}</a>
-              <a href={BRAND.tollFreeHref}><Phone size={16} /> Toll-free: {BRAND.tollFree}</a>
-              <a href={BRAND.directPhoneHref}><Phone size={16} /> Direct: {BRAND.directPhone}</a>
+              <a href={BRAND.tollFreeHref}><Phone size={16} /> {data.tollFreeLabel || 'Toll-free:'} {BRAND.tollFree}</a>
+              <a href={BRAND.directPhoneHref}><Phone size={16} /> {data.directLabel || 'Direct:'} {BRAND.directPhone}</a>
               <span><MapPin size={16} /> {BRAND.address}</span>
               <span><Clock size={16} /> {BRAND.hours}</span>
               <div className="ft-social">
@@ -138,17 +145,17 @@ export default function Footer() {
           <div className="ft-cert">
             <ShieldCheck size={22} />
             <p>
-              <b>Landscape digital specialists.</b> Digital services, plant and garden showcases, websites, client booking apps, 24/7 live answering, vanity phone lines, and Melville NY office & mailbox.
+              <b>{data.certTitle}</b> {data.certDesc}
             </p>
           </div>
 
           <div className="ft-bottom">
-            <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.word}™, Inc. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.word}™, Inc. {data.rights}</span>
             <span className="ft-legal">
-              <a href="#top" onClick={go('top')}>Privacy</a>
-              <a href="#top" onClick={go('top')}>Terms</a>
+              <a href="#top" onClick={go('top')}>{data.privacy}</a>
+              <a href="#top" onClick={go('top')}>{data.terms}</a>
             </span>
-            <button className="ft-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top">
+            <button className="ft-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label={data.backToTop || 'Back to top'}>
               <ArrowUp size={18} />
             </button>
           </div>

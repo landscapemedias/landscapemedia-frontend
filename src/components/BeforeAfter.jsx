@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react'
 import { Smartphone, Sparkles, MoveHorizontal } from 'lucide-react'
 import { IMG } from '../data/site'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function BeforeAfter() {
   const ref = useRef(null)
   const [p, setP] = useState(50)
   const [touched, setTouched] = useState(false)
+  const { t } = useLanguage()
+  const ba = t.projects?.beforeAfter || {}
 
   const move = (x) => {
     const r = ref.current.getBoundingClientRect()
@@ -31,12 +34,12 @@ export default function BeforeAfter() {
         <div className="ba-after">
           <img src={IMG.cover} alt="Same estate terrace after professional shoot and edit" className="ba-img after" draggable="false" />
           <div className="ba-brand">
-            <b>Estate Garden Terrace</b>
-            <small>Terrace & perennial bed showcase · Melville, NY</small>
+            <b>{ba.title}</b>
+            <small>{ba.tag}</small>
           </div>
         </div>
-        <span className="ba-tag l"><Smartphone size={14} /> Phone photo</span>
-        <span className="ba-tag r"><Sparkles size={14} /> Our shoot & edit</span>
+        <span className="ba-tag l"><Smartphone size={14} /> {ba.phonePhoto}</span>
+        <span className="ba-tag r"><Sparkles size={14} /> {ba.shootEdit}</span>
         <span className="ba-line">
           <i><MoveHorizontal size={18} /></i>
         </span>
@@ -46,12 +49,12 @@ export default function BeforeAfter() {
           max="100"
           value={Math.round(p)}
           onChange={(e) => { setTouched(true); setP(+e.target.value) }}
-          aria-label="Compare before and after"
+          aria-label={ba.sliderText || 'Compare before and after'}
         />
       </div>
       <div className="ba-copy">
-        <b>Same job. Same garden.</b>
-        <span>The difference is how it is shown. Drag the slider.</span>
+        <b>{ba.sameJob}</b>
+        <span>{ba.dragSlider}</span>
       </div>
     </div>
   )

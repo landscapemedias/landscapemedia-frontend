@@ -1,7 +1,14 @@
 import { useMemo, useRef } from 'react'
-import { SEASONS } from '../data/site'
 import { useScrollProgress, scrollToId } from '../hooks'
 import { Btn } from './ui'
+import { useLanguage } from '../context/LanguageContext'
+
+const SEASON_STYLES = [
+  { key: 'spring', sky: ['#cfe9d6', '#f3efe3'], leaf: ['#9ad66a', '#c9f08a', '#f6b8c9'] },
+  { key: 'summer', sky: ['#bfe3f5', '#fff7d6'], leaf: ['#2f7d3c', '#4f8a4b', '#76b852'] },
+  { key: 'fall', sky: ['#f6d7b0', '#f3efe3'], leaf: ['#d9822b', '#c4532b', '#f4c35a'] },
+  { key: 'winter', sky: ['#dfe7ee', '#f7f9fb'], leaf: ['#ffffff', '#e8f0f5', '#cfdde6'] },
+]
 
 function rand(seed) {
   let s = seed
@@ -76,16 +83,27 @@ function Particles({ kind }) {
 export default function Seasons() {
   const ref = useRef(null)
   const p = useScrollProgress(ref, 'pin')
-  const idx = Math.min(SEASONS.length - 1, Math.floor(p * SEASONS.length))
-  const s = SEASONS[idx]
-  const local = p * SEASONS.length - idx
+  const { t } = useLanguage()
+  const data = t.seasons || {}
+
+  const seasons = (data.list || []).map((s, idx) => ({
+    ...SEASON_STYLES[idx],
+    ...s,
+  }))
+
+  const idx = Math.min(seasons.length - 1, Math.floor(p * seasons.length))
+  const s = seasons[idx] || seasons[0] || {
+    key: 'spring', sky: ['#cfe9d6', '#f3efe3'], leaf: ['#9ad66a', '#c9f08a', '#f6b8c9'],
+    name: 'Spring', months: '', title: '', lead: '', plays: [], metric: { n: 0, unit: '', label: '' },
+  }
+  const local = p * seasons.length - idx
 
   const jump = (i) => {
     const el = ref.current
     if (!el) return
     const top = el.getBoundingClientRect().top + window.scrollY
     const span = el.offsetHeight - window.innerHeight
-    window.scrollTo({ top: top + span * ((i + 0.08) / SEASONS.length), behavior: 'smooth' })
+    window.scrollTo({ top: top + span * ((i + 0.08) / seasons.length), behavior: 'smooth' })
   }
 
   return (
@@ -94,12 +112,12 @@ export default function Seasons() {
         <Particles kind={s.key} />
         <div className="wrap st-grid">
           <div className="st-head">
-            <span className="eyebrow">Year-round marketing</span>
+            <span className="eyebrow">{data.eyebrow}</span>
             <h2 className="h-display h-md">
-              Campaigns for <em>every</em> season.
+              {data.title}
             </h2>
             <div className="st-tabs" role="tablist">
-              {SEASONS.map((x, i) => (
+              {seasons.map((x, i) => (
                 <button key={x.key} role="tab" aria-selected={i === idx} className={i === idx ? 'on' : ''} onClick={() => jump(i)}>
                   <span>{x.name}</span>
                   <small>{x.months}</small>
@@ -113,10 +131,10 @@ export default function Seasons() {
             <SeasonTree season={s} />
             <div className="st-badge" key={s.key}>
               <b>
-                {s.metric.n}
-                <span>{s.metric.unit}</span>
+                {s.metric?.n}
+                <span>{s.metric?.unit}</span>
               </b>
-              <small>{s.metric.label}</small>
+              <small>{s.metric?.label}</small>
             </div>
           </div>
 
@@ -125,14 +143,16 @@ export default function Seasons() {
             <h3 className="h-display">{s.title}</h3>
             <p>{s.lead}</p>
             <ul>
-              {s.plays.map((pl, i) => (
+              {(s.plays || []).map((pl, i) => (
                 <li key={pl.k} style={{ '--i': i }}>
                   <b>{pl.k}</b>
                   <span>{pl.v}</span>
                 </li>
               ))}
             </ul>
-            <Btn onClick={() => scrollToId('book')}>Plan my {s.name.toLowerCase()} campaign</Btn>
+            <Btn onClick={() => scrollToId('book')}>
+              {data.buttonText ? `${data.buttonText} ${s.name.toLowerCase()}` : `Plan my ${s.name.toLowerCase()} campaign`}
+            </Btn>
           </div>
         </div>
       </div>

@@ -1,29 +1,6 @@
 import { useRef } from 'react'
 import { useScrollProgress } from '../hooks'
-import { IMG } from '../data/site'
-
-const STAGES = [
-  {
-    k: 'Seed', n: '01', t: 'Digital Brand Identity', img: IMG.seedlings, alt: 'Seedling trays in a nursery',
-    d: 'Logo, botanical color palette, typography and truck wraps. The visual DNA every plant showcase, reel and digital campaign grows from.',
-    chips: ['Logo & wordmark', 'Truck wraps', 'Brand guide'], when: 'Weeks 1 to 3',
-  },
-  {
-    k: 'Roots', n: '02', t: 'Digital Showcase & Booking', img: IMG.hands, alt: 'Hands planting a young plant in soil',
-    d: 'A high-converting website showcasing your finest plants, garden designs, and outdoor living. Paired with a 24/7 online calendar.',
-    chips: ['Plant & garden gallery', 'Online calendar', 'Quote forms'], when: 'Weeks 3 to 5',
-  },
-  {
-    k: 'Shoots', n: '03', t: 'Plant Reels, Media & Social', img: IMG.sprout, alt: 'Young green sprout breaking through soil',
-    d: 'Cinematic on-site video reels of your crews planting, edging, and transforming properties. Content that pushes through the noise.',
-    chips: ['Weekly plant reels', 'Door hangers', 'Social calendar'], when: 'Every week',
-  },
-  {
-    k: 'Bloom', n: '04', t: 'Full Schedule & High-Ticket Jobs', img: IMG.flowers, alt: 'Garden in full bloom',
-    d: 'Direct calls, booked site visits and signed recurring maintenance plans. The results that grow your landscape business.',
-    chips: ['Booked visits', 'Signed plans', 'Monthly ROI report'], when: 'Season after season',
-  },
-]
+import { useLanguage } from '../context/LanguageContext'
 
 const ROOTS = [
   'M200 330 C196 380 172 410 150 460 C138 488 128 520 110 556',
@@ -109,7 +86,10 @@ function Plant({ p }) {
 export default function GrowthRoots() {
   const ref = useRef(null)
   const p = useScrollProgress(ref, 'pin')
-  const idx = Math.min(STAGES.length - 1, Math.floor(p * STAGES.length))
+  const { t } = useLanguage()
+  const data = t.growth
+  const stages = data.stages || []
+  const idx = Math.min(stages.length - 1, Math.floor(p * stages.length))
   const leads = Math.round(clamp((p - 0.5) / 0.45) * 148)
 
   return (
@@ -117,14 +97,14 @@ export default function GrowthRoots() {
       <div className="root-sticky">
         <div className="wrap root-grid">
           <div className="root-left">
-            <span className="eyebrow">Digital Growth Process</span>
+            <span className="eyebrow">{data.eyebrow}</span>
             <h2 className="h-display h-md root-title">
-              How we digitize & grow <em>landscape brands.</em>
+              {data.title} <em>{data.titleEm}</em>
             </h2>
             <div className="root-stage-wrap">
               <Plant p={p} />
               <div className="root-meter">
-                <small>Leads this month</small>
+                <small>{data.meterLabel}</small>
                 <b>{leads}</b>
                 <span className="root-meter-bar"><i style={{ transform: `scaleX(${leads / 148})` }} /></span>
               </div>
@@ -134,7 +114,7 @@ export default function GrowthRoots() {
 
           <div className="root-right">
             <div className="root-cards">
-              {STAGES.map((s, i) => (
+              {stages.map((s, i) => (
                 <article key={s.k} className={`root-card ${i === idx ? 'on' : ''} ${i < idx ? 'past' : ''}`} aria-hidden={i !== idx}>
                   <div className="root-photo">
                     <img src={s.img} alt={s.alt} loading="lazy" />
@@ -156,7 +136,7 @@ export default function GrowthRoots() {
               ))}
             </div>
             <ol className="root-steps">
-              {STAGES.map((s, i) => (
+              {stages.map((s, i) => (
                 <li key={s.k} className={i <= idx ? 'on' : ''}>
                   <span />
                   {s.k}

@@ -1,22 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Home, Truck, ClipboardCheck, CalendarPlus, Bell, Zap, CreditCard, Check, Star, Smartphone, Leaf as LeafIco, MapPin, Battery, Wifi, Signal } from 'lucide-react'
-import { IMG, BRAND } from '../data/site'
+import { IMG } from '../data/site'
 import { Words } from './ui'
 import { useMouse } from '../hooks'
+import { useLanguage } from '../context/LanguageContext'
 
-const FEATURES = [
-  { icon: Home, t: 'Property dashboard', d: 'Next visit, property health score and every service in one place.' },
-  { icon: Truck, t: 'Live crew tracking', d: 'See your crew on the map and get a heads up before they arrive.' },
-  { icon: ClipboardCheck, t: 'Photo visit reports', d: 'Before and after photos with a checklist after every visit.' },
-  { icon: CalendarPlus, t: 'Book in seconds', d: 'Request pruning, cleanups or a storm crew with two taps.' },
-]
-
-const NOTES = [
-  { icon: Truck, t: 'Crew arriving in 12 min', c: 'a' },
-  { icon: Check, t: 'Visit report ready', c: 'b' },
-  { icon: CreditCard, t: 'Invoice paid · $240', c: 'c' },
-  { icon: Zap, t: 'Storm alert for Melville', c: 'd' },
-]
+const FEAT_ICONS = [Home, Truck, ClipboardCheck, CalendarPlus]
+const NOTE_ICONS = [Truck, Check, CreditCard, Zap]
 
 function StatusBar() {
   return (
@@ -31,12 +21,12 @@ function StatusBar() {
   )
 }
 
-function ScreenHome() {
+function ScreenHome({ labels = {} }) {
   return (
     <div className="scr scr-home">
       <div className="sh-top">
         <div>
-          <small>Good morning</small>
+          <small>{labels.goodMorning || 'Good morning'}</small>
           <b>Sarah</b>
         </div>
         <span className="sh-bell">
@@ -45,9 +35,9 @@ function ScreenHome() {
         </span>
       </div>
       <div className="sh-next">
-        <small>Next visit</small>
-        <b>Weekly maintenance</b>
-        <span>Thu, 8:30 AM · Crew 4</span>
+        <small>{labels.nextVisit || 'Next visit'}</small>
+        <b>{labels.weeklyMaint || 'Weekly maintenance'}</b>
+        <span>{labels.scheduleThu || 'Thu, 8:30 AM · Crew 4'}</span>
         <LeafIco size={60} className="sh-leaf" />
       </div>
       <div className="sh-score">
@@ -57,15 +47,15 @@ function ScreenHome() {
         </svg>
         <div>
           <b>92</b>
-          <small>Property health</small>
+          <small>{labels.propertyHealth || 'Property health'}</small>
         </div>
       </div>
       <div className="sh-grid">
         {[
-          [CalendarPlus, 'Book'],
-          [ClipboardCheck, 'Reports'],
-          [Zap, 'Storm SOS'],
-          [CreditCard, 'Pay'],
+          [CalendarPlus, labels.book || 'Book'],
+          [ClipboardCheck, labels.reports || 'Reports'],
+          [Zap, labels.stormSos || 'Storm SOS'],
+          [CreditCard, labels.pay || 'Pay'],
         ].map(([I, l], i) => (
           <span key={l} style={{ '--i': i }}>
             <I size={16} />
@@ -77,7 +67,7 @@ function ScreenHome() {
   )
 }
 
-function ScreenTrack() {
+function ScreenTrack({ labels = {} }) {
   return (
     <div className="scr scr-track">
       <div className="st-map">
@@ -98,7 +88,7 @@ function ScreenTrack() {
           </g>
         </svg>
         <span className="st-eta">
-          <b>12</b> min
+          <b>12</b> {labels.minRemaining || 'min'}
         </span>
       </div>
       <div className="st-card">
@@ -106,9 +96,9 @@ function ScreenTrack() {
           <img src={IMG.crew} alt="" />
         </span>
         <div>
-          <b>Crew 4 · Marco</b>
+          <b>{labels.crewName || 'Crew 4 · Marco'}</b>
           <small>
-            <Star size={10} fill="currentColor" /> 4.9 · ISA certified
+            <Star size={10} fill="currentColor" /> 4.9 · {labels.certified || 'ISA certified'}
           </small>
         </div>
         <span className="st-call">
@@ -116,31 +106,32 @@ function ScreenTrack() {
         </span>
       </div>
       <div className="st-steps">
-        <span className="done">Left yard</span>
-        <span className="now">On the way</span>
-        <span>Arrived</span>
+        <span className="done">{labels.leftYard || 'Left yard'}</span>
+        <span className="now">{labels.onTheWay || 'On the way'}</span>
+        <span>{labels.arrived || 'Arrived'}</span>
       </div>
     </div>
   )
 }
 
-function ScreenReport() {
+function ScreenReport({ labels = {} }) {
+  const tasks = labels.tasks || ['Lawn mowed & edged', 'Beds weeded & mulched', 'Shrubs pruned', 'Debris cleared']
   return (
     <div className="scr scr-report">
-      <b className="sr-h">Visit report</b>
-      <small className="sr-d">Thu, Oct 15 · 2h 10m</small>
+      <b className="sr-h">{labels.visitReport || 'Visit report'}</b>
+      <small className="sr-d">{labels.timeSpent || 'Thu, Oct 15 · 2h 10m'}</small>
       <div className="sr-pics">
         <span>
           <img src={IMG.garden} alt="" />
-          <i>Before</i>
+          <i>{labels.before || 'Before'}</i>
         </span>
         <span>
           <img src={IMG.path} alt="" />
-          <i>After</i>
+          <i>{labels.after || 'After'}</i>
         </span>
       </div>
       <ul className="sr-list">
-        {['Lawn mowed & edged', 'Beds weeded & mulched', 'Shrubs pruned', 'Debris cleared'].map((t, i) => (
+        {tasks.map((t, i) => (
           <li key={t} style={{ '--i': i }}>
             <span>
               <Check size={10} strokeWidth={4} />
@@ -158,12 +149,13 @@ function ScreenReport() {
   )
 }
 
-function ScreenBook() {
+function ScreenBook({ labels = {} }) {
+  const services = labels.services || ['Tree pruning', 'Seasonal cleanup', 'Lawn aeration']
   return (
     <div className="scr scr-book">
-      <b className="sr-h">Book a service</b>
+      <b className="sr-h">{labels.bookService || 'Book a service'}</b>
       <div className="sb-list">
-        {['Tree pruning', 'Seasonal cleanup', 'Lawn aeration'].map((t, i) => (
+        {services.map((t, i) => (
           <span key={t} className={i === 0 ? 'on' : ''}>
             <LeafIco size={14} />
             {t}
@@ -187,17 +179,24 @@ function ScreenBook() {
         ))}
       </div>
       <span className="sb-btn">
-        <span>Confirm booking</span>
+        <span>{labels.confirmBooking || 'Confirm booking'}</span>
         <Check size={14} strokeWidth={3} />
       </span>
     </div>
   )
 }
 
-const SCREENS = [ScreenHome, ScreenTrack, ScreenReport, ScreenBook]
+function PhoneView({ idx, className = '', style, data }) {
+  const renderScreen = () => {
+    switch (idx) {
+      case 0: return <ScreenHome labels={data.screenHome} />
+      case 1: return <ScreenTrack labels={data.screenTrack} />
+      case 2: return <ScreenReport labels={data.screenReport} />
+      case 3: return <ScreenBook labels={data.screenBook} />
+      default: return <ScreenHome labels={data.screenHome} />
+    }
+  }
 
-function Phone({ idx, className = '', style }) {
-  const S = SCREENS[idx]
   return (
     <div className={`phone ${className}`} style={style}>
       <div className="ph-btn l1" />
@@ -207,7 +206,7 @@ function Phone({ idx, className = '', style }) {
         <div className="ph-island" />
         <StatusBar />
         <div className="ph-view" key={idx}>
-          <S />
+          {renderScreen()}
         </div>
         <div className="ph-tabs">
           {[Home, Truck, ClipboardCheck, CalendarPlus].map((I, i) => (
@@ -226,10 +225,22 @@ export default function AppShowcase() {
   const [idx, setIdx] = useState(0)
   const [hold, setHold] = useState(false)
   const m = useMouse()
+  const { t } = useLanguage()
+  const data = t.appShowcase || {}
+
+  const features = (data.features || []).map((f, i) => ({
+    ...f,
+    icon: FEAT_ICONS[i] || Home,
+  }))
+
+  const notes = (data.notes || []).map((n, i) => ({
+    ...n,
+    icon: NOTE_ICONS[i] || Bell,
+  }))
 
   useEffect(() => {
     if (hold) return
-    const id = setInterval(() => setIdx((i) => (i + 1) % SCREENS.length), 4200)
+    const id = setInterval(() => setIdx((i) => (i + 1) % 4), 4200)
     return () => clearInterval(id)
   }, [hold])
 
@@ -242,18 +253,18 @@ export default function AppShowcase() {
       </div>
       <div className="wrap as-grid">
         <div className="as-copy">
-          <span className="eyebrow" data-reveal="">Client Apps & Digital Tech</span>
+          <span className="eyebrow" data-reveal="">{data.eyebrow}</span>
           <h2 className="h-display h-lg" style={{ marginTop: 18 }}>
-            <Words text="Your brand," />
+            <Words text={data.title1} />
             <br />
-            <Words text="on their home screen." delay={0.15} className="ital" />
+            <Words text={data.title2} delay={0.15} className="ital" />
           </h2>
           <p className="lead" data-reveal="" style={{ '--d': '0.2s' }}>
-            Part of our digital services: we build custom branded iOS & Android booking apps for your landscape business. Clients schedule maintenance, request plant care, track crews, and pay invoices from their phones.
+            {data.lead}
           </p>
           <div className="as-feats" onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
-            {FEATURES.map((f, i) => (
-              <button key={f.t} className={i === idx ? 'on' : ''} onClick={() => setIdx(i)}>
+            {features.map((f, i) => (
+              <button key={f.t || i} className={i === idx ? 'on' : ''} onClick={() => setIdx(i)}>
                 <span className="as-ico">
                   <f.icon size={18} />
                 </span>
@@ -269,14 +280,14 @@ export default function AppShowcase() {
             <span>
               <Smartphone size={18} />
               <span>
-                <small>Available on</small>
+                <small>{data.availableOn || 'Available on'}</small>
                 <b>iPhone</b>
               </span>
             </span>
             <span>
               <Smartphone size={18} />
               <span>
-                <small>Available on</small>
+                <small>{data.availableOn || 'Available on'}</small>
                 <b>Android</b>
               </span>
             </span>
@@ -285,11 +296,11 @@ export default function AppShowcase() {
 
         <div className="as-stage" data-reveal="scale">
           <div className="as-tilt" style={{ transform: `rotateY(${m.x * 14}deg) rotateX(${m.y * -10}deg)` }}>
-            <Phone idx={(idx + 3) % 4} className="back left" />
-            <Phone idx={(idx + 1) % 4} className="back right" />
-            <Phone idx={idx} className="front" />
-            {NOTES.map((n, i) => (
-              <div key={n.t} className={`as-note ${n.c} ${i === idx ? 'on' : ''}`}>
+            <PhoneView idx={(idx + 3) % 4} className="back left" data={data} />
+            <PhoneView idx={(idx + 1) % 4} className="back right" data={data} />
+            <PhoneView idx={idx} className="front" data={data} />
+            {notes.map((n, i) => (
+              <div key={n.t || i} className={`as-note ${n.c} ${i === idx ? 'on' : ''}`}>
                 <span>
                   <n.icon size={14} />
                 </span>
