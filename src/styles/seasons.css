@@ -1,6 +1,6 @@
 .seasons {
   position: relative;
-  height: 440vh;
+  height: 280vh;
   background: linear-gradient(180deg, var(--sky1), var(--sky2));
   transition: --sky1 1s, --sky2 1s;
 }
@@ -337,7 +337,7 @@
 
 @media (max-width: 960px) {
   .seasons {
-    height: 480vh;
+    height: 320vh;
   }
   .st-grid {
     grid-template-columns: 1fr;

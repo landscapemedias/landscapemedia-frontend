@@ -13,14 +13,14 @@ export default function BottomBar() {
     { id: 'top', label: data.home || 'Home', icon: Home },
     { id: 'services', label: data.services || 'Services', icon: Leaf },
     { id: 'book', label: data.book || 'Book', icon: CalendarPlus, main: true },
-    { id: 'mockups', label: data.mockups || 'Mockups', icon: Images },
+    { id: 'portfolio', label: data.portfolio || 'Portfolio', icon: Images },
     { id: 'menu', label: data.menu || 'Menu', icon: Menu },
   ]
 
   useEffect(() => {
     const on = () => {
       let cur = 'top'
-      ;['services', 'mockups', 'book'].forEach((id) => {
+      ;['services', 'portfolio', 'book'].forEach((id) => {
         const el = document.getElementById(id)
         if (el && el.getBoundingClientRect().top < innerHeight * 0.5) cur = id
       })

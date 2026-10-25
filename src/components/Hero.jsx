@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CalendarCheck, Printer, Clapperboard, Mail, Play, Headphones, PhoneCall } from 'lucide-react'
+import { CalendarCheck, Globe, Smartphone, Clapperboard, Camera, Palette, Play } from 'lucide-react'
 import { IMG } from '../data/site'
 import { Btn, Words } from './ui'
 import { scrollToId, useMouse } from '../hooks'
 import { useLanguage } from '../context/LanguageContext'
 
-const ICONS = [CalendarCheck, Headphones, PhoneCall, Printer, Clapperboard, Mail]
+const ICONS = [Globe, Smartphone, Clapperboard, Camera, Palette, CalendarCheck]
 
 function seeded(n) {
   let s = n
@@ -121,7 +121,7 @@ export default function Hero() {
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
             <Btn onClick={() => scrollToId('book')}>{t.hero.cta}</Btn>
-            <button className="hero-play" onClick={() => scrollToId('mockups')} data-cursor="Watch">
+            <button className="hero-play" onClick={() => scrollToId('portfolio')} data-cursor="Watch">
               <span className="hp-ring">
                 <Play size={16} fill="currentColor" />
               </span>
@@ -150,7 +150,7 @@ export default function Hero() {
                 <path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0" />
               </defs>
               <text>
-                <textPath href="#circ">BRANDING · REELS · SOCIAL · EMAIL · APPS ·</textPath>
+                <textPath href="#circ">WEB · APPS · BRANDING · REELS · VIDEO ·</textPath>
               </text>
             </svg>
             <span className="hb-core">

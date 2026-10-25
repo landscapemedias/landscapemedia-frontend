@@ -1,14 +1,14 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { Snowflake, TreePine, Scissors, Sprout } from 'lucide-react'
+import { Globe, Smartphone, Clapperboard, Palette } from 'lucide-react'
 import { IMG } from '../data/site'
 import { Words } from './ui'
 import { useLanguage } from '../context/LanguageContext'
 
 const WRAP_STYLES = [
-  { k: 'maintenance', icon: Scissors, img: IMG.trimmer, c1: '#234b34', c2: '#b8e86a', ink: '#f3efe3', sky: ['#bfe6f2', '#f4f8e6'], hill: ['#8fc46a', '#5f9a48'], fx: 'pollen' },
-  { k: 'snow', icon: Snowflake, img: IMG.snow, c1: '#16314f', c2: '#9fd3ff', ink: '#ffffff', sky: ['#9fb3c6', '#e9eef3'], hill: ['#e9f0f5', '#cfdbe4'], fx: 'snow' },
-  { k: 'tree', icon: TreePine, img: IMG.canopy, c1: '#4a2f1b', c2: '#f4c35a', ink: '#fff6e4', sky: ['#f6c99a', '#fbecd6'], hill: ['#d9822b', '#a5521f'], fx: 'leaves' },
-  { k: 'greenhouse', icon: Sprout, img: IMG.greenhouse, c1: '#0f4f4a', c2: '#e2f7b5', ink: '#f3efe3', sky: ['#cfeee6', '#f6fbef'], hill: ['#76b8a0', '#3f8a72'], fx: 'pollen' },
+  { k: 'web', icon: Globe, img: IMG.cover, c1: '#234b34', c2: '#b8e86a', ink: '#f3efe3', sky: ['#bfe6f2', '#f4f8e6'], hill: ['#8fc46a', '#5f9a48'], fx: 'pollen' },
+  { k: 'app', icon: Smartphone, img: IMG.garden, c1: '#16314f', c2: '#9fd3ff', ink: '#ffffff', sky: ['#c9d8e6', '#eef3f7'], hill: ['#9cc7a0', '#6c9f7a'], fx: 'pollen' },
+  { k: 'video', icon: Clapperboard, img: IMG.canopy, c1: '#4a2f1b', c2: '#f4c35a', ink: '#fff6e4', sky: ['#f6c99a', '#fbecd6'], hill: ['#d9822b', '#a5521f'], fx: 'leaves' },
+  { k: 'brand', icon: Palette, img: IMG.greenhouse, c1: '#0f4f4a', c2: '#e2f7b5', ink: '#f3efe3', sky: ['#cfeee6', '#f6fbef'], hill: ['#76b8a0', '#3f8a72'], fx: 'pollen' },
 ]
 
 const HILL_A = 'M0 200 V120 C120 60 220 140 340 90 C460 40 560 130 680 80 C800 30 900 110 1000 120 V200Z'
@@ -44,6 +44,55 @@ function Trees({ color }) {
   )
 }
 
+function Device({ w, uid }) {
+  if (w.k === 'app') {
+    return (
+      <g transform="translate(372 52)">
+        <rect width="62" height="122" rx="12" fill="#111" />
+        <clipPath id={`${uid}-ph-${w.k}`}><rect x="5" y="6" width="52" height="110" rx="8" /></clipPath>
+        <g clipPath={`url(#${uid}-ph-${w.k})`}>
+          <rect x="5" y="6" width="52" height="110" fill="#fff" />
+          <image href={w.img} x="5" y="6" width="52" height="50" preserveAspectRatio="xMidYMid slice" />
+          <rect x="10" y="62" width="34" height="6" rx="3" fill={w.c1} />
+          <rect x="10" y="74" width="24" height="10" rx="5" fill={w.c2} />
+          {[0, 1].map((r) => [0, 1].map((c) => <rect key={`${r}${c}`} x={10 + c * 22} y={90 + r * 13} width="19" height="10" rx="3" fill="#e2f1d4" />))}
+        </g>
+      </g>
+    )
+  }
+  if (w.k === 'video') {
+    return (
+      <g transform="translate(366 50)">
+        <rect width="74" height="126" rx="10" fill="#111" opacity="0.85" />
+        <circle cx="37" cy="63" r="18" fill="rgba(255,255,255,.85)" />
+        <path d="M32 53 L48 63 L32 73Z" fill={w.c1} />
+        <rect x="8" y="104" width="40" height="5" rx="2.5" fill="#fff" />
+        <rect x="8" y="113" width="26" height="4" rx="2" fill="rgba(255,255,255,.6)" />
+        <circle cx="64" cy="14" r="4" fill="#ff4d4d" />
+      </g>
+    )
+  }
+  if (w.k === 'brand') {
+    return (
+      <g transform="translate(352 62)">
+        <rect width="100" height="100" rx="20" fill="#fff" />
+        <path d="M30 70 C30 46 46 30 70 30 C70 54 54 70 30 70Z" fill={w.c1} />
+        {[w.c1, w.c2, '#f4c35a', '#4f8a4b'].map((c, i) => <circle key={c} cx={22 + i * 19} cy="88" r="6" fill={c} />)}
+      </g>
+    )
+  }
+  return (
+    <g transform="translate(340 56)">
+      <rect width="118" height="96" rx="8" fill="#fff" />
+      <rect width="118" height="14" rx="8" fill="#eef0ea" />
+      {[0, 1, 2].map((i) => <circle key={i} cx={9 + i * 8} cy="7" r="2.6" fill={i ? '#cfd5c8' : '#f08a7a'} />)}
+      <image href={w.img} x="4" y="16" width="110" height="46" preserveAspectRatio="xMidYMid slice" />
+      <rect x="8" y="68" width="66" height="7" rx="3" fill={w.c1} />
+      <rect x="8" y="80" width="38" height="10" rx="5" fill={w.c2} />
+    </g>
+  )
+}
+
 function WrapArt({ w, uid }) {
   return (
     <g>
@@ -58,6 +107,8 @@ function WrapArt({ w, uid }) {
         <path d="M0 34C0 14 14 0 34 0c0 20-14 34-34 34z" fill={w.c2} />
         <path d="M0 34L20 14" stroke={w.c1} strokeWidth="2.4" />
       </g>
+      <text x="64" y="112" className="tw-tag" fill={w.c2}>WEB · APPS · REELS · VIDEO · FOTO</text>
+      <Device w={w} uid={uid} />
       <text x="62" y="140" className="tw-name" fill={w.ink}>{w.name[0]}</text>
       <text x="62" y="176" className="tw-name" fill={w.c2}>{w.name[1]}</text>
       <text x="64" y="202" className="tw-tag" fill={w.ink}>{w.tag}</text>

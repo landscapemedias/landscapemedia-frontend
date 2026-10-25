@@ -10,10 +10,11 @@ import NicheStories from './components/NicheStories'
 import WhyUs from './components/WhyUs'
 import Projects from './components/Projects'
 import AppShowcase from './components/AppShowcase'
-import Estimate from './components/Estimate'
+import Offer from './components/Offer'
+import Portfolio from './components/Portfolio'
+import Testimonials from './components/Testimonials'
 import BottomBar from './components/BottomBar'
 import Nursery from './components/Nursery'
-import PlantPassport from './components/PlantPassport'
 import Process from './components/Process'
 import Booking from './components/Booking'
 import Faq from './components/Faq'
@@ -51,17 +52,18 @@ export default function App() {
         <GrowthRoots />
         <TruckWrap />
         <Nursery />
-        <PlantPassport />
+        <Offer />
+        <Portfolio />
         <Mockups />
         <NicheStories />
         <Projects />
+        <Testimonials />
         <Viewfinder />
         <FlyerDrop />
         <Seasons />
         <GoldenHour />
         <AppShowcase />
         <WhyUs />
-        <Estimate />
         <Process />
         <Booking />
         <Faq />

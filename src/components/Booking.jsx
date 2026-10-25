@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { MapPin, Video, Phone, CalendarPlus, ChevronLeft, ChevronRight } from 'lucide-react'
+import { MapPin, Video, Phone, Mail, Clock, CalendarPlus, ChevronLeft, ChevronRight } from 'lucide-react'
 import { BRAND } from '../data/site'
 import { Btn, Words } from './ui'
 import { useLanguage } from '../context/LanguageContext'
@@ -34,12 +34,13 @@ export default function Booking() {
   const [type, setType] = useState('site')
   const [date, setDate] = useState(null)
   const [time, setTime] = useState('')
-  const [form, setForm] = useState({ name: '', email: '', company: '', phone: '' })
+  const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', message: '' })
   const [picks, setPicks] = useState([])
   const [done, setDone] = useState(false)
   const { t, lang } = useLanguage()
   const data = t.booking || {}
-  const servicesList = t.services?.list || []
+  const info = t.contact || {}
+  const interests = info.interests || []
 
   const types = (data.types || []).map((tp) => ({
     ...tp,
@@ -63,7 +64,17 @@ export default function Booking() {
 
   const submit = (e) => {
     e.preventDefault()
-    if (valid) setDone(true)
+    if (!valid) return
+    const body = [
+      `${T.label} · ${label} · ${time} EST`,
+      `${form.name} · ${form.company}`,
+      `${form.email} · ${form.phone}`,
+      `${info.interest}: ${picks.join(', ')}`,
+      '',
+      form.message,
+    ].join('\n')
+    window.location.href = `mailto:${BRAND.email}?subject=${encodeURIComponent(info.mailSubject || '')}&body=${encodeURIComponent(body)}`
+    setDone(true)
   }
 
   const confirmedHeading = (data.confirmedTitle || "You're booked, {name}.").replace('{name}', form.name.split(' ')[0])
@@ -89,6 +100,23 @@ export default function Booking() {
             {data.lead}
           </p>
         </div>
+
+        <ul className="bk-info" data-reveal="">
+          {[
+            { icon: Phone, label: info.callLabel, value: BRAND.phone, href: BRAND.phoneHref },
+            { icon: Mail, label: info.emailLabel, value: BRAND.email, href: `mailto:${BRAND.email}` },
+            { icon: MapPin, label: info.visitLabel, value: BRAND.address },
+            { icon: Clock, label: info.hoursLabel, value: t.nav?.hours || BRAND.hours },
+          ].map((w) => {
+            const inner = (
+              <>
+                <span className="bk-info-ico"><w.icon size={18} /></span>
+                <span><small>{w.label}</small><b>{w.value}</b></span>
+              </>
+            )
+            return <li key={w.label}>{w.href ? <a href={w.href}>{inner}</a> : <div>{inner}</div>}</li>
+          })}
+        </ul>
 
         <form className="bk-app" onSubmit={submit} data-reveal="scale">
           {done ? (
@@ -175,18 +203,20 @@ export default function Booking() {
                   <input placeholder={data.company || 'Company name'} value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
                   <input placeholder={data.phone || 'Phone'} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
                 </div>
+                <span className="bk-step">{data.step5 || '05 · Your project'}</span>
                 <div className="bk-picks">
-                  {servicesList.map((s) => (
+                  {interests.map((x) => (
                     <button
                       type="button"
-                      key={s.n}
-                      className={`chip ${picks.includes(s.n) ? 'on' : ''}`}
-                      onClick={() => setPicks(picks.includes(s.n) ? picks.filter((p) => p !== s.n) : [...picks, s.n])}
+                      key={x}
+                      className={`chip ${picks.includes(x) ? 'on' : ''}`}
+                      onClick={() => setPicks(picks.includes(x) ? picks.filter((p) => p !== x) : [...picks, x])}
                     >
-                      {s.name}
+                      {x}
                     </button>
                   ))}
                 </div>
+                <textarea className="bk-msg" rows={3} placeholder={info.message} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
 
                 <div className="bk-sum">
                   <span>

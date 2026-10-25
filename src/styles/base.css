@@ -300,6 +300,15 @@ h1 em, h2 em, h3 em, h4 em, h5 em, h6 em,
   background: var(--cream);
 }
 
+.btn.light:hover {
+  color: var(--moss);
+}
+
+.btn.light:hover .ico {
+  background: var(--moss);
+  color: var(--sprout);
+}
+
 .btn.ghost {
   --bg: transparent;
   --fg: var(--moss);

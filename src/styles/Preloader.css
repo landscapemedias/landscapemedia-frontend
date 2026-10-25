@@ -8,7 +8,7 @@
   background: radial-gradient(70% 60% at 50% 45%, #1d4a33 0%, var(--ink) 70%);
   color: var(--cream);
   clip-path: inset(0 0 0 0);
-  transition: clip-path 1s var(--ease);
+  transition: clip-path 0.7s var(--ease);
 }
 
 .preloader.leave {

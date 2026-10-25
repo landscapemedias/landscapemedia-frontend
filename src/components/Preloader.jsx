@@ -10,14 +10,14 @@ export default function Preloader({ onDone }) {
   useEffect(() => {
     let raf
     const t0 = performance.now()
-    const dur = 2600
+    const dur = 1200
     const step = (t) => {
       const k = Math.min(1, (t - t0) / dur)
       setN(Math.round((1 - Math.pow(1 - k, 3)) * 100))
       if (k < 1) raf = requestAnimationFrame(step)
       else {
-        setTimeout(() => setLeaving(true), 350)
-        setTimeout(onDone, 1350)
+        setTimeout(() => setLeaving(true), 150)
+        setTimeout(onDone, 750)
       }
     }
     raf = requestAnimationFrame(step)
