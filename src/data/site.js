@@ -24,6 +24,10 @@ import glassHouseImg from '../assets/images/site/glass-house.jpg'
 import plansImg from '../assets/images/site/plans.jpg'
 import teamImg from '../assets/images/site/team.jpg'
 import coverImg from '../assets/images/site/cover+photo+v2.webp'
+import precastExchangeImg from '../assets/images/site/precast-exchange-desktop.png'
+import precastExchangeMobileImg from '../assets/images/site/precast-exchange-mobile.png'
+import precastMediaImg from '../assets/images/site/precast-media-desktop.png'
+import precastMediaMobileImg from '../assets/images/site/precast-media-mobile.png'
 
 export const BRAND = {
   name: 'Landscape',
@@ -78,6 +82,10 @@ export const IMG = {
   plans: plansImg,
   team: teamImg,
   cover: coverImg,
+  precastExchange: precastExchangeImg,
+  precastExchangeMobile: precastExchangeMobileImg,
+  precastMedia: precastMediaImg,
+  precastMobile: precastMediaMobileImg,
 }
 export const NAV = [
   { id: 'services', label: 'Services' },

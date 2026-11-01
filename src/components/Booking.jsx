@@ -37,6 +37,8 @@ export default function Booking() {
   const [form, setForm] = useState({ name: '', email: '', company: '', phone: '', message: '' })
   const [picks, setPicks] = useState([])
   const [done, setDone] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const { t, lang } = useLanguage()
   const data = t.booking || {}
   const info = t.contact || {}
@@ -62,19 +64,46 @@ export default function Booking() {
   const T = types.find((item) => item.k === type) || types[0] || { label: 'In person' }
   const label = date?.toLocaleDateString(locale, { weekday: 'long', month: 'long', day: 'numeric' })
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    if (!valid) return
-    const body = [
-      `${T.label} · ${label} · ${time} EST`,
-      `${form.name} · ${form.company}`,
-      `${form.email} · ${form.phone}`,
-      `${info.interest}: ${picks.join(', ')}`,
-      '',
-      form.message,
-    ].join('\n')
-    window.location.href = `mailto:${BRAND.email}?subject=${encodeURIComponent(info.mailSubject || '')}&body=${encodeURIComponent(body)}`
-    setDone(true)
+    if (!valid || submitting) return
+    setSubmitting(true)
+    setSubmitError('')
+
+    const selectedServices = picks.length > 0 ? picks.join(', ') : 'General Inquiry'
+    const payload = {
+      howShouldWeMeet: T.label || 'In Person',
+      pickDay: label || (date ? date.toISOString().split('T')[0] : 'Not specified'),
+      chooseTime: time || 'Not specified',
+      personName: form.name.trim(),
+      email: form.email.trim(),
+      companyName: form.company.trim() || 'N/A',
+      phone: form.phone.trim() || 'N/A',
+      requiredService: form.message.trim() ? `${selectedServices} | Note: ${form.message.trim()}` : selectedServices,
+    }
+
+    try {
+      const res = await fetch('https://landscape-media-ow1m.vercel.app/api/v1/user/add-user-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await res.json()
+      if (res.ok && result.status === 1) {
+        setDone(true)
+      } else {
+        throw new Error(result.msg || 'Error al enviar la consulta. Intente de nuevo.')
+      }
+    } catch (err) {
+      console.error('Failed to submit inquiry:', err)
+      setSubmitError(
+        lang === 'es'
+          ? 'No pudimos registrar su consulta en este momento. Por favor inténtelo de nuevo o contáctenos directamente.'
+          : 'Could not register your inquiry at this moment. Please try again or reach out directly.'
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const confirmedHeading = (data.confirmedTitle || "You're booked, {name}.").replace('{name}', form.name.split(' ')[0])
@@ -218,6 +247,21 @@ export default function Booking() {
                 </div>
                 <textarea className="bk-msg" rows={3} placeholder={info.message} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
 
+                {submitError && (
+                  <div style={{
+                    padding: '12px 16px',
+                    borderRadius: '12px',
+                    background: 'rgba(239, 68, 68, 0.15)',
+                    border: '1px solid rgba(239, 68, 68, 0.4)',
+                    color: '#fca5a5',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    lineHeight: '1.4'
+                  }}>
+                    {submitError}
+                  </div>
+                )}
+
                 <div className="bk-sum">
                   <span>
                     {date ? (
@@ -229,7 +273,11 @@ export default function Booking() {
                       data.selectDayTime || 'Select a day and time'
                     )}
                   </span>
-                  <Btn type="submit" disabled={!valid}>{data.submit || 'Confirm booking'}</Btn>
+                  <Btn type="submit" disabled={!valid || submitting}>
+                    {submitting
+                      ? (lang === 'es' ? 'Enviando...' : 'Submitting...')
+                      : (data.submit || 'Confirm booking')}
+                  </Btn>
                 </div>
               </div>
             </>

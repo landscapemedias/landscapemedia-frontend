@@ -11,6 +11,7 @@ import WhyUs from './components/WhyUs'
 import Projects from './components/Projects'
 import AppShowcase from './components/AppShowcase'
 import Offer from './components/Offer'
+import OurWork from './components/OurWork'
 import Portfolio from './components/Portfolio'
 import Testimonials from './components/Testimonials'
 import BottomBar from './components/BottomBar'
@@ -26,17 +27,60 @@ import Viewfinder from './components/Viewfinder'
 import GoldenHour from './components/GoldenHour'
 import TruckWrap from './components/TruckWrap'
 import FlyerDrop from './components/FlyerDrop'
+import AdminInquiries from './components/AdminInquiries'
 import { useReveal } from './hooks'
 
+const checkIsAdmin = () => {
+  if (typeof window === 'undefined') return false
+  const path = window.location.pathname.toLowerCase()
+  const hash = window.location.hash.toLowerCase()
+  return (
+    path === '/admin' ||
+    path === '/admin/' ||
+    path.startsWith('/admin') ||
+    hash === '#admin' ||
+    hash === '#/admin' ||
+    hash.startsWith('#admin')
+  )
+}
+
 export default function App() {
+  const [isAdmin, setIsAdmin] = useState(checkIsAdmin)
   const [loading, setLoading] = useState(true)
   const done = useCallback(() => setLoading(false), [])
+
+  useEffect(() => {
+    const onLocationChange = () => {
+      setIsAdmin(checkIsAdmin())
+    }
+    window.addEventListener('popstate', onLocationChange)
+    window.addEventListener('hashchange', onLocationChange)
+    return () => {
+      window.removeEventListener('popstate', onLocationChange)
+      window.removeEventListener('hashchange', onLocationChange)
+    }
+  }, [])
 
   useEffect(() => {
     document.body.classList.toggle('is-loading', loading)
   }, [loading])
 
-  useReveal(!loading)
+  useReveal(!loading && !isAdmin)
+
+  if (isAdmin) {
+    return (
+      <AdminInquiries
+        onBack={() => {
+          if (window.location.hash.toLowerCase().includes('admin')) {
+            window.location.hash = ''
+          } else {
+            window.history.pushState(null, '', '/')
+          }
+          setIsAdmin(false)
+        }}
+      />
+    )
+  }
 
   return (
     <>
@@ -53,6 +97,7 @@ export default function App() {
         <TruckWrap />
         <Nursery />
         <Offer />
+        <OurWork />
         <Portfolio />
         <Mockups />
         <NicheStories />

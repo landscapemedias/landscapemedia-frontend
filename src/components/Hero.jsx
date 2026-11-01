@@ -121,7 +121,7 @@ export default function Hero() {
           </p>
           <div className="hero-actions" data-reveal="" style={{ '--d': '0.85s' }}>
             <Btn onClick={() => scrollToId('book')}>{t.hero.cta}</Btn>
-            <button className="hero-play" onClick={() => scrollToId('portfolio')} data-cursor="Watch">
+            <button className="hero-play" onClick={() => scrollToId('our-work')} data-cursor="Watch">
               <span className="hp-ring">
                 <Play size={16} fill="currentColor" />
               </span>

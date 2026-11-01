@@ -18,7 +18,7 @@ export const TRANSLATIONS = {
       links: [
         { id: 'services', label: 'Servicios' },
         { id: 'offer', label: 'Precios' },
-        { id: 'portfolio', label: 'Portafolio' },
+        { id: 'our-work', label: 'Trabajos' },
         { id: 'mockups', label: 'Maquetas' },
         { id: 'app', label: 'Apps' },
         { id: 'book', label: 'Contacto' },
@@ -567,7 +567,7 @@ export const TRANSLATIONS = {
       links: [
         { id: 'services', label: 'Services' },
         { id: 'offer', label: 'Pricing' },
-        { id: 'portfolio', label: 'Portfolio' },
+        { id: 'our-work', label: 'Our Work' },
         { id: 'mockups', label: 'Mockups' },
         { id: 'app', label: 'Apps' },
         { id: 'book', label: 'Contact' },

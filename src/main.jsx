@@ -24,6 +24,7 @@ import './styles/viewfinder.css'
 import './styles/flyerdrop.css'
 import './styles/goldenhour.css'
 import './styles/digital.css'
+import './styles/admin.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
