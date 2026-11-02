@@ -18,11 +18,16 @@ import {
   AlertCircle,
   ArrowLeft,
   Sparkles,
-  Users
+  Users,
+  Trash2,
+  Loader2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 import { BRAND } from '../data/site'
 
-const API_GET_URL = 'https://landscape-media-ow1m.vercel.app/api/v1/user/get-user-inquiry'
+const API_GET_URL = 'https://landscape-media.vercel.app/api/v1/user/get-user-inquiry'
+const API_DELETE_URL = 'https://landscape-media.vercel.app/api/v1/user/delete-user-inquiry'
 
 export default function AdminInquiries({ onBack }) {
   const [inquiries, setInquiries] = useState([])
@@ -32,6 +37,34 @@ export default function AdminInquiries({ onBack }) {
   const [typeFilter, setTypeFilter] = useState('ALL')
   const [copiedId, setCopiedId] = useState(null)
   const [lastRefreshed, setLastRefreshed] = useState(null)
+  const [deletingId, setDeletingId] = useState(null)
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null)
+  const [toastMessage, setToastMessage] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(5)
+
+  // Ensure body scroll is unlocked on admin page
+  useEffect(() => {
+    document.body.classList.remove('is-loading')
+    document.body.style.overflow = 'auto'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  // Auto-reset confirm state after 4 seconds
+  useEffect(() => {
+    if (!confirmDeleteId) return
+    const timer = setTimeout(() => {
+      setConfirmDeleteId(null)
+    }, 4000)
+    return () => clearTimeout(timer)
+  }, [confirmDeleteId])
+
+  // Reset to page 1 whenever filter, search or page size changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [search, typeFilter, pageSize])
 
   const fetchInquiries = async () => {
     setLoading(true)
@@ -89,12 +122,19 @@ export default function AdminInquiries({ onBack }) {
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
     return inquiries.filter((item) => {
-      // Filter by meeting type
+      // Filter by category
       if (typeFilter !== 'ALL') {
-        const meet = (item.howShouldWeMeet || '').toLowerCase()
-        if (typeFilter === 'VIDEO' && !meet.includes('video')) return false
-        if (typeFilter === 'PERSON' && !meet.includes('person')) return false
-        if (typeFilter === 'PHONE' && !meet.includes('phone') && !meet.includes('tel')) return false
+        if (typeFilter === 'TODAY') {
+          const today = new Date().toDateString()
+          if (!item.createdAt || new Date(item.createdAt).toDateString() !== today) {
+            return false
+          }
+        } else {
+          const meet = (item.howShouldWeMeet || '').toLowerCase()
+          if (typeFilter === 'VIDEO' && !meet.includes('video')) return false
+          if (typeFilter === 'PERSON' && !meet.includes('person')) return false
+          if (typeFilter === 'PHONE' && !meet.includes('phone') && !meet.includes('tel')) return false
+        }
       }
 
       // Filter by query
@@ -109,6 +149,15 @@ export default function AdminInquiries({ onBack }) {
       )
     })
   }, [inquiries, search, typeFilter])
+
+  // Pagination calculations
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
+  const activePage = Math.min(currentPage, totalPages)
+
+  const paginatedInquiries = useMemo(() => {
+    const start = (activePage - 1) * pageSize
+    return filtered.slice(start, start + pageSize)
+  }, [filtered, activePage, pageSize])
 
   // Copy full inquiry details
   const handleCopy = (item, id) => {
@@ -127,6 +176,33 @@ export default function AdminInquiries({ onBack }) {
       setCopiedId(id)
       setTimeout(() => setCopiedId(null), 2000)
     })
+  }
+
+  // Delete single inquiry
+  const handleDelete = async (id) => {
+    if (confirmDeleteId !== id) {
+      setConfirmDeleteId(id)
+      return
+    }
+
+    setDeletingId(id)
+    try {
+      const res = await fetch(`${API_DELETE_URL}?inquiryId=${encodeURIComponent(id)}`)
+      const result = await res.json()
+      if (res.ok && result.status === 1) {
+        setInquiries((prev) => prev.filter((item) => (item.id || item._id) !== id))
+        setToastMessage('Inquiry deleted successfully!')
+        setTimeout(() => setToastMessage(''), 3000)
+      } else {
+        throw new Error(result.msg || 'Failed to delete inquiry')
+      }
+    } catch (err) {
+      console.error('Delete error:', err)
+      alert('Error deleting inquiry: ' + (err.message || 'Unknown error'))
+    } finally {
+      setDeletingId(null)
+      setConfirmDeleteId(null)
+    }
   }
 
   // Export CSV
@@ -227,9 +303,13 @@ export default function AdminInquiries({ onBack }) {
 
       {/* Main Content */}
       <main className="admin-content">
-        {/* Metric Cards */}
+        {/* Metric Cards - Interactive click to filter */}
         <div className="admin-stats-grid">
-          <div className="admin-stat-card">
+          <div
+            className={`admin-stat-card ${typeFilter === 'ALL' ? 'active' : ''}`}
+            onClick={() => setTypeFilter('ALL')}
+            title="Click to show all inquiries"
+          >
             <div className="admin-stat-icon">
               <Inbox size={24} />
             </div>
@@ -239,7 +319,11 @@ export default function AdminInquiries({ onBack }) {
             </div>
           </div>
 
-          <div className="admin-stat-card">
+          <div
+            className={`admin-stat-card ${typeFilter === 'TODAY' ? 'active' : ''}`}
+            onClick={() => setTypeFilter(typeFilter === 'TODAY' ? 'ALL' : 'TODAY')}
+            title="Click to filter inquiries received today"
+          >
             <div className="admin-stat-icon" style={{ background: 'rgba(56, 189, 248, 0.12)', color: '#38bdf8' }}>
               <Sparkles size={24} />
             </div>
@@ -249,7 +333,11 @@ export default function AdminInquiries({ onBack }) {
             </div>
           </div>
 
-          <div className="admin-stat-card">
+          <div
+            className={`admin-stat-card ${typeFilter === 'VIDEO' ? 'active' : ''}`}
+            onClick={() => setTypeFilter(typeFilter === 'VIDEO' ? 'ALL' : 'VIDEO')}
+            title="Click to filter Video Call inquiries"
+          >
             <div className="admin-stat-icon" style={{ background: 'rgba(168, 85, 247, 0.12)', color: '#c084fc' }}>
               <Video size={24} />
             </div>
@@ -259,7 +347,11 @@ export default function AdminInquiries({ onBack }) {
             </div>
           </div>
 
-          <div className="admin-stat-card">
+          <div
+            className={`admin-stat-card ${typeFilter === 'PERSON' ? 'active' : ''}`}
+            onClick={() => setTypeFilter(typeFilter === 'PERSON' ? 'ALL' : 'PERSON')}
+            title="Click to filter In-Person inquiries"
+          >
             <div className="admin-stat-icon" style={{ background: 'rgba(251, 146, 60, 0.12)', color: '#fb923c' }}>
               <MapPin size={24} />
             </div>
@@ -289,6 +381,12 @@ export default function AdminInquiries({ onBack }) {
               className={`admin-pill ${typeFilter === 'ALL' ? 'active' : ''}`}
             >
               All ({inquiries.length})
+            </button>
+            <button
+              onClick={() => setTypeFilter('TODAY')}
+              className={`admin-pill ${typeFilter === 'TODAY' ? 'active' : ''}`}
+            >
+              Today ({stats.todayCount})
             </button>
             <button
               onClick={() => setTypeFilter('PERSON')}
@@ -381,9 +479,10 @@ export default function AdminInquiries({ onBack }) {
 
         {/* Inquiries Cards List */}
         {!loading && filtered.length > 0 && (
-          <div className="admin-inquiries-grid">
-            {filtered.map((item, idx) => {
-              const uniqueKey = item.id || item._id || idx
+          <>
+            <div className="admin-inquiries-grid">
+              {paginatedInquiries.map((item, idx) => {
+                const uniqueKey = item.id || item._id || idx
               const isCopied = copiedId === uniqueKey
               const createdAtFormatted = item.createdAt
                 ? new Date(item.createdAt).toLocaleString(undefined, {
@@ -463,14 +562,36 @@ export default function AdminInquiries({ onBack }) {
 
                   {/* Col 4: Timestamp & Quick Action */}
                   <div className="admin-card-actions">
-                    <button
-                      onClick={() => handleCopy(item, uniqueKey)}
-                      className={`admin-copy-btn ${isCopied ? 'copied' : ''}`}
-                      title="Copy lead details to clipboard"
-                    >
-                      {isCopied ? <Check size={14} /> : <Copy size={14} />}
-                      <span>{isCopied ? 'Copied!' : 'Copy Info'}</span>
-                    </button>
+                    <div className="admin-btn-group">
+                      <button
+                        onClick={() => handleCopy(item, uniqueKey)}
+                        className={`admin-copy-btn ${isCopied ? 'copied' : ''}`}
+                        title="Copy lead details to clipboard"
+                      >
+                        {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                        <span>{isCopied ? 'Copied!' : 'Copy Info'}</span>
+                      </button>
+
+                      <button
+                        onClick={() => handleDelete(item.id || item._id)}
+                        disabled={deletingId === (item.id || item._id)}
+                        className={`admin-delete-btn ${confirmDeleteId === (item.id || item._id) ? 'confirming' : ''}`}
+                        title={confirmDeleteId === (item.id || item._id) ? 'Click again to confirm delete' : 'Delete this inquiry'}
+                      >
+                        {deletingId === (item.id || item._id) ? (
+                          <Loader2 size={14} style={{ animation: 'adminSpin 1s linear infinite' }} />
+                        ) : (
+                          <Trash2 size={14} />
+                        )}
+                        <span>
+                          {deletingId === (item.id || item._id)
+                            ? 'Deleting...'
+                            : confirmDeleteId === (item.id || item._id)
+                            ? 'Confirm?'
+                            : 'Delete'}
+                        </span>
+                      </button>
+                    </div>
 
                     <div className="admin-date-stamp">
                       Received: {createdAtFormatted}
@@ -480,8 +601,80 @@ export default function AdminInquiries({ onBack }) {
               )
             })}
           </div>
-        )}
+
+          {/* Pagination Controls */}
+          <div className="admin-pagination-wrapper">
+            <div className="admin-pagination-info">
+              <span>
+                Showing <b>{(activePage - 1) * pageSize + 1}–{Math.min(activePage * pageSize, filtered.length)}</b> of <b>{filtered.length}</b> inquiries
+              </span>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                <span>Per page:</span>
+                <select
+                  value={pageSize}
+                  onChange={(e) => setPageSize(Number(e.target.value))}
+                  className="admin-page-size-select"
+                >
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
+                </select>
+              </div>
+            </div>
+
+            {totalPages > 1 && (
+              <div className="admin-pagination-buttons">
+                <button
+                  onClick={() => {
+                    setCurrentPage((p) => Math.max(1, p - 1))
+                    window.scrollTo({ top: 120, behavior: 'smooth' })
+                  }}
+                  disabled={activePage === 1}
+                  className="admin-page-nav-btn"
+                >
+                  <ChevronLeft size={16} />
+                  <span>Prev</span>
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => {
+                      setCurrentPage(p)
+                      window.scrollTo({ top: 120, behavior: 'smooth' })
+                    }}
+                    className={`admin-page-num-btn ${activePage === p ? 'active' : ''}`}
+                  >
+                    {p}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => {
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
+                    window.scrollTo({ top: 120, behavior: 'smooth' })
+                  }}
+                  disabled={activePage === totalPages}
+                  className="admin-page-nav-btn"
+                >
+                  <span>Next</span>
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            )}
+          </div>
+        </>
+      )}
       </main>
+
+      {/* Floating Success Toast */}
+      {toastMessage && (
+        <div className="admin-toast">
+          <Check size={16} />
+          <span>{toastMessage}</span>
+        </div>
+      )}
     </div>
   )
 }

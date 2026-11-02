@@ -277,6 +277,54 @@
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+}
+
+.bk-done-act .bk-btn-gcal {
+  background: var(--sprout);
+  color: var(--ink);
+  font-weight: 700;
+  border: 1.5px solid var(--sprout);
+  box-shadow: 0 4px 18px rgba(184, 232, 106, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px;
+  height: 52px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+
+.bk-done-act .bk-btn-gcal:hover {
+  background: #cbf382;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(184, 232, 106, 0.45);
+}
+
+.bk-done-act .bk-btn-ics {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(243, 239, 227, 0.35);
+  color: var(--cream);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  height: 52px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s var(--ease);
+}
+
+.bk-done-act .bk-btn-ics:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--sprout);
+  color: var(--sprout);
+  transform: translateY(-2px);
 }
 
 .bk-sprout {

@@ -62,8 +62,12 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    document.body.classList.toggle('is-loading', loading)
-  }, [loading])
+    if (isAdmin) {
+      document.body.classList.remove('is-loading')
+    } else {
+      document.body.classList.toggle('is-loading', loading)
+    }
+  }, [loading, isAdmin])
 
   useReveal(!loading && !isAdmin)
 

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { MapPin, Video, Phone, Mail, Clock, CalendarPlus, ChevronLeft, ChevronRight } from 'lucide-react'
+import { MapPin, Video, Phone, Mail, Clock, Calendar, CalendarPlus, ChevronLeft, ChevronRight } from 'lucide-react'
 import { BRAND } from '../data/site'
 import { Btn, Words } from './ui'
 import { useLanguage } from '../context/LanguageContext'
@@ -12,18 +12,51 @@ const ICONS = {
 
 const SLOTS = ['9:00 AM', '10:00 AM', '11:30 AM', '1:00 PM', '2:30 PM', '4:00 PM']
 
-function ics(date, time, type, name) {
+function getGoogleCalendarUrl(date, time, type, name) {
+  if (!date || !time) return '#'
   const [t, ap] = time.split(' ')
   let [h, m] = t.split(':').map(Number)
   if (ap === 'PM' && h !== 12) h += 12
+  if (ap === 'AM' && h === 12) h = 0
+
   const d = new Date(date)
   d.setHours(h, m, 0, 0)
   const e = new Date(d.getTime() + 30 * 60000)
   const f = (x) => x.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
-  const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'BEGIN:VEVENT', `DTSTART:${f(d)}`, `DTEND:${f(e)}`, `SUMMARY:${BRAND.name} ${BRAND.word} strategy call`, `DESCRIPTION:${type} with ${name}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n')
+
+  const title = encodeURIComponent(`${BRAND.name} ${BRAND.word} - ${type}`)
+  const details = encodeURIComponent(`${type} with ${name} · Landscape Media Strategy Call`)
+  const location = encodeURIComponent(type.toLowerCase().includes('person') ? BRAND.address : 'Online Strategy Session')
+
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${f(d)}/${f(e)}&details=${details}&location=${location}`
+}
+
+function ics(date, time, type, name) {
+  if (!date || !time) return
+  const [t, ap] = time.split(' ')
+  let [h, m] = t.split(':').map(Number)
+  if (ap === 'PM' && h !== 12) h += 12
+  if (ap === 'AM' && h === 12) h = 0
+  const d = new Date(date)
+  d.setHours(h, m, 0, 0)
+  const e = new Date(d.getTime() + 30 * 60000)
+  const f = (x) => x.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+  const body = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Landscape Media//Strategy Call//EN',
+    'BEGIN:VEVENT',
+    `DTSTART:${f(d)}`,
+    `DTEND:${f(e)}`,
+    `SUMMARY:${BRAND.name} ${BRAND.word} - ${type}`,
+    `DESCRIPTION:${type} with ${name}\\nLandscape Media Strategy Session`,
+    'STATUS:CONFIRMED',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n')
   const a = document.createElement('a')
-  a.href = URL.createObjectURL(new Blob([body], { type: 'text/calendar' }))
-  a.download = 'strategy-call.ics'
+  a.href = URL.createObjectURL(new Blob([body], { type: 'text/calendar;charset=utf-8' }))
+  a.download = 'landscape-media-strategy-call.ics'
   a.click()
 }
 
@@ -83,7 +116,7 @@ export default function Booking() {
     }
 
     try {
-      const res = await fetch('https://landscape-media-ow1m.vercel.app/api/v1/user/add-user-inquiry', {
+      const res = await fetch('https://landscape-media.vercel.app/api/v1/user/add-user-inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -107,7 +140,7 @@ export default function Booking() {
   }
 
   const confirmedHeading = (data.confirmedTitle || "You're booked, {name}.").replace('{name}', form.name.split(' ')[0])
-  const confirmedText = (data.confirmedBody || '{type} on {date} at {time} EST. A confirmation is on its way to {email}.')
+  const confirmedText = (data.confirmedBody || '{type} on {date} at {time} EST. Your booking request has been successfully received; we will confirm at {email}.')
     .replace('{type}', T.label)
     .replace('{date}', label || '')
     .replace('{time}', time)
@@ -158,12 +191,40 @@ export default function Booking() {
               <h3 className="h-display">{confirmedHeading}</h3>
               <p>{confirmedText}</p>
               <div className="bk-done-act">
-                <Btn onClick={() => ics(date, time, T.label, form.name)} icon={false}>
-                  <CalendarPlus size={16} style={{ marginRight: 8, verticalAlign: -3 }} />
-                  {data.addToCal || 'Add to calendar'}
-                </Btn>
-                <button type="button" className="btn ghost" onClick={() => { setDone(false); setTime('') }}>
-                  {data.changeTime || 'Change time'}
+                <a
+                  href={getGoogleCalendarUrl(date, time, T.label, form.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bk-btn-gcal"
+                  title="Add to Google Calendar"
+                >
+                  <CalendarPlus size={18} />
+                  <span>Google Calendar</span>
+                </a>
+
+                <button
+                  type="button"
+                  className="bk-btn-ics"
+                  onClick={() => ics(date, time, T.label, form.name)}
+                  title="Download .ics for Apple Calendar or Outlook"
+                >
+                  <Calendar size={18} />
+                  <span>Apple / Outlook (.ics)</span>
+                </button>
+
+                <button
+                  type="button"
+                  className="btn ghost"
+                  onClick={() => {
+                    setForm({ name: '', email: '', company: '', phone: '', message: '' })
+                    setPicks([])
+                    setDate(null)
+                    setTime('')
+                    setDone(false)
+                  }}
+                  title={lang === 'es' ? 'Enviar una nueva consulta' : 'Submit a new booking request'}
+                >
+                  {lang === 'es' ? 'Nueva solicitud' : 'Submit new request'}
                 </button>
               </div>
             </div>
